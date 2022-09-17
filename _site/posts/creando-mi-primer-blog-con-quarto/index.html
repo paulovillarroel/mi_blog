@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Paulo Villarroel">
+<meta name="dcterms.date" content="2022-09-17">
+<meta name="description" content="Te enseño a crear tu primer blog con Quarto, publicar nuevos artículos, subirlo a GitHub y desplegarlo en la web.">
+
+<title>mi_blog - Creando mi primer blog con Quarto</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">mi_blog</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com"><i class="bi bi-twitter" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Creando mi primer blog con Quarto</h1>
+                  <div>
+        <div class="description">
+          Te enseño a crear tu primer blog con Quarto, publicar nuevos artículos, subirlo a GitHub y desplegarlo en la web.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">quarto</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Paulo Villarroel </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">September 17, 2022</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#hola" id="toc-hola" class="nav-link active" data-scroll-target="#hola">Hola!!</a>
+  <ul class="collapse">
+  <li><a href="#paso-1-descargar-quarto" id="toc-paso-1-descargar-quarto" class="nav-link" data-scroll-target="#paso-1-descargar-quarto">Paso 1: Descargar Quarto</a></li>
+  <li><a href="#paso-2-crea-un-proyecto" id="toc-paso-2-crea-un-proyecto" class="nav-link" data-scroll-target="#paso-2-crea-un-proyecto">Paso 2: Crea un proyecto</a></li>
+  <li><a href="#paso-3-preview-de-tu-blog" id="toc-paso-3-preview-de-tu-blog" class="nav-link" data-scroll-target="#paso-3-preview-de-tu-blog">Paso 3: Preview de tu blog</a></li>
+  <li><a href="#paso-4-crear-un-post" id="toc-paso-4-crear-un-post" class="nav-link" data-scroll-target="#paso-4-crear-un-post">Paso 4: Crear un post</a></li>
+  <li><a href="#paso-5-subiendo-el-blog-a-github" id="toc-paso-5-subiendo-el-blog-a-github" class="nav-link" data-scroll-target="#paso-5-subiendo-el-blog-a-github">Paso 5: Subiendo el blog a GitHub</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="hola" class="level1">
+<h1>Hola!!</h1>
+<p>Este es el primer post de mi nuevo blog. Acá iré escribiendo sobre distintas temáticas relacionadas al mundo de la programación y la ciencia de datos.</p>
+<p>Bienvenido/a nuevamente.</p>
+<p>En esta oportunidad te voy a enseñar a crear tu propio blog, como el que estás viendo ahora. Si! Como este mismo. Te parece?</p>
+<p>Pues vamos a ello!!</p>
+<p>Lo primero que debes saber es que este blog está construído sobre la base <a href="https://quarto.org/">Quarto</a>. Quarto es una nueva plataforma open-source, lanzada hace poco tiempo, y que busca facilitar la publicación de artículos científicos. La gracia que tiene es que soporta distintos lenguajes de programación (R, Python, Julia) en una sola aplicación.</p>
+<p>Bueno, dentro de las cosas que permite hacer Quarto es crear un blog. Que es lo que haremos ahora.</p>
+<section id="paso-1-descargar-quarto" class="level2">
+<h2 class="anchored" data-anchor-id="paso-1-descargar-quarto">Paso 1: Descargar Quarto</h2>
+<p>Lo primero que tienes que hacer es <a href="https://quarto.org/docs/get-started/">descargar Quarto</a> desde su web oficial. Elige la versión que corresponda a tu sistema operativo. La instalación no tiene ninguna cosa extraña, es como cualquier programa nada más.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="download-quarto.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<p>En lo personal, estoy usando RStudio como editor de texto, pero se pueden usar otros como Visual Studio Code o Jupyter Notebooks. En este caso, explicaré los pasos para RStudio.</p>
+</section>
+<section id="paso-2-crea-un-proyecto" class="level2">
+<h2 class="anchored" data-anchor-id="paso-2-crea-un-proyecto">Paso 2: Crea un proyecto</h2>
+<p>Si estás familiarizado con RStudio, sabrás lo que es un proyecto. Si no, pues un proyecto es un conjunto de archivos que se mantienen relacionados entre sí, de modo que sea más simple el desarrollo y vinculación. Además, de facilitar el uso de rutas relativas lo cual es genial a la hora de compartir código o de proyectos más grandes.</p>
+<p>En RStudio debes ir al menú superior y seleccionar <code>New Project…</code></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="new-project1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<p>Eso te abrirá una nueva pestaña, en donde debes seleccionar la opción <code>New Directory.</code></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="new-project2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<p>Luego, debes eligir el tipo de proyecto. En este caso, selecciona <code>Quarto Blog</code>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="new-project3.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<p>Se abrirá una nueva ventana. Acá debes poner el nombre de la carpera que vas a crear (en Directory name). Verifica la carpeta en donde vas a crear este directorio. Luego dale a <code>Create Project</code>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="new-project4.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<p>Con eso, Quarto te creará una serie de archivos y la estructura del blog de forma automática!!!</p>
+<p>Verás que ahora tienes muchos archivos nuevos en tu visor.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="files.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="paso-3-preview-de-tu-blog" class="level2">
+<h2 class="anchored" data-anchor-id="paso-3-preview-de-tu-blog">Paso 3: Preview de tu blog</h2>
+<p>Con los pasos anteriores, Quarto te creó un blog completamente funcional. Eso si, con artículos de muestra que después hay que eliminar o modificar, obviamente. Pero ya tienes la base.</p>
+<p>Para revisar cómo se ve tu blog, debes darle clic al botón <code>Render</code> de la parte superior.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="render.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<p>Verás una serie de cosas que van a sair en la consola de RStudio, pero es parte del proceso de renderizado. O sea, para armar el blog y pasar los archivos a una página web.</p>
+<p>Si todo sale bien, se debería abrir tu blog en una pestaña de tu navegador.</p>
+<p>Y listo!!!</p>
+<p>Ya tienes tu primer blog 🎉</p>
+<p>Es posible que tu blog se muestra en el mismo RStudio en una ventana lateral. Esa opción me parece que viene por defecto (no recuerdo bien), pero yo la tengo configurada para que me aparezca el preview en una ventana del navegador. Me gusta más esa opción, pues se ve mejor el contenido. Para poner esa opción, debes darle clic a la tuerca que está al lado derecho del botón Render y seleccionar <code>Preview in Window</code>.</p>
+<p><img src="preview.png" class="img-fluid"></p>
+<p>Fíjate que la web está en tu computador y se está mosrando desde una dirección que dice <code>localhost</code>. Esto es por ese mismo motivo. A pesar de que se ve como una web a través de tu navegador, el blog solo está en tu computador. No está subido a internet ni alojado en ningún servicio que permita que otros lo vean. Para eso, hay que hacer algunas cosas, que las veremos un poco más adelante.</p>
+</section>
+<section id="paso-4-crear-un-post" class="level2">
+<h2 class="anchored" data-anchor-id="paso-4-crear-un-post">Paso 4: Crear un post</h2>
+<p>Cuando creas tu proyecto de blog con Quarto, la aplicación crea la estructura y pone 2 post de ejemplo.</p>
+<p>Si observas los archivos, verás una carpeta llamada <code>posts</code>. En esta carpeta es donde se deben ir guardando los archivos para los nuevos posts.</p>
+<p>Por defecto te crea 2 carpetas: welcome y post-with-code</p>
+<p>Esos son post de muestra, que los puedes eliminar. Pero antes que lo hagas, quiero que te fijes en cómo estan estructurados. Esa será la forma en que deberás crear tu próximas entradas.</p>
+<p>Cada artículo (o post) consiste en una carpeta. Dentro de ella hay un archivo <code>index.qmd</code> y algunas imágenes.</p>
+<p>Esta es la estructura de archivos que se te creará de forma automática:</p>
+<ul>
+<li><p>Created _quarto.yml</p></li>
+<li><p>Created index.qmd}</p></li>
+<li><p>Created posts/welcome/index.qmd</p></li>
+<li><p>Created posts/post-with-code/index.qmd</p></li>
+<li><p>Created about.qmd</p></li>
+<li><p>Created styles.css</p></li>
+<li><p>Created posts/_metadata.yml</p></li>
+</ul>
+<p>En la carpeta <code>posts</code> crea un nuevo archivo con el nombre de tu nueva entrada. Dentro de esa carpeta, crea un archivo <code>.qmd</code> y llámalo <code>index</code>. Es decir, te debería quedar un archivo de nombre i<code>ndex.qmd</code></p>
+<p>Esto es fundamental. Siempre usa index para nombrar a los nuevos posts. De lo contrario, Quarto no encontrará el archivo al cual hacer referencia para renderizar adecuadamente la web.</p>
+<p>Si ya estás familiarizado/a con R Markdown, notarás que trabajar con Quarto es muy similar. De hecho, los archivos .qmd tienen la misma estructura. Un encabezado (YAML) con algunas cinfiguraciones generales y luego el espacio para escribir texto.</p>
+<p>Para este post, usé este YAML:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="yaml.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<p>En artículos posteriores veremos cómo configurar el YAML, pues tiene muchas opciones.</p>
+<p>Ahora que ya tienes creada una nueva carpeta dentro de <code>posts</code> y agregaste el <code>index.qmd</code>, básicamente ya tienes un nuevo artículo listo para el blog.</p>
+<p>Guarda todos los cambios y dale a <code>Render</code> nuevamente. Si ya tenías abierto el blog en tu navegador, deberían verse reflejados los cambios realizados. Si no pasa eso, actualiza la página para ver los cambios.</p>
+<p>Así se ve mi blog, solo con 1 artículo publicado (que es este).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="blog.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="paso-5-subiendo-el-blog-a-github" class="level2">
+<h2 class="anchored" data-anchor-id="paso-5-subiendo-el-blog-a-github">Paso 5: Subiendo el blog a GitHub</h2>
+<p>Me encanta el open-source y el compartir código. Y una de las mejores formas de dejarlo publicado en GitHub.</p>
+<p>Para hacerlo, desde RStudio es bastante simple.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
