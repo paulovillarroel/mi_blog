@@ -135,18 +135,18 @@ Teniendo lo anterior ya realizado, podemos usar la librería `{usethis}` para si
 Primero, instalamos la librería:
 
 ```{r}
-install.packages("usethis")
+# install.packages("usethis")
 ```
 
 Configuramos nuestras credenciales (los datos que usamos para la cuenta de GitHub):
 
 ```{r}
-usethis::use_git_config(
-  # your name
-  user.name = "Mi nombre",
-  # your email used in your GitHub account
-  user.email = "micorreo@gmail.com"
-)
+# usethis::use_git_config(
+#   # your name
+#   user.name = "Mi nombre",
+#   # your email used in your GitHub account
+#   user.email = "micorreo@gmail.com"
+# )
 ```
 
 Creamos nuestro GitHub PAT Token con [`usethis::create_github_token()`](https://usethis.r-lib.org/reference/github-token.html) (es como una contraseña, pero más segura). Cuando ejecutas este comando, se te abrirá una pestaña de tu navegador. Tendrás que verificar algunos permisos a GitHub. Luego, en la configuración del token, cambia el nombre, ajustael tiempo de expiración y el resto déjalo como está. Crea el token.
@@ -168,7 +168,7 @@ Ahora configuremos algunas cosas más...
 Usaremos `use_git()` para iniciar el control de versiones de GIT en nuestro proyecto.
 
 ```{r}
-usethis::use_git()
+# usethis::use_git()
 # ✔ Setting active project to '/Users/Desktop/name-of-your-blog/'
 # ✔ Initialising Git repo
 # ✔ Adding '.Rproj.user', '.Rhistory', '.Rdata', '.httr-oauth', '.DS_Store' to '.gitignore'
@@ -207,7 +207,7 @@ usethis::use_git()
 Ahora, usaremos use_github() para crear un repositorio en GitHub y subir el proyecto.
 
 ```{r}
-usethis::use_github()
+# usethis::use_github()
 ```
 
 Si todo ha salido bien, se debería abrir tu navegador con el nuevo repositorio de GitHub.
