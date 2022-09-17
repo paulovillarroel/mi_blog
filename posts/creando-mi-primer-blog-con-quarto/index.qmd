@@ -129,9 +129,9 @@ Así se ve mi blog, solo con 1 artículo publicado (que es este).
 
 Me encanta el open-source y el compartir código. Y una de las mejores formas de dejarlo publicado en GitHub.
 
-Para hacerlo, desde RStudio es bastante simple. Ah! Debes tener una cuenta ya creada en GitHub y tener GIT instalado.
+Para hacerlo, desde RStudio es bastante simple. Ah! Debes tener una cuenta ya creada en [GitHub](https://github.com/) y tener [GIT instalado](https://git-scm.com/).
 
-Teniendo lo anterior ya realizado, podemos usar la librería `{usethis}` para simpleificar el proceso. [Acá puedes ver](https://usethis.r-lib.org/) la documentación oficial.
+Teniendo lo anterior ya realizado, podemos usar la librería `{usethis}` para simplificar el proceso. [Acá puedes ver](https://usethis.r-lib.org/) la documentación oficial.
 
 Primero, instalamos la librería:
 
