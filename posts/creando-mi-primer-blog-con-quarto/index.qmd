@@ -204,8 +204,76 @@ usethis::use_git()
 # Selection: 2
 ```
 
-Ahora, usaremos use_github() para subir el proyecto a un repositorio remoto en GitHub.
+Ahora, usaremos use_github() para crear un repositorio en GitHub y subir el proyecto.
 
 ```{r}
 usethis::use_github()
 ```
+
+Si todo ha salido bien, se debería abrir tu navegador con el nuevo repositorio de GitHub.
+
+[Acá puedes](https://github.com/paulovillarroel/mi_blog) ver el repositorio de este proyecto.
+
+## Paso 6: Desplegar con Netlify
+
+Ahora vamos a publicar nuestro blog en internet para que otros lo puedan ver. Recuerda que hasta ahora, sigue estando solo en tu computador.
+
+Para hacer el deploy (despliegue) usaremos [Netlify](https://www.netlify.com/).
+
+Este es un servicio que hará que el blog esté disponible en una dirección web. Además, entre otras funciones super interesantes, tiene la opción de conectarlo a un repositorio de GitHub, que es lo que haremos en este caso.
+
+Usaremos esta opción, ya que nos ayudará a ser más transparentes en todo el flujo de trabajo y podremos desplegar los cambios que vayamos realizando en nuestro proyecto y repo de GitHub.
+
+Para eso, primero deber crearte una cuenta en Netlify. Mi recomendación es que lo hagas usando tu cuenta de GitHub.
+
+Una vez iniciada sesión, se te mostrará algo así:
+
+![](netlify1.png){fig-align="center"}
+
+En la sección Sites, dale clic a `Import from Git`.
+
+Selecciona GitHub.
+
+![](netlify2.png){fig-align="center"}
+
+Se comenzará a sincronzar con tu perfil de GitHub y te mostrará todos los respositorio disponibles.
+
+Elige el que acabamos de crear, donde está nuestro blog.
+
+Se mostrará algunos detalles. Acá debes ingresar en Base directory `_site`, como se muestra en la imagen.
+
+Este paso es importante, de lo contrario no funcionará tu web.
+
+![](netlify3.png){fig-align="center"}
+
+Dale al botón `Deploy site`.
+
+Te va a salir algo como esto...
+
+![](netlify4.png){fig-align="center"}
+
+Si no cambia el estado y sigue saliendo el mensaje Site deply in progress, puedes actualizar la página de tu navegador. Habitualmente este proceso es rápido y solo toma unos segundos.
+
+![](netlify5.png){fig-align="center"}
+
+Si todo anda bien, debería estar ya desplegado nuestro blog.
+
+Para acceder a él, anda al link que te ponen (xxxx.netlify.app).
+
+Esta es una dirección web con un nombre aleatorio que te da Netlify. La podemos cambiar en la configuración por algo que nos haga más sentido. E incluso, podemos usar nustro propio dominio si es que lo tenemos.
+
+Se abrirá una pestaña en tu navegador, mostrando tu blog!!! 😍
+
+![](deploy_web.png){fig-align="center"}
+
+En Netlify, en la sección de Site settings podemos encontrar la opción para cambiar la dirección web.
+
+Para ello, debemos dar clic en `Change site name`.
+
+![](netlify6.png){fig-align="center"}
+
+Se te abrirá una ventana. Ingresa el nombre que desees y listo.
+
+Cambiado el nombre. Nota que este cambio de nombre cambia la dirección web, por lo que si has compartido el link previo, este ya no funcionará. Ten cuidado con cambiar el nombre a cada rato.
+
+➡️[Así quedó mi blog.](https://blogdepaulo.netlify.app/)
