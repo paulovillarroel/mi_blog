@@ -3,7 +3,7 @@ title: "Creando mi primer blog con Quarto"
 description: "Te enseño a crear tu primer blog con Quarto, publicar nuevos artículos, subirlo a GitHub y desplegarlo en la web."
 author: "Paulo Villarroel"
 date: "2022-09-17"
-categories: [quarto]
+categories: [quarto, tutorial]
 ---
 
 # Hola!!
