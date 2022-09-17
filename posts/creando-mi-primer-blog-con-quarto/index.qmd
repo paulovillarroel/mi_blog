@@ -4,6 +4,7 @@ description: "Te enseño a crear tu primer blog con Quarto, publicar nuevos art�
 author: "Paulo Villarroel"
 date: "2022-09-17"
 categories: [quarto, tutorial]
+image: "blog_quarto.jpg"
 ---
 
 # Hola!!
@@ -275,8 +276,6 @@ Para ello, debemos dar clic en `Change site name`.
 Se te abrirá una ventana. Ingresa el nombre que desees y listo.
 
 Cambiado el nombre. Nota que este cambio de nombre cambia la dirección web, por lo que si has compartido el link previo, este ya no funcionará. Ten cuidado con cambiar el nombre a cada rato.
-
-➡️[Así quedó mi blog.](https://blogdepaulo.netlify.app/)
 
 Espero que este tutorial te haya servido y que puedas tener tu propio blog.
 
