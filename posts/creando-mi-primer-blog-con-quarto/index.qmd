@@ -7,7 +7,7 @@ categories: [quarto, tutorial]
 image: "blog_quarto.jpg"
 ---
 
-# Hola!!
+Hola!! 🤘
 
 Este es el primer post de mi nuevo blog. Acá iré escribiendo sobre distintas temáticas relacionadas al mundo de la programación y la ciencia de datos.
 

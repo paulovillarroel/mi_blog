@@ -4,7 +4,7 @@ description: "Ahora que ya tenemos nuestro blog arriba, toca personalizarlo y de
 author: "Paulo Villarroel"
 date: "2022-09-19"
 categories: [quarto, tutorial]
-#image: "blog_quarto.jpg"
+image: "personalizar-blog.jpg"
 ---
 
 Ya tenemos nuestro blog! Y ya que al subir este nuevo post, voy a cambiar la configuración, te dejo esta imagen de la versión original del cual parto.
@@ -129,9 +129,8 @@ Ok, vamos con esto...
 
 7.  Anda al archivo `_quarto.yml` y agrega este código:
 
-```{=html}
 <!-- -->
-```
+
     comments:
       giscus:
         repo: YOURGITHUBACCOUNT/YOURREPO
@@ -146,9 +145,8 @@ En mi caso, queda así:
 
     Para evitar ésto, debemos incluir en el YAML de los `.qmd` respectivos el siguiente código:
 
-```{=html}
 <!-- -->
-```
+
     comments: false
 
 ## Algunos toques finales
