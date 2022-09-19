@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/personalizado-el-blog/index.html",
       "/posts/creando-mi-primer-blog-con-quarto/index.html"
     ]
   }
