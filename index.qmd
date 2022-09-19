@@ -1,5 +1,6 @@
 ---
 title: "Blog"
+description: "Tecnología, ciencia de datos y programación."
 listing:
   contents: posts
   sort: "date desc"
