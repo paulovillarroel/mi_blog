@@ -16,8 +16,6 @@ about:
 comments: false
 ---
 
-# Paulo Villarroel
-
 Soy Enfermero egresado de la Universidad de Chile con 18 años de experiencia profesional, con vasta experiencia en ámbitos de gestión, innovación y evaluación de proyectos. Durante más de 1 década he liderado distintos proyectos de mejora de procesos, inteligencia de negocios y excelencia operacional (LEAN y Seis Sigma) en distintas instituciones de salud. Actualmente, junto a mi rol clínico, desarrollo iniciativas de Ciencia de Datos aplicada, tanto a nivel profesional como docente.
 
-Emprendedor y fundador de la única comunidad de innovación abierta en salud pública de Chile ([OpenSalud LAB](https://opensaludlab.org/)). Además, creador y coordinador del [curso de Data Science en salud](https://opensaludlab.org/ciencia-de-datos) en español más grande del mundo.
+Emprendedor y fundador de la única comunidad de innovación abierta en salud pública de Chile ([OpenSalud LAB](https://opensaludlab.org/)). Además, soy creador y coordinador del [curso de Data Science en salud](https://opensaludlab.org/ciencia-de-datos) en español más grande del mundo.
