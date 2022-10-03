@@ -41,7 +41,7 @@ A ver, que un lenguaje sea el más buscado, más famoso y esas cosas no es tan i
 
 ## ¿Por qué hacer una web?
 
-En [aprendiendopython.com](https://www.aprendiendopython.com/) estoy documentando gran parte de lo que voy estudiando sobre Python.
+En [aprendiendopython.com](http://www.aprendiendopython.com/) estoy documentando gran parte de lo que voy estudiando sobre Python.
 
 Decidí hacer eso por varios motivos...
 
@@ -81,7 +81,7 @@ chinese_zodiac(year)
 
 Efectivamente. Python, al ser uno de los lenguajes más famosos, está lleno de tutoriales, cursos, videos en YouTube y libros, tanto de pago como, en su mayoría, gratuitos. Además, la documentación oficial de Python es bastante buena.
 
-Entonces, ¿Qué aporta [aprendiendopython](https://www.aprendiendopython.com/) a la comunidad?
+Entonces, ¿Qué aporta [aprendiendopython](http://www.aprendiendopython.com/) a la comunidad?
 
 Primero. Yo no lo llamaría un curso. Porque no está diseñado para ser eso. Como te mencionaba antes, lo que estoy documentando es mi ruta de aprendizaje, no estoy haciendo un curso. Pero, a pesar de eso, puede cumplir esa función, principalmente, pues me he dedicado bastante a explicar los conceptos, dar muchos ejemplos y no dar cosas por obvias. Me parece que muchos cursos fallan en eso. Explican cosas muy por encima y no se detienen a explicarlas de forma clara.
 
@@ -93,6 +93,6 @@ Ok.
 
 Te dejo cordialmente invtada/o a seguir el aprendizaje de Python conmigo.
 
-👉 Recuerda visitar [aprendiendopython.com](https://www.aprendiendopython.com/)
+👉 Recuerda visitar [aprendiendopython.com](http://www.aprendiendopython.com/)
 
 Nos vemos!!
