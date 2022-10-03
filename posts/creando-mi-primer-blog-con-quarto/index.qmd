@@ -282,3 +282,7 @@ Espero que este tutorial te haya servido y que puedas tener tu propio blog.
 En próximas entradas, estaré revisando cómo hacer ajustes al blog, personalizar algunas cosas estéticas y agregarle algunas funcionaidades.
 
 Nos vemos! 😜
+
+\
+
+👉 Revisa la segunda parte de este tutorial [en este enlace](https://www.paulovillarroel.com/posts/personalizado-el-blog/).

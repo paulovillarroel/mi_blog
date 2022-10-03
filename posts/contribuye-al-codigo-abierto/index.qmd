@@ -87,4 +87,4 @@ Eso es lo primero para empezar a contribuir al open source.
 
 En el próximo artículo te explicaré de forma muy precisa, cómo hacer tu primera **pull request**, que es la forma por excelencia de contribuir a proyectos abiertos. Pero eso, lo veremos en detalle el mi próximo artículo.
 
-No vemos!!! 😁
+Nos vemos!!! 😁

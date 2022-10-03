@@ -7,7 +7,9 @@ categories: [quarto, tutorial]
 image: "personalizar-blog.jpg"
 ---
 
-Ya tenemos nuestro blog! Y ya que al subir este nuevo post, voy a cambiar la configuración, te dejo esta imagen de la versión original del cual parto.
+Ya tenemos [nuestro blog!](https://www.paulovillarroel.com/posts/creando-mi-primer-blog-con-quarto/)
+
+Y ya que al subir este nuevo post, voy a cambiar la configuración, te dejo esta imagen de la versión original del cual parto.
 
 ![](blog.png){fig-align="center"}
 
