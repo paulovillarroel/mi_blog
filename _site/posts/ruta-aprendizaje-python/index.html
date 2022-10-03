@@ -232,6 +232,7 @@ gtag('config', 'G-RNWVZS7ZL8', { 'anonymize_ip': true});
   <li><a href="#por-qué-aprender-python" id="toc-por-qué-aprender-python" class="nav-link active" data-scroll-target="#por-qué-aprender-python">¿Por qué aprender Python?</a></li>
   <li><a href="#por-qué-hacer-una-web" id="toc-por-qué-hacer-una-web" class="nav-link" data-scroll-target="#por-qué-hacer-una-web">¿Por qué hacer una web?</a></li>
   <li><a href="#basado-en-proyectos" id="toc-basado-en-proyectos" class="nav-link" data-scroll-target="#basado-en-proyectos">Basado en proyectos</a></li>
+  <li><a href="#pero-está-lleno-de-otros-cursos" id="toc-pero-está-lleno-de-otros-cursos" class="nav-link" data-scroll-target="#pero-está-lleno-de-otros-cursos">Pero está lleno de otros cursos…</a></li>
   </ul>
 </nav>
     </div>
@@ -282,28 +283,34 @@ gtag('config', 'G-RNWVZS7ZL8', { 'anonymize_ip': true});
 <p>Además de enseñar lo que se va aprendiendo, otra forma de ir consolidando de mejor forma los conocimientos, es el realizar proyectos.</p>
 <p>Llevar a la práctica distintas cosas, en proyectos pequeños, pero que permitan entender el funcionamiento del lenguaje.</p>
 <p>Ya hice uno y lo tengo publicado. Es un pequeño script para identificar el signo del zodiaco chino que te corresponde, según el año de nacimiento.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Chinese Zodiac</span></span>
+<div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">year = int(input("Ingresa el año de nacimiento</span><span class="kw">:</span><span class="at"> </span><span class="st">"))</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># More info https://www.travelchinaguide.com/intro/astrology/60year-cycle.htm</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>year <span class="op">=</span> <span class="bu">int</span>(<span class="bu">input</span>(<span class="st">"Ingresa el año de nacimiento: "</span>))</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="st">def chinese_zodiac(year:int):</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="st">    elements = ("</span><span class="er">madera",</span><span class="at"> </span><span class="er">"fuego",</span><span class="at"> </span><span class="er">"tierra",</span><span class="at"> </span><span class="er">"metal",</span><span class="at"> </span><span class="er">"agua")</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">    animals = ("rata", "buey", "tigre", "conejo", "dragón", "serpiente", "caballo", "oveja", "mono", "gallo", "perro", "cerdo")</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> chinese_zodiac(year:<span class="bu">int</span>):</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    elements <span class="op">=</span> (<span class="st">"madera"</span>, <span class="st">"fuego"</span>, <span class="st">"tierra"</span>, <span class="st">"metal"</span>, <span class="st">"agua"</span>)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    animals <span class="op">=</span> (<span class="st">"rata"</span>, <span class="st">"buey"</span>, <span class="st">"tigre"</span>, <span class="st">"conejo"</span>, <span class="st">"dragón"</span>, <span class="st">"serpiente"</span>, <span class="st">"caballo"</span>, <span class="st">"oveja"</span>, <span class="st">"mono"</span>, <span class="st">"gallo"</span>, <span class="st">"perro"</span>, <span class="st">"cerdo"</span>)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> year <span class="op">&lt;</span> <span class="dv">604</span>:</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"El ciclo sexagenario chino comenzó en el año 604. Debes introducir un año adecuado."</span>)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        sexagenary_year <span class="op">=</span> (year <span class="op">-</span> <span class="dv">4</span>) <span class="op">%</span> <span class="dv">60</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        element <span class="op">=</span> elements[<span class="bu">int</span>((sexagenary_year <span class="op">%</span> <span class="dv">10</span>) <span class="op">/</span> <span class="dv">2</span>)]</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        animal <span class="op">=</span> animals[<span class="bu">int</span>(sexagenary_year <span class="op">%</span> <span class="dv">12</span>)]</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Año: </span><span class="sc">{</span>year<span class="sc">}</span><span class="ss"> / Zodiaco: </span><span class="sc">{</span>animal<span class="sc">}</span><span class="ss"> de </span><span class="sc">{</span>element<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>chinese_zodiac(year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">if year &lt; 604</span><span class="kw">:</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="at">        print("El ciclo sexagenario chino comenzó en el año 604. Debes introducir un año adecuado.")</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">else</span><span class="kw">:</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="at">        sexagenary_year = (year - 4) % 60</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="at">        element = elements[int((sexagenary_year % 10) / 2)]</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="at">        animal = animals[int(sexagenary_year % 12)]</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">print(f"Año</span><span class="kw">:</span><span class="at"> </span><span class="kw">{</span><span class="at">year</span><span class="kw">}</span><span class="at"> / Zodiaco: {animal} de {element}")</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="at">chinese_zodiac(year)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="pero-está-lleno-de-otros-cursos" class="level2">
+<h2 class="anchored" data-anchor-id="pero-está-lleno-de-otros-cursos">Pero está lleno de otros cursos…</h2>
+<p>Efectivamente. Python, al ser uno de los lenguajes más famosos, está lleno de tutoriales, cursos, videos en YouTube y libros, tanto de pago como, en su mayoría, gratuitos. Además, la documentación oficial de Python es bastante buena.</p>
+<p>Entonces, ¿Qué aporta <a href="https://www.aprendiendopython.com/">aprendiendopython</a> a la comunidad?</p>
+<p>Primero. Yo no lo llamaría un curso. Porque no está diseñado para ser eso. Como te mencionaba antes, lo que estoy documentando es mi ruta de aprendizaje, no estoy haciendo un curso. Pero, a pesar de eso, puede cumplir esa función, principalmente, pues me he dedicado bastante a explicar los conceptos, dar muchos ejemplos y no dar cosas por obvias. Me parece que muchos cursos fallan en eso. Explican cosas muy por encima y no se detienen a explicarlas de forma clara.</p>
+<p>Por otro lado, el ritmo no es muy rápido. No es como esos cursos que te prometen que en 4 horas aprendes a programar y puedes tener el trabajo de tus sueños. Eso es mucha fantasía y te venden algo que no es así. Como todo en la vida, si quieres lograr las metas, debes dedicarle mucho tiempo, ser perseverante y seguir adelante, aún cuando las cosas no te salgan. Como acá estoy documentando mis estudios, puede que le dedique más tiempo a algunos temas que a otros, o que sea repetitivo en varias ocasiones.</p>
+<p>Sin embargo, esto es jústamente lo que lo hace diferente y especial. Pues yo también lo estoy estudiando, por lo que esa expereincia de estudio y descubrimiento es muy valiosa, cosa que no ocurre en cursos o libros, donde todo está maqueteado. Acá te comento cosas que me funcionan y las que no, te hablo desde mi experiencia. Esto lo hace una forma muy especial de aprender. Es como ir al cine a ver una películay comentar con un amigo mas mejores escenas, fallas y opiniones. Esa es una experiencia mucho más entretenida que solo ir al cine. Bueno, acá es lo mismo.</p>
+<p>Ok.</p>
+<p>Te dejo cordialmente invtada/o a seguir el aprendizaje de Python conmigo.</p>
+<p>👉 Recuerda visitar <a href="https://www.aprendiendopython.com/">aprendiendopython.com</a></p>
+<p>Nos vemos!!</p>
 
 
 </section>
