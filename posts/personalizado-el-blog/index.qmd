@@ -153,36 +153,38 @@ En mi caso, queda así:
 
 Para darle algunos toques finales a la personalización del blog, te dejo como dejé mi archivo `_quarto.yml`
 
-    project:
-      type: website
+``` yaml
+project:
+  type: website
 
-    website:
-      title: "PauloVillarroel.com"
-      site-url: "https://www.paulovillarroel.com/"
-      google-analytics: "G-RNWVZS7ZL8"
-      navbar:
-        right:
-          - about.qmd
-          - icon: github
-            href: https://github.com/paulovillarroel
-          - icon: twitter
-            href: https://twitter.com/Chazkon
-          - icon: linkedin
-            href: https://www.linkedin.com/in/paulovillarroeltapia/
-    format:
-      html:
-        smooth-scroll: true
-        theme:
-          dark: darkly
-          light: flatly
-        css: styles.css
-        link-external-newwindow: true
+website:
+  title: "PauloVillarroel.com"
+  site-url: "https://www.paulovillarroel.com/"
+  google-analytics: "G-RNWVZS7ZL8"
+  navbar:
+    right:
+      - about.qmd
+      - icon: github
+        href: https://github.com/paulovillarroel
+      - icon: twitter
+        href: https://twitter.com/Chazkon
+      - icon: linkedin
+        href: https://www.linkedin.com/in/paulovillarroeltapia/
+format:
+  html:
+    smooth-scroll: true
+    theme:
+      dark: darkly
+      light: flatly
+    css: styles.css
+    link-external-newwindow: true
 
-    editor: visual
+editor: visual
 
-    comments:
-      giscus:
-        repo: paulovillarroel/mi_blog
+comments:
+  giscus:
+    repo: paulovillarroel/mi_blog
+```
 
 Ok
 
