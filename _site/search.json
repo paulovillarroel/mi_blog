@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Blog",
     "section": "",
-    "text": "quarto\n\n\ntutorial\n\n\n\nAhora que ya tenemos nuestro blog arriba, toca personalizarlo y dejarlo más lindo.\n\n\n\nPaulo Villarroel\n\n\nSep 19, 2022\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nquarto\n\n\ntutorial\n\n\n\nTe enseño a crear tu primer blog con Quarto, publicar nuevos artículos, subirlo a GitHub y desplegarlo en la web.\n\n\n\nPaulo Villarroel\n\n\nSep 17, 2022\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "opensource\n\n\ntutorial\n\n\ngit\n\n\ngithub\n\n\n\nRevisemos cómo contribuir a que crezca el conocimiento en el mundo!\n\n\n\nPaulo Villarroel\n\n\nOct 3, 2022\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nquarto\n\n\ntutorial\n\n\n\nAhora que ya tenemos nuestro blog arriba, toca personalizarlo y dejarlo más lindo.\n\n\n\nPaulo Villarroel\n\n\nSep 19, 2022\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nquarto\n\n\ntutorial\n\n\n\nTe enseño a crear tu primer blog con Quarto, publicar nuevos artículos, subirlo a GitHub y desplegarlo en la web.\n\n\n\nPaulo Villarroel\n\n\nSep 17, 2022\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
@@ -131,5 +131,33 @@
     "title": "Creando mi primer blog con Quarto",
     "section": "Paso 6: Desplegar con Netlify",
     "text": "Paso 6: Desplegar con Netlify\nAhora vamos a publicar nuestro blog en internet para que otros lo puedan ver. Recuerda que hasta ahora, sigue estando solo en tu computador.\nPara hacer el deploy (despliegue) usaremos Netlify.\nEste es un servicio que hará que el blog esté disponible en una dirección web. Además, entre otras funciones super interesantes, tiene la opción de conectarlo a un repositorio de GitHub, que es lo que haremos en este caso.\nUsaremos esta opción, ya que nos ayudará a ser más transparentes en todo el flujo de trabajo y podremos desplegar los cambios que vayamos realizando en nuestro proyecto y repo de GitHub.\nPara eso, primero deber crearte una cuenta en Netlify. Mi recomendación es que lo hagas usando tu cuenta de GitHub.\nUna vez iniciada sesión, se te mostrará algo así:\n\n\n\n\n\nEn la sección Sites, dale clic a Import from Git.\nSelecciona GitHub.\n\n\n\n\n\nSe comenzará a sincronzar con tu perfil de GitHub y te mostrará todos los respositorio disponibles.\nElige el que acabamos de crear, donde está nuestro blog.\nSe mostrará algunos detalles. Acá debes ingresar en Base directory _site, como se muestra en la imagen.\nEste paso es importante, de lo contrario no funcionará tu web.\n\n\n\n\n\nDale al botón Deploy site.\nTe va a salir algo como esto…\n\n\n\n\n\nSi no cambia el estado y sigue saliendo el mensaje Site deply in progress, puedes actualizar la página de tu navegador. Habitualmente este proceso es rápido y solo toma unos segundos.\n\n\n\n\n\nSi todo anda bien, debería estar ya desplegado nuestro blog.\nPara acceder a él, anda al link que te ponen (xxxx.netlify.app).\nEsta es una dirección web con un nombre aleatorio que te da Netlify. La podemos cambiar en la configuración por algo que nos haga más sentido. E incluso, podemos usar nustro propio dominio si es que lo tenemos.\nSe abrirá una pestaña en tu navegador, mostrando tu blog!!! 😍\n\n\n\n\n\nEn Netlify, en la sección de Site settings podemos encontrar la opción para cambiar la dirección web.\nPara ello, debemos dar clic en Change site name.\n\n\n\n\n\nSe te abrirá una ventana. Ingresa el nombre que desees y listo.\nCambiado el nombre. Nota que este cambio de nombre cambia la dirección web, por lo que si has compartido el link previo, este ya no funcionará. Ten cuidado con cambiar el nombre a cada rato.\nEspero que este tutorial te haya servido y que puedas tener tu propio blog.\nEn próximas entradas, estaré revisando cómo hacer ajustes al blog, personalizar algunas cosas estéticas y agregarle algunas funcionaidades.\nNos vemos! 😜"
+  },
+  {
+    "objectID": "posts/contribuye-al-codigo-abierto/index.html",
+    "href": "posts/contribuye-al-codigo-abierto/index.html",
+    "title": "Contribuye al código abierto",
+    "section": "",
+    "text": "Hola (otra vez!!)\nHoy te quiero hablar de un tema, que considero, muy relevante: el código abierto.\nEn inglés al código abierto se le denomina open source. Y es que más que una forma de desarrollar código de forma colaborativa, es una filosofía o un movimiento. Es una lógica que supera solo a la producción del software mismo, sino que abarca valores del diseño descentralizado y solución de problemas de forma colectiva y abierta. Si deseas saber un poco más del open source, puedes revisar este link.\nEn lo personal, me encanta esta filosofía del open source. Y es que esta forma de trabajo puede abarcar no solo el desarrollo de código, sino que de otras industrias y áreas. La innovación tiene mucho de ésto, de desarrollar soluciones de forma colaborativa y abierta.\nHoy quiero que tu puedas contribuir al código abierto. Si!! Que ayudes a generar conocimiento colectivo. Entonces debes conocer un par de cosas. Una de éstas es el control de versiones GIT y la otra es alguna plataforma de repositorios remotos , como GitHub, GitLab o Bitbucket.\nPero cuando me puse a pensar en cómo explicarte a contribuir al código abierto, me parece relevante explicarte un paso antes. Y es que para que puedas hacer estas cosas, debes conocer algo de GIT."
+  },
+  {
+    "objectID": "posts/contribuye-al-codigo-abierto/index.html#qué-es-git",
+    "href": "posts/contribuye-al-codigo-abierto/index.html#qué-es-git",
+    "title": "Contribuye al código abierto",
+    "section": "¿Qué es GIT?",
+    "text": "¿Qué es GIT?\nEn la web de Microsoft indican:\nGit es un sistema de control de versiones distribuido, lo que significa que un clon local del proyecto es un repositorio de control de versiones completo. Estos repositorios locales plenamente funcionales permiten trabajar sin conexión o de forma remota con facilidad. Los desarrolladores confirman su trabajo localmente y, a continuación, sincronizan su copia del repositorio con la copia en el servidor. Este paradigma es distinto del control de versiones centralizado, donde los clientes deben sincronizar el código con un servidor antes de crear nuevas versiones.\nYa te contaré más sobre GIT en otros artículos. En esta oportunidad seré muy concreto. Te explicaré cómo instalar GIT en tu computador para que puedas empezar a contribuir a proyectos de código abierto lo antes posible."
+  },
+  {
+    "objectID": "posts/contribuye-al-codigo-abierto/index.html#pasos-para-instalar-git",
+    "href": "posts/contribuye-al-codigo-abierto/index.html#pasos-para-instalar-git",
+    "title": "Contribuye al código abierto",
+    "section": "Pasos para instalar GIT",
+    "text": "Pasos para instalar GIT\nInstalar GIT no es nada complejo. Es como cualquier programa que instalas. Básicamente es descargar el instalador y darle clic a “siguiente” muchas veces.\nDe todas formas, hace unos meses me tocó instalar GIT y tomé capturas de pantalla de cada paso. Te las dejo para que te sirvan de referencia.\n\n\n\nVersión de GIT Puede que la versión que instales no sea la misma que muestro acá, pero la instalación no debería ser muy distinta."
+  },
+  {
+    "objectID": "posts/contribuye-al-codigo-abierto/index.html#finalmente",
+    "href": "posts/contribuye-al-codigo-abierto/index.html#finalmente",
+    "title": "Contribuye al código abierto",
+    "section": "Finalmente…",
+    "text": "Finalmente…\nSi sigues los pasos, no deberías tener mayor dificultades para tener instalado GIT.\nEso es lo primero para empezar a contribuir al open source.\nEn el próximo artículo te explicaré de forma muy precisa, cómo hacer tu primera pull request, que es la forma por excelencia de contribuir a proyectos abiertos. Pero eso, lo veremos en detalle el mi próximo artículo.\nNo vemos!!! 😁"
   }
 ]

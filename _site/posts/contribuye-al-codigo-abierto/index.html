@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Paulo Villarroel">
-<meta name="dcterms.date" content="2022-09-19">
-<meta name="description" content="Ahora que ya tenemos nuestro blog arriba, toca personalizarlo y dejarlo más lindo.">
+<meta name="dcterms.date" content="2022-10-03">
+<meta name="description" content="Revisemos cómo contribuir a que crezca el conocimiento en el mundo!">
 
-<title>PauloVillarroel.com - Personalizando el blog</title>
+<title>PauloVillarroel.com - Contribuye al código abierto</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -125,15 +125,17 @@ gtag('config', 'G-RNWVZS7ZL8', { 'anonymize_ip': true});
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Personalizando el blog</h1>
+      <h1 class="title">Contribuye al código abierto</h1>
                   <div>
         <div class="description">
-          Ahora que ya tenemos nuestro blog arriba, toca personalizarlo y dejarlo más lindo.
+          Revisemos cómo contribuir a que crezca el conocimiento en el mundo!
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">quarto</div>
+                <div class="quarto-category">opensource</div>
                 <div class="quarto-category">tutorial</div>
+                <div class="quarto-category">git</div>
+                <div class="quarto-category">github</div>
               </div>
                   </div>
   </div>
@@ -151,7 +153,7 @@ gtag('config', 'G-RNWVZS7ZL8', { 'anonymize_ip': true});
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">September 19, 2022</p>
+        <p class="date">October 3, 2022</p>
       </div>
     </div>
       
@@ -166,12 +168,9 @@ gtag('config', 'G-RNWVZS7ZL8', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul class="collapse">
-  <li><a href="#cambiando-el-título" id="toc-cambiando-el-título" class="nav-link active" data-scroll-target="#cambiando-el-título">Cambiando el título</a></li>
-  <li><a href="#cambiando-links" id="toc-cambiando-links" class="nav-link" data-scroll-target="#cambiando-links">Cambiando links</a></li>
-  <li><a href="#cambiando-el-tema" id="toc-cambiando-el-tema" class="nav-link" data-scroll-target="#cambiando-el-tema">Cambiando el tema</a></li>
-  <li><a href="#cambiando-el-layout" id="toc-cambiando-el-layout" class="nav-link" data-scroll-target="#cambiando-el-layout">Cambiando el layout</a></li>
-  <li><a href="#agregando-comentarios" id="toc-agregando-comentarios" class="nav-link" data-scroll-target="#agregando-comentarios">Agregando comentarios</a></li>
-  <li><a href="#algunos-toques-finales" id="toc-algunos-toques-finales" class="nav-link" data-scroll-target="#algunos-toques-finales">Algunos toques finales</a></li>
+  <li><a href="#qué-es-git" id="toc-qué-es-git" class="nav-link active" data-scroll-target="#qué-es-git">¿Qué es GIT?</a></li>
+  <li><a href="#pasos-para-instalar-git" id="toc-pasos-para-instalar-git" class="nav-link" data-scroll-target="#pasos-para-instalar-git">Pasos para instalar GIT</a></li>
+  <li><a href="#finalmente" id="toc-finalmente" class="nav-link" data-scroll-target="#finalmente">Finalmente…</a></li>
   </ul>
 </nav>
     </div>
@@ -181,192 +180,124 @@ gtag('config', 'G-RNWVZS7ZL8', { 'anonymize_ip': true});
 
 
 
-<p>Ya tenemos nuestro blog! Y ya que al subir este nuevo post, voy a cambiar la configuración, te dejo esta imagen de la versión original del cual parto.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="blog.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-<p>Ahora toca cambia algunas cosas para que el blog sea más funcional y adecuado.</p>
-<section id="cambiando-el-título" class="level2">
-<h2 class="anchored" data-anchor-id="cambiando-el-título">Cambiando el título</h2>
-<p>Entre esas cosas, quiero cambiar el título del blog. Ahora dice “mi_blog”, que es el nombre del archivo en donde tengo el proyecto completo y que al crear el blog con Quarto, toma este nombre (del archico) por defecto. Pero es feo y quiero cambiarlo por algo más representativo.</p>
-<p>Dentro de las carpetas y estructura que se crean por defecto, en la raiz del proyecto hay un archivo que se llama <code>_quarto.yml</code>. Este es un archivo YAML que contiene algunos datos de configuración general del blog.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="yaml1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-<p>Si te fijas, ahí está el título del blog, el “mi blog” que deseo cambiar.</p>
-<p>Pues bueno, entonces habrá que modificarlo. Voy a poner mi dirección web <code>paulovillarroel.com</code> que es un dominio que compré hace unos días y lo configuré en mi cuenta de Netlify para linkearla a mi blog. Hacer eso es bastante simple. La web de Netlify es bien intuitiva.</p>
-<p>Pues bueno…</p>
-<p>Para ver los cambios que voy realizando en el blog, sin necesidad de renderizar y desplegar nada (no es buena idea hacer todo es cada vez que se hacen cambios, pues la idea es hacerlo cuando cuando ya se tienen varios cambios finalizados y que comprobamos que funcionan y nos gustan). Para ello, lo que haré es previsualizar la web.</p>
-<p>Eso se hace del menú superior de RStudio, en la pestaña de <code>Build</code> está la opción de <code>Preview Website</code>. Esto abrirá una pestaña del navegador con el preview de lo que estamos haciendo.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="blog2.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-<p>Ok!! Vamos avanzando!! 🎉</p>
-<p>Ya tenemos cambiado el nombre de la web, arriba a la izquierda. Y aparace una nueva entrada a blog que es este mismo artículo que estoy escribiendo.</p>
-<p>Pero sigue apareciendo “mi_blog” como una especia de título.</p>
-<p>Para modificar esa sección, es necesario cambiar algunas cosas de la página que estamos visualizando. En la carpeta raíz del proyecto, tenemos el archivo i<code>ndex.qmd</code>. Si lo abrimos, nos encontramos con lo siguiente:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="blog3.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-<p>Vemos que tiene como título “mi_blog”. Maravilloso!!!</p>
-<p>Ahora procedemos a cambiarlo. En mi caso le he puesto simplemente Blog.</p>
-<p>Hay varias opciones de configuración aquí, pero por ahora las dejaremos igual. Ya las retomaré más adelante.</p>
-<p>Fíjate que si ya tienes la pestaña del navegador abierta (la que se abrió al hacer clic en Preview) y la actualizas, se verán reflejados los cambios (debes guardarlos antes eso si). Recuerda que este preview está solo en tu computador y no en la versión publicada en la web. Por eso la dirección sale localhost, que es tu pc.</p>
+<p>Hola (otra vez!!)</p>
+<p>Hoy te quiero hablar de un tema, que considero, muy relevante: el código abierto.</p>
+<p>En inglés al código abierto se le denomina open source. Y es que más que una forma de desarrollar código de forma colaborativa, es una filosofía o un movimiento. Es una lógica que supera solo a la producción del software mismo, sino que abarca valores del diseño descentralizado y solución de problemas de forma colectiva y abierta. Si deseas saber un poco más del open source, puedes <a href="https://www.redhat.com/es/topics/open-source/what-is-open-source">revisar este link</a>.</p>
+<p>En lo personal, me encanta esta filosofía del open source. Y es que esta forma de trabajo puede abarcar no solo el desarrollo de código, sino que de otras industrias y áreas. La innovación tiene mucho de ésto, de desarrollar soluciones de forma colaborativa y abierta.</p>
+<p>Hoy quiero que tu puedas contribuir al código abierto. Si!! Que ayudes a generar conocimiento colectivo. Entonces debes conocer un par de cosas. Una de éstas es el control de <a href="https://git-scm.com/">versiones GIT</a> y la otra es alguna plataforma de repositorios remotos , como <a href="https://github.com/">GitHub</a>, <a href="https://about.gitlab.com/">GitLab</a> o <a href="https://bitbucket.org/">Bitbucket</a>.</p>
+<p>Pero cuando me puse a pensar en cómo explicarte a contribuir al código abierto, me parece relevante explicarte un paso antes. Y es que para que puedas hacer estas cosas, debes conocer algo de GIT.</p>
+<section id="qué-es-git" class="level2">
+<h2 class="anchored" data-anchor-id="qué-es-git">¿Qué es GIT?</h2>
+<p>En la <a href="https://learn.microsoft.com/es-es/devops/develop/git/what-is-git">web de Microsoft</a> indican:</p>
+<p><em>Git es un sistema de control de versiones distribuido, lo que significa que un clon local del proyecto es un repositorio de control de versiones completo. Estos repositorios locales plenamente funcionales permiten trabajar sin conexión o de forma remota con facilidad. Los desarrolladores confirman su trabajo localmente y, a continuación, sincronizan su copia del repositorio con la copia en el servidor. Este paradigma es distinto del control de versiones centralizado, donde los clientes deben sincronizar el código con un servidor antes de crear nuevas versiones.</em></p>
+<p>Ya te contaré más sobre GIT en otros artículos. En esta oportunidad seré muy concreto. Te explicaré cómo instalar GIT en tu computador para que puedas empezar a contribuir a proyectos de código abierto lo antes posible.</p>
 </section>
-<section id="cambiando-links" class="level2">
-<h2 class="anchored" data-anchor-id="cambiando-links">Cambiando links</h2>
-<p>Si eres curioso/a, te habrás dado cuenta que los links de los íconos que salen arriba a la derecha te llevan a las web oficiales de GitHub y Twitter. Bueno, eso es algo que debemos cambiar, para poner los link a mis redes sociales respectivas.</p>
-<p>En el archivo <code>_quarto.yml</code> que ya vimos antes, están los link para modificarlos. Pongo mis links correctos y aprovecho de agregar mi perfil de LinkedIn.</p>
-<p>Finalmente, me queda así…</p>
+<section id="pasos-para-instalar-git" class="level2">
+<h2 class="anchored" data-anchor-id="pasos-para-instalar-git">Pasos para instalar GIT</h2>
+<p>Instalar GIT no es nada complejo. Es como cualquier programa que instalas. Básicamente es descargar el instalador y darle clic a “siguiente” muchas veces.</p>
+<p>De todas formas, hace unos meses me tocó instalar GIT y tomé capturas de pantalla de cada paso. Te las dejo para que te sirvan de referencia.</p>
+<div class="alert alert-dismissible alert-light">
+<button type="button" class="btn-close" data-bs-dismiss="alert">
+</button>
+<p><strong>Versión de GIT</strong> Puede que la versión que instales no sea la misma que muestro acá, pero la instalación no debería ser muy distinta.</p>
+</div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="yaml2.png" class="img-fluid figure-img"></p>
+<p><img src="git2.png" class="img-fluid figure-img" width="800"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="git3.png" class="img-fluid figure-img" width="800"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="git4.png" class="img-fluid figure-img" width="800"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="git5.png" class="img-fluid figure-img" width="800"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="git6.png" class="img-fluid figure-img" width="800"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="git7.png" class="img-fluid figure-img" width="800"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="git8.png" class="img-fluid figure-img" width="800"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="git9.png" class="img-fluid figure-img" width="800"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="git10.png" class="img-fluid figure-img" width="800"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="git11.png" class="img-fluid figure-img" width="800"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="git12.png" class="img-fluid figure-img" width="800"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="git13.png" class="img-fluid figure-img" width="800"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="git14.png" class="img-fluid figure-img" width="800"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="git15.png" class="img-fluid figure-img" width="800"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="git16.png" class="img-fluid figure-img" width="800"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="git17.png" class="img-fluid figure-img" width="800"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="git18.png" class="img-fluid figure-img" width="800"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="git19.png" class="img-fluid figure-img" width="800"></p>
 </figure>
 </div>
 </section>
-<section id="cambiando-el-tema" class="level2">
-<h2 class="anchored" data-anchor-id="cambiando-el-tema">Cambiando el tema</h2>
-<p>El tema por defecto del blog no está mal, pero me gustaría probar otro.</p>
-<p>Quarto usa Bootstrap 5 y <a href="https://bootswatch.com/">Boostwatch</a> para los temas. Tiene 25 temas ya inlcuídos por defecto, los cuales los <a href="https://quarto.org/docs/websites/website-blog.html#themes">puedes ver y revisar</a> en la web de Quarto.</p>
-<p>En mi caso usaré el tema <code>darkly</code>, ya que me gustan los temas oscuros.</p>
-<p>Para cambiar el tema tan solo debes cambiar el nombre que aparece en <code>theme</code> en el YAML. Sin embargo, podemos hacer algo interesante acá y es agregar la opción de tener 2 temas, uno claro y otro oscuro para que sea el usuario quien pueda elegir cual le acomode más. Para eso, en la sección themes debemos hacer lo siguiente:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="themes.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-<p>La verdad, es que podríamos cambiar muchas más cosas del tema, incluso crear un tema propio. Para ello, tendríamos que tocar el CSS, pero este es un tutorial para principiantes, así que no me voy a meter en esos temas por ahora. Pero creéme, conocer de HTML y CSS es algo muy útil. Te lo dejo ahí.</p>
-<p>Nota que puse la versión dark arriba de la light, pues quiero que esa sea la por defecto al entrar a la web.</p>
-</section>
-<section id="cambiando-el-layout" class="level2">
-<h2 class="anchored" data-anchor-id="cambiando-el-layout">Cambiando el layout</h2>
-<p>Hasta ahora, el blog se ve de esta forma:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="blog4.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-<p>Pero esa configuración de cómo se ven los artículo no me termina de convencer.</p>
-<p>Si revisamos la <a href="https://quarto.org/docs/websites/website-listings.html">web de Quarto</a>, tenemos varias opciones para el layout:</p>
-<ul>
-<li><p>default</p></li>
-<li><p>grid</p></li>
-<li><p>table</p></li>
-</ul>
-<p>Para modificar esta configuración, debemos hacerlo del archivo <code>index.qmd</code> de la raiz del proyecto. En la sección listing/type.</p>
-<p>De las 3 opciones, me gusta más la opción de <code>grid</code>. Con ello, el blog queda algo así…</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="blog5.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</section>
-<section id="agregando-comentarios" class="level2">
-<h2 class="anchored" data-anchor-id="agregando-comentarios">Agregando comentarios</h2>
-<p>Una de las cosas interesantes de un blog es la interacción con los visitantes. Y una de las opciones interesantes que te ofrece Quarto es agregar la posibilidad de que las personas puedan escribir comentarios en los artículos.</p>
-<p>En la web de Quarto <a href="https://quarto.org/docs/output-formats/html-basics.html#commenting">puedes leer</a> más detalles de esta implementación.</p>
-<p>En este caso, yo usaré <a href="https://giscus.app/es">Giscus</a>, que se basa en los comentarios de GitHub. Aprovecharemos la instancia que ya tenemos nustro blog en Github para usar esta funcionalidad.</p>
-<p>Ok, vamos con esto…</p>
-<ol type="1">
-<li>Tenemos que ir a la <a href="https://github.com/apps/giscus">web de Giscus</a> y darle al botón <code>install</code>.</li>
-</ol>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="giscus.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-<ol start="2" type="1">
-<li>Debemos elegir el repositorio de GitHub al cual haremos referencia, en este caso, el que creamos en el <a href="https://www.paulovillarroel.com/posts/creando-mi-primer-blog-con-quarto/">artículo anterior</a>.</li>
-</ol>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="giscus2.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-<ol start="3" type="1">
-<li>Le damos a Install.</li>
-<li>Es posible que GitHub te pida algunos permisos o verificaciones.</li>
-<li>Debes asegurarte que tienes las discusiones habilitadas en tu repositorio. Si no has cambiado nada, por defecto la debes tener desactivadas. Para activarlas, tienes que ir a tu repositorio del blog e ir a <code>Settings</code>.</li>
-</ol>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="github1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-<ol start="6" type="1">
-<li>En la sección de configuración (settings) baja un poco en la página. Encontrarás una sección llamada Features. Marca la opción de <code>Discussions</code>.</li>
-</ol>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="github2.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-<ol start="7" type="1">
-<li>Anda al archivo <code>_quarto.yml</code> y agrega este código:</li>
-</ol>
-<!-- -->
-<pre><code>comments:
-  giscus:
-    repo: YOURGITHUBACCOUNT/YOURREPO</code></pre>
-<p>Lógicamente, en donde dice repo debes poner la dirección web de tu repositorio de GitHub en donde tienes el proyecto.</p>
-<p>En mi caso, queda así:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="github3.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-<ol start="8" type="1">
-<li><p>Por defecto, al agregar esta llínea de código se pondrá en cada página de la web la opción de discusiones. En mi caso, solo quiero ésto para los artículos, pero no para la parte en donde muestro todos los artículos y otras partes como el about (que no lo hemos tocado hasta ahora, por cierto).</p>
-<p>Para evitar ésto, debemos incluir en el YAML de los <code>.qmd</code> respectivos el siguiente código:</p></li>
-</ol>
-<!-- -->
-<pre><code>comments: false</code></pre>
-</section>
-<section id="algunos-toques-finales" class="level2">
-<h2 class="anchored" data-anchor-id="algunos-toques-finales">Algunos toques finales</h2>
-<p>Para darle algunos toques finales a la personalización del blog, te dejo como dejé mi archivo <code>_quarto.yml</code></p>
-<pre><code>project:
-  type: website
-
-website:
-  title: "PauloVillarroel.com"
-  site-url: "https://www.paulovillarroel.com/"
-  google-analytics: "G-RNWVZS7ZL8"
-  navbar:
-    right:
-      - about.qmd
-      - icon: github
-        href: https://github.com/paulovillarroel
-      - icon: twitter
-        href: https://twitter.com/Chazkon
-      - icon: linkedin
-        href: https://www.linkedin.com/in/paulovillarroeltapia/
-format:
-  html:
-    smooth-scroll: true
-    theme:
-      dark: darkly
-      light: flatly
-    css: styles.css
-    link-external-newwindow: true
-
-editor: visual
-
-comments:
-  giscus:
-    repo: paulovillarroel/mi_blog</code></pre>
-<p>Ok</p>
-<p>Ya estamos terminando este artículo. Espero que te haya sido útil.</p>
-<p>Aún faltan cosas por configurar y personalizar, pero hemos avanzado bastante por ahora.</p>
-<p>Nos vemos!! 🚀</p>
+<section id="finalmente" class="level2">
+<h2 class="anchored" data-anchor-id="finalmente">Finalmente…</h2>
+<p>Si sigues los pasos, no deberías tener mayor dificultades para tener instalado GIT.</p>
+<p>Eso es lo primero para empezar a contribuir al open source.</p>
+<p>En el próximo artículo te explicaré de forma muy precisa, cómo hacer tu primera <strong>pull request</strong>, que es la forma por excelencia de contribuir a proyectos abiertos. Pero eso, lo veremos en detalle el mi próximo artículo.</p>
+<p>No vemos!!! 😁</p>
 
 
 </section>

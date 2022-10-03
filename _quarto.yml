@@ -18,11 +18,10 @@ format:
   html:
     smooth-scroll: true
     theme:
-      dark: darkly
       light: flatly
+      dark: darkly
     css: styles.css
     link-external-newwindow: true
-
 
 editor: visual
 

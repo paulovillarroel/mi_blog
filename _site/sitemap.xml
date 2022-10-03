@@ -2,18 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.paulovillarroel.com/index.html</loc>
-    <lastmod>2022-09-19T21:48:41.870Z</lastmod>
+    <lastmod>2022-10-03T02:42:04.116Z</lastmod>
   </url>
   <url>
     <loc>https://www.paulovillarroel.com/posts/creando-mi-primer-blog-con-quarto/index.html</loc>
-    <lastmod>2022-09-19T15:55:33.265Z</lastmod>
+    <lastmod>2022-10-03T02:32:11.245Z</lastmod>
   </url>
   <url>
     <loc>https://www.paulovillarroel.com/posts/personalizado-el-blog/index.html</loc>
-    <lastmod>2022-09-19T15:53:13.522Z</lastmod>
+    <lastmod>2022-10-03T02:32:03.481Z</lastmod>
   </url>
   <url>
     <loc>https://www.paulovillarroel.com/about.html</loc>
     <lastmod>2022-09-19T21:48:38.143Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.paulovillarroel.com/posts/contribuye-al-codigo-abierto/index.html</loc>
+    <lastmod>2022-10-03T02:42:03.428Z</lastmod>
   </url>
 </urlset>
