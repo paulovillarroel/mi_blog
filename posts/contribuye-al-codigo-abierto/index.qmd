@@ -34,8 +34,14 @@ Instalar GIT no es nada complejo. Es como cualquier programa que instalas. Bási
 De todas formas, hace unos meses me tocó instalar GIT y tomé capturas de pantalla de cada paso. Te las dejo para que te sirvan de referencia.
 
 ::: {.alert .alert-dismissible .alert-light}
-<button type="button" class="btn-close" data-bs-dismiss="alert"></button> <strong>Versión de GIT</strong> Puede que la versión que instales no sea la misma que muestro acá, pero la instalación no debería ser muy distinta.
+<button type="button" class="btn-close" data-bs-dismiss="alert">
+
+</button>
+
+<strong>Versión de GIT</strong> Puede que la versión que instales no sea la misma que muestro acá, pero la instalación no debería ser muy distinta.
 :::
+
+![](git1.png){fig-align="center" width="800"}
 
 ![](git2.png){fig-align="center" width="800"}
 
