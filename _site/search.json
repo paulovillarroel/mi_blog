@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Blog",
     "section": "",
-    "text": "opensource\n\n\ntutorial\n\n\ngit\n\n\ngithub\n\n\n\nRevisemos cómo contribuir a que crezca el conocimiento en el mundo!\n\n\n\nPaulo Villarroel\n\n\nOct 3, 2022\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nquarto\n\n\ntutorial\n\n\n\nAhora que ya tenemos nuestro blog arriba, toca personalizarlo y dejarlo más lindo.\n\n\n\nPaulo Villarroel\n\n\nSep 19, 2022\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nquarto\n\n\ntutorial\n\n\n\nTe enseño a crear tu primer blog con Quarto, publicar nuevos artículos, subirlo a GitHub y desplegarlo en la web.\n\n\n\nPaulo Villarroel\n\n\nSep 17, 2022\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "opensource\n\n\ntutorial\n\n\ngit\n\n\ngithub\n\n\n\nRevisemos cómo contribuir a que crezca el conocimiento en el mundo!\n\n\n\nPaulo Villarroel\n\n\nOct 3, 2022\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\npython\n\n\ncurso\n\n\n\nAprende desde cero el lenguaje de programación más usado y demandado del mundo.\n\n\n\nPaulo Villarroel\n\n\nOct 3, 2022\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\npython\n\n\ncurso\n\n\n\nAprende desde cero el lenguaje de programación más usado y demandado del mundo.\n\n\n\nPaulo Villarroel\n\n\nOct 3, 2022\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nquarto\n\n\ntutorial\n\n\n\nAhora que ya tenemos nuestro blog arriba, toca personalizarlo y dejarlo más lindo.\n\n\n\nPaulo Villarroel\n\n\nSep 19, 2022\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nquarto\n\n\ntutorial\n\n\n\nTe enseño a crear tu primer blog con Quarto, publicar nuevos artículos, subirlo a GitHub y desplegarlo en la web.\n\n\n\nPaulo Villarroel\n\n\nSep 17, 2022\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
@@ -159,5 +159,40 @@
     "title": "Contribuye al código abierto",
     "section": "Finalmente…",
     "text": "Finalmente…\nSi sigues los pasos, no deberías tener mayor dificultades para tener instalado GIT.\nEso es lo primero para empezar a contribuir al open source.\nEn el próximo artículo te explicaré de forma muy precisa, cómo hacer tu primera pull request, que es la forma por excelencia de contribuir a proyectos abiertos. Pero eso, lo veremos en detalle el mi próximo artículo.\nNos vemos!!! 😁"
+  },
+  {
+    "objectID": "posts/ruta-aprendizaje-python/index.html",
+    "href": "posts/ruta-aprendizaje-python/index.html",
+    "title": "Mi ruta de aprendizaje en Python",
+    "section": "",
+    "text": "Hola!\nTe quiero contar que, desde hace varias semanas, que estoy estudiando Python. Este sería mi tercer lenguaje de programación, luego de R y SQL.\nYo me dedico, principalmente, al análisis de datos y aplicaciones de inteligencia artificial, por lo cual este stack de tecnología me parece bastante potente.\nA continuación te explico porqué decidí aprender Python y hacerlo de esta forma."
+  },
+  {
+    "objectID": "posts/ruta-aprendizaje-python/index.html#por-qué-aprender-python",
+    "href": "posts/ruta-aprendizaje-python/index.html#por-qué-aprender-python",
+    "title": "Mi ruta de aprendizaje en Python",
+    "section": "¿Por qué aprender Python?",
+    "text": "¿Por qué aprender Python?\nPython es el lenguaje de programación “más famoso” en la actualidad a nivel mundial. Bueno, si no es el primero, está entre los 3 primeros seguro, va a depender de la encuesta que se mire (tiene una lucha a muerte con JavaScript jajaj). Pero es innegable que este lenguaje es ampliamente buscado y las ofertas laborales son cada vez más necesitadas, en especial, en temas de análisis de datos, inteligencia artificial, IoT y backend.\nSi miramos Google Trends, podemos ver que el interés por este lenguaje de programación ha ido creciendo, en especial, desde el 2015 en adelante.\n\n\nPosiblemente eso tenga relación con el auge de la inteligencia artificial, en donde Python es uno de los lenguajes más usados.\nPor otra parte, si revisamos el TIOBE Index para el mes de septiembre 2022, vemos que Python se posiciona en el primer puesto del ranking, con tendencia al alza respecto del mes pasado.\n\n\n\n\n\nEn la encuesta 2022 de desarrolladores que hace StackOverflow, nuevamente vemos a Python entre los primeros lugares de los lenguajes más usados.\n\n\n\n\n\nA ver, que un lenguaje sea el más buscado, más famoso y esas cosas no es tan importante. La verdad que lo que debería ser determinante es la utilidad que te ofrece aprenderlo. En mi caso, me sirve 😎, pues para temas de análisis de datos es uno de los más relevantes en la actualidad."
+  },
+  {
+    "objectID": "posts/ruta-aprendizaje-python/index.html#por-qué-hacer-una-web",
+    "href": "posts/ruta-aprendizaje-python/index.html#por-qué-hacer-una-web",
+    "title": "Mi ruta de aprendizaje en Python",
+    "section": "¿Por qué hacer una web?",
+    "text": "¿Por qué hacer una web?\nEn aprendiendopython.com estoy documentando gran parte de lo que voy estudiando sobre Python.\nDecidí hacer eso por varios motivos…\n\nMe gusta enseñar y me parece que puedo contribuir en ese sentido.\nLa mejor forma de estudiar y aprender algo, es enseñándolo. Al explicárselo a otras personas, el aprendizaje es mucho más significativo y la curva es mucho más rápida. Esta es una metodología que uso bastante.\nA pesar de que estoy recién aprendiendo Python, ya tengo conocimientos en programación (soy programador desde hace un par de años), lo cual hace que aprender un nuevo lenguaje sea mucho más simple. Sin embargo, en este proyecto decidí obviar un poco mis conocimientos previos e intentar explicar todo desde los más simple y básico, de modo que cualquiera pueda entenderlo. O, al menos, esa es mi intención.\nIr documentando mi aprendizaje me ayuda a ir dejando un manual de estudio y notas para el futuro. En general, uno se puede aprender gran parte de las cosas de memoria y entender la lógica, pero la sintaxis puede que se olvide. El contar con este material de apoyo me permitirá tener acceso simple a esas cosas si es que lo llegara a necesitar."
+  },
+  {
+    "objectID": "posts/ruta-aprendizaje-python/index.html#basado-en-proyectos",
+    "href": "posts/ruta-aprendizaje-python/index.html#basado-en-proyectos",
+    "title": "Mi ruta de aprendizaje en Python",
+    "section": "Basado en proyectos",
+    "text": "Basado en proyectos\nAdemás de enseñar lo que se va aprendiendo, otra forma de ir consolidando de mejor forma los conocimientos, es el realizar proyectos.\nLlevar a la práctica distintas cosas, en proyectos pequeños, pero que permitan entender el funcionamiento del lenguaje.\nYa hice uno y lo tengo publicado. Es un pequeño script para identificar el signo del zodiaco chino que te corresponde, según el año de nacimiento.\n\n## Chinese Zodiac\n\n# More info https://www.travelchinaguide.com/intro/astrology/60year-cycle.htm\n\nyear = int(input(\"Ingresa el año de nacimiento: \"))\n\ndef chinese_zodiac(year:int):\n    elements = (\"madera\", \"fuego\", \"tierra\", \"metal\", \"agua\")\n    animals = (\"rata\", \"buey\", \"tigre\", \"conejo\", \"dragón\", \"serpiente\", \"caballo\", \"oveja\", \"mono\", \"gallo\", \"perro\", \"cerdo\")\n\n    if year < 604:\n        print(\"El ciclo sexagenario chino comenzó en el año 604. Debes introducir un año adecuado.\")\n    else:\n        sexagenary_year = (year - 4) % 60\n        element = elements[int((sexagenary_year % 10) / 2)]\n        animal = animals[int(sexagenary_year % 12)]\n\n        print(f\"Año: {year} / Zodiaco: {animal} de {element}\")\n\nchinese_zodiac(year)"
+  },
+  {
+    "objectID": "posts/ruta-aprendizaje-python/index.html#pero-está-lleno-de-otros-cursos",
+    "href": "posts/ruta-aprendizaje-python/index.html#pero-está-lleno-de-otros-cursos",
+    "title": "Mi ruta de aprendizaje en Python",
+    "section": "Pero está lleno de otros cursos…",
+    "text": "Pero está lleno de otros cursos…\nEfectivamente. Python, al ser uno de los lenguajes más famosos, está lleno de tutoriales, cursos, videos en YouTube y libros, tanto de pago como, en su mayoría, gratuitos. Además, la documentación oficial de Python es bastante buena.\nEntonces, ¿Qué aporta aprendiendopython a la comunidad?\nPrimero. Yo no lo llamaría un curso. Porque no está diseñado para ser eso. Como te mencionaba antes, lo que estoy documentando es mi ruta de aprendizaje, no estoy haciendo un curso. Pero, a pesar de eso, puede cumplir esa función, principalmente, pues me he dedicado bastante a explicar los conceptos, dar muchos ejemplos y no dar cosas por obvias. Me parece que muchos cursos fallan en eso. Explican cosas muy por encima y no se detienen a explicarlas de forma clara.\nPor otro lado, el ritmo no es muy rápido. No es como esos cursos que te prometen que en 4 horas aprendes a programar y puedes tener el trabajo de tus sueños. Eso es mucha fantasía y te venden algo que no es así. Como todo en la vida, si quieres lograr las metas, debes dedicarle mucho tiempo, ser perseverante y seguir adelante, aún cuando las cosas no te salgan. Como acá estoy documentando mis estudios, puede que le dedique más tiempo a algunos temas que a otros, o que sea repetitivo en varias ocasiones.\nSin embargo, esto es jústamente lo que lo hace diferente y especial. Pues yo también lo estoy estudiando, por lo que esa expereincia de estudio y descubrimiento es muy valiosa, cosa que no ocurre en cursos o libros, donde todo está maqueteado. Acá te comento cosas que me funcionan y las que no, te hablo desde mi experiencia. Esto lo hace una forma muy especial de aprender. Es como ir al cine a ver una películay comentar con un amigo mas mejores escenas, fallas y opiniones. Esa es una experiencia mucho más entretenida que solo ir al cine. Bueno, acá es lo mismo.\nOk.\nTe dejo cordialmente invtada/o a seguir el aprendizaje de Python conmigo.\n👉 Recuerda visitar aprendiendopython.com\nNos vemos!!"
   }
 ]
