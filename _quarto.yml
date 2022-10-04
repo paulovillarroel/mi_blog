@@ -4,6 +4,9 @@ project:
 website:
   title: "PauloVillarroel.com"
   site-url: "https://www.paulovillarroel.com/"
+  page-navigation: true
+  repo-url: https://github.com/paulovillarroel/mi_blog
+  repo-actions: [issue]
   google-analytics: "G-RNWVZS7ZL8"
   navbar:
     right:
