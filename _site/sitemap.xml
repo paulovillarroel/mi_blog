@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.paulovillarroel.com/index.html</loc>
-    <lastmod>2022-10-03T22:05:07.817Z</lastmod>
+    <lastmod>2022-10-04T04:57:47.021Z</lastmod>
   </url>
   <url>
     <loc>https://www.paulovillarroel.com/posts/creando-mi-primer-blog-con-quarto/index.html</loc>
@@ -14,14 +14,18 @@
   </url>
   <url>
     <loc>https://www.paulovillarroel.com/about.html</loc>
-    <lastmod>2022-10-03T03:22:52.371Z</lastmod>
+    <lastmod>2022-10-04T04:51:40.014Z</lastmod>
   </url>
   <url>
     <loc>https://www.paulovillarroel.com/posts/contribuye-al-codigo-abierto/index.html</loc>
-    <lastmod>2022-10-03T22:05:07.303Z</lastmod>
+    <lastmod>2022-10-04T04:44:30.459Z</lastmod>
   </url>
   <url>
     <loc>https://www.paulovillarroel.com/posts/ruta-aprendizaje-python/index.html</loc>
-    <lastmod>2022-10-03T14:52:46.542Z</lastmod>
+    <lastmod>2022-10-04T04:43:54.685Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.paulovillarroel.com/posts/factores-en-r/index.html</loc>
+    <lastmod>2022-10-04T04:57:46.180Z</lastmod>
   </url>
 </urlset>
