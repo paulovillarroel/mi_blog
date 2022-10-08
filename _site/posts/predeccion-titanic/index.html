@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Paulo Villarroel">
-<meta name="dcterms.date" content="2022-10-03">
-<meta name="description" content="Revisemos cómo contribuir a que crezca el conocimiento en el mundo!">
+<meta name="dcterms.date" content="2022-10-06">
+<meta name="description" content="Realizamos un modelo de predicción utilizando XXX">
 
-<title>PauloVillarroel.com - Contribuye al código abierto</title>
+<title>PauloVillarroel.com - ¿Quién sobrevivió en el Titanic?</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -125,17 +125,16 @@ gtag('config', 'G-RNWVZS7ZL8', { 'anonymize_ip': true});
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Contribuye al código abierto</h1>
+      <h1 class="title">¿Quién sobrevivió en el Titanic?</h1>
                   <div>
         <div class="description">
-          Revisemos cómo contribuir a que crezca el conocimiento en el mundo!
+          Realizamos un modelo de predicción utilizando XXX
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">opensource</div>
+                <div class="quarto-category">r</div>
                 <div class="quarto-category">tutorial</div>
-                <div class="quarto-category">git</div>
-                <div class="quarto-category">github</div>
+                <div class="quarto-category">machine learning</div>
               </div>
                   </div>
   </div>
@@ -153,7 +152,7 @@ gtag('config', 'G-RNWVZS7ZL8', { 'anonymize_ip': true});
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">October 3, 2022</p>
+        <p class="date">October 6, 2022</p>
       </div>
     </div>
       
@@ -168,9 +167,7 @@ gtag('config', 'G-RNWVZS7ZL8', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul class="collapse">
-  <li><a href="#qué-es-git" id="toc-qué-es-git" class="nav-link active" data-scroll-target="#qué-es-git">¿Qué es GIT?</a></li>
-  <li><a href="#pasos-para-instalar-git" id="toc-pasos-para-instalar-git" class="nav-link" data-scroll-target="#pasos-para-instalar-git">Pasos para instalar GIT</a></li>
-  <li><a href="#finalmente" id="toc-finalmente" class="nav-link" data-scroll-target="#finalmente">Finalmente…</a></li>
+  <li><a href="#los-datos" id="toc-los-datos" class="nav-link active" data-scroll-target="#los-datos">Los datos</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/paulovillarroel/mi_blog/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -180,129 +177,24 @@ gtag('config', 'G-RNWVZS7ZL8', { 'anonymize_ip': true});
 
 
 
-<p>Hola (otra vez!!)</p>
-<p>Hoy te quiero hablar de un tema, que considero, muy relevante: el código abierto.</p>
-<p>En inglés al código abierto se le denomina open source. Y es que más que una forma de desarrollar código de forma colaborativa, es una filosofía o un movimiento. Es una lógica que supera solo a la producción del software mismo, sino que abarca valores del diseño descentralizado y solución de problemas de forma colectiva y abierta. Si deseas saber un poco más del open source, puedes <a href="https://www.redhat.com/es/topics/open-source/what-is-open-source">revisar este link</a>.</p>
-<p>En lo personal, me encanta esta filosofía del open source. Y es que esta forma de trabajo puede abarcar no solo el desarrollo de código, sino que de otras industrias y áreas. La innovación tiene mucho de ésto, de desarrollar soluciones de forma colaborativa y abierta.</p>
-<p>Hoy quiero que tu puedas contribuir al código abierto. Si!! Que ayudes a generar conocimiento colectivo. Entonces debes conocer un par de cosas. Una de éstas es el control de <a href="https://git-scm.com/">versiones GIT</a> y la otra es alguna plataforma de repositorios remotos , como <a href="https://github.com/">GitHub</a>, <a href="https://about.gitlab.com/">GitLab</a> o <a href="https://bitbucket.org/">Bitbucket</a>.</p>
-<p>Pero cuando me puse a pensar en cómo explicarte a contribuir al código abierto, me parece relevante explicarte un paso antes. Y es que para que puedas hacer estas cosas, debes conocer algo de GIT.</p>
-<section id="qué-es-git" class="level2">
-<h2 class="anchored" data-anchor-id="qué-es-git">¿Qué es GIT?</h2>
-<p>En la <a href="https://learn.microsoft.com/es-es/devops/develop/git/what-is-git">web de Microsoft</a> indican:</p>
-<p><em>Git es un sistema de control de versiones distribuido, lo que significa que un clon local del proyecto es un repositorio de control de versiones completo. Estos repositorios locales plenamente funcionales permiten trabajar sin conexión o de forma remota con facilidad. Los desarrolladores confirman su trabajo localmente y, a continuación, sincronizan su copia del repositorio con la copia en el servidor. Este paradigma es distinto del control de versiones centralizado, donde los clientes deben sincronizar el código con un servidor antes de crear nuevas versiones.</em></p>
-<p>Ya te contaré más sobre GIT en otros artículos. En esta oportunidad seré muy concreto. Te explicaré cómo instalar GIT en tu computador para que puedas empezar a contribuir a proyectos de código abierto lo antes posible.</p>
-</section>
-<section id="pasos-para-instalar-git" class="level2">
-<h2 class="anchored" data-anchor-id="pasos-para-instalar-git">Pasos para instalar GIT</h2>
-<p>Instalar GIT no es nada complejo. Es como cualquier programa que instalas. Básicamente es descargar el instalador y darle clic a “siguiente” muchas veces.</p>
-<p>De todas formas, hace unos meses me tocó instalar GIT y tomé capturas de pantalla de cada paso. Te las dejo para que te sirvan de referencia.</p>
-<div class="alert alert-dismissible alert-light">
-<button type="button" class="btn-close" data-bs-dismiss="alert">
-</button>
-<p><strong>Versión de GIT</strong> Puede que la versión que instales no sea la misma que muestro acá, pero la instalación no debería ser muy distinta.</p>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="git1.png" class="img-fluid figure-img" width="800"></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="git2.png" class="img-fluid figure-img" width="800"></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="git3.png" class="img-fluid figure-img" width="800"></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="git4.png" class="img-fluid figure-img" width="800"></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="git5.png" class="img-fluid figure-img" width="800"></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="git6.png" class="img-fluid figure-img" width="800"></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="git7.png" class="img-fluid figure-img" width="800"></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="git8.png" class="img-fluid figure-img" width="800"></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="git9.png" class="img-fluid figure-img" width="800"></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="git10.png" class="img-fluid figure-img" width="800"></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="git11.png" class="img-fluid figure-img" width="800"></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="git12.png" class="img-fluid figure-img" width="800"></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="git13.png" class="img-fluid figure-img" width="800"></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="git14.png" class="img-fluid figure-img" width="800"></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="git15.png" class="img-fluid figure-img" width="800"></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="git16.png" class="img-fluid figure-img" width="800"></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="git17.png" class="img-fluid figure-img" width="800"></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="git18.png" class="img-fluid figure-img" width="800"></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="git19.png" class="img-fluid figure-img" width="800"></p>
-</figure>
-</div>
-</section>
-<section id="finalmente" class="level2">
-<h2 class="anchored" data-anchor-id="finalmente">Finalmente…</h2>
-<p>Si sigues los pasos, no deberías tener mayor dificultades para tener instalado GIT.</p>
-<p>Eso es lo primero para empezar a contribuir al open source.</p>
-<p>En el próximo artículo te explicaré de forma muy precisa, cómo hacer tu primera <strong>pull request</strong>, que es la forma por excelencia de contribuir a proyectos abiertos. Pero eso, lo veremos en detalle en mi próximo artículo.</p>
-<p>Nos vemos!!! 😁</p>
+<p>Bienvendo/a!! 😛</p>
+<p>Hoy vamos a hacer algo distinto. Vamos a tratar de predecir quién sobrevive de los pasajeros del Titanic, usando inteligencia artificial.</p>
+<p>Ojo. No voy a ser muy exhaustivo, ni tan profundo en el análisis ni usaré modelos de machine learning muy complejos, pues quiero que este artículo te sirva como ejemplo de lo que se puede llegar a hacer y sea simple de seguir. En la vida real la cosa es un poco distinta. Generalmente, se realizan múltiples pruebas con muchos modelos y se van seleccionando en base a su desempeño (ya veremos qué significa esto). Por otro lado, los datos tienden a estar mucho más sucios y el trabajo de limpieza es una de las actividades a la que más se le dedica tiempo y esfuerzo.</p>
+<p>Para efectos de este artículo, usarmos los datos de una competencia de Kaggle, en donde está un dataset (un conjunto de datos) sobre los pasajeros del Titanic, en donde se especifican algunas variables y quien sobrevivió o no. Puedes revisar los datos en <a href="https://www.kaggle.com/competitions/titanic/data">el siguiente enlace</a>.</p>
+<section id="los-datos" class="level2">
+<h2 class="anchored" data-anchor-id="los-datos">Los datos</h2>
+<p>Como te mencionada, los datos correponden a registros de pasajeros que se subieron en el Titanic. Si, el Titanic. Ese barco británico que naufragó en el océano Atlántico durante la noche del 14 y la madrugada del 15 de abril de 1912, mientras realizaba su viaje inaugural desde Southampton a Nueva York, tras chocar con un iceberg. En el hundimiento la gran mayoría de las personas que iban a bordo, lo que convierte a esta catástrofe en uno de los mayores naufragios de la historia.</p>
+<p>Hay una película de como 4 horas donde sale Di Caprio, también. La viste?</p>
+<p>Ok. Ya sabemos de qué van los datos.</p>
+<p>Los datos incluyen 3 archivos:</p>
+<ul>
+<li><p>gender_submission.csv</p></li>
+<li><p>test.csv</p></li>
+<li><p>train.csv</p></li>
+</ul>
+<p>El primero es un ejemplo de cómo se deben subir las predicciones a la web de Kaggle para participar de la competencia (Ah! La competencia tiene que ver con quién logra acertar más con las predicciones).</p>
+<p>El archivo test contiene datos de los pasajeros para realizar las pruebas del modelo de machine learning. No contiene datos sobre la sobrevivencia. Son los registros que hay que predecir.</p>
+<p>El archivo train contiene los datos de los pasajeros para realizar el entrenamiento del algoritmo de machine learninig. Este tiene especificado si el pasajero sobrevivió o no.</p>
 
 
 </section>

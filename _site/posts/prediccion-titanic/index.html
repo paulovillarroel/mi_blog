@@ -1,0 +1,2307 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Paulo Villarroel">
+<meta name="dcterms.date" content="2022-10-08">
+<meta name="description" content="Entreno 20 modelos de Machine Learning para averiguarlo.">
+
+<title>PauloVillarroel.com - ¿Quién sobrevivió al accidente del Titanic?</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-RNWVZS7ZL8"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-RNWVZS7ZL8', { 'anonymize_ip': true});
+</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">PauloVillarroel.com</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">Sobre mí</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/paulovillarroel"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/Chazkon"><i class="bi bi-twitter" role="img">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/paulovillarroeltapia/"><i class="bi bi-linkedin" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">¿Quién sobrevivió al accidente del Titanic?</h1>
+                  <div>
+        <div class="description">
+          Entreno 20 modelos de Machine Learning para averiguarlo.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">r</div>
+                <div class="quarto-category">tutorial</div>
+                <div class="quarto-category">machine learning</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Paulo Villarroel </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">October 8, 2022</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#los-datos" id="toc-los-datos" class="nav-link active" data-scroll-target="#los-datos">Los datos</a></li>
+  <li><a href="#análisis-exploratorio" id="toc-análisis-exploratorio" class="nav-link" data-scroll-target="#análisis-exploratorio">Análisis exploratorio</a></li>
+  <li><a href="#manejo-de-nas" id="toc-manejo-de-nas" class="nav-link" data-scroll-target="#manejo-de-nas">Manejo de NA´s</a></li>
+  <li><a href="#feature-engineering" id="toc-feature-engineering" class="nav-link" data-scroll-target="#feature-engineering">Feature Engineering</a></li>
+  <li><a href="#modelamiento-ml" id="toc-modelamiento-ml" class="nav-link" data-scroll-target="#modelamiento-ml">Modelamiento ML</a></li>
+  <li><a href="#subir-a-kaggle" id="toc-subir-a-kaggle" class="nav-link" data-scroll-target="#subir-a-kaggle">Subir a Kaggle</a></li>
+  <li><a href="#conclusiones" id="toc-conclusiones" class="nav-link" data-scroll-target="#conclusiones">Conclusiones</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/paulovillarroel/mi_blog/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<p>Bienvendo/a!! 😛</p>
+<p>Hoy vamos a hacer algo distinto. Vamos a tratar de predecir quién sobrevive de los pasajeros del Titanic, usando inteligencia artificial.</p>
+<p>Ojo. No voy a ser muy exhaustivo, ni tan profundo en el análisis ni usaré modelos de machine learning muy complejos, pues quiero que este artículo te sirva como ejemplo de lo que se puede llegar a hacer y sea simple de seguir. En la vida real la cosa es un poco distinta. Generalmente, se realizan múltiples pruebas con muchos modelos y se van seleccionando en base a su desempeño (ya veremos qué significa esto). Por otro lado, los datos tienden a estar mucho más sucios y el trabajo de limpieza es una de las actividades a la que más se le dedica tiempo y esfuerzo.</p>
+<p>Para efectos de este artículo, usarmos los datos de una competencia de Kaggle, en donde está un dataset (un conjunto de datos) sobre los pasajeros del Titanic, en donde se especifican algunas variables y quien sobrevivió o no. Puedes revisar los datos en <a href="https://www.kaggle.com/competitions/titanic/data">el siguiente enlace</a>.</p>
+<section id="los-datos" class="level2">
+<h2 class="anchored" data-anchor-id="los-datos">Los datos</h2>
+<p>Como te mencionada, los datos correponden a registros de pasajeros que se subieron en el Titanic. Si, el Titanic. Ese barco británico que naufragó en el océano Atlántico durante la noche del 14 y la madrugada del 15 de abril de 1912, mientras realizaba su viaje inaugural desde Southampton a Nueva York, tras chocar con un iceberg. En el hundimiento la gran mayoría de las personas que iban a bordo, lo que convierte a esta catástrofe en uno de los mayores naufragios de la historia.</p>
+<p>Hay una película de como 4 horas donde sale Di Caprio, también. La viste?</p>
+<p>Ok. Ya sabemos de qué van los datos.</p>
+<p>Los datos incluyen 3 archivos:</p>
+<ul>
+<li><p>gender_submission.csv</p></li>
+<li><p>test.csv</p></li>
+<li><p>train.csv</p></li>
+</ul>
+<p>El primero es un ejemplo de cómo se deben subir las predicciones a la web de Kaggle para participar de la competencia (Ah! La competencia tiene que ver con quién logra acertar más con las predicciones).</p>
+<p>El archivo test contiene datos de los pasajeros para realizar las pruebas del modelo de machine learning. No contiene datos sobre la sobrevivencia. Son los registros que hay que predecir.</p>
+<p>El archivo train contiene los datos de los pasajeros para realizar el entrenamiento del algoritmo de machine learninig. Este tiene especificado si el pasajero sobrevivió o no.</p>
+<p>Vamos con el tema…</p>
+<p>Cargamos las librerías:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidymodels)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Cargamos los datos:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>here<span class="sc">::</span><span class="fu">i_am</span>(<span class="st">"index.qmd"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"train.csv"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"test.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="análisis-exploratorio" class="level2">
+<h2 class="anchored" data-anchor-id="análisis-exploratorio">Análisis exploratorio</h2>
+<p>Esta etapa es fundamental. el análisis exploratorio de datos es una de las primeras etapas en cualquier proyectos de ciencia de datos. El objetivo es analizar los datos para entender cómo están compuestos y qué representan. Habitualmente para estos fines, se pueden usar estadísticas descriptivas e inferenciales. Además, el uso de visualizaciones es un elemento super valioso.</p>
+<p>Por lo demás, de este análisis exploratorio, se pueden desprender distintas acciones de <strong>Feature Engeneering</strong>. Este es un paso muy importante en el aprendizaje automático. El feature engineering (o ingeniería de características) se refiere al proceso de diseño de características artificiales en un algoritmo. Estas características artificiales son utilizadas por ese algoritmo para mejorar su rendimiento y precisión.</p>
+<p>Este paso es fundamental en los modelos de machine learning. Aunque para efectos de este artículo, posiblemente no haré todo lo que se podría hacer, como expliqué al inicio, para privilegiar la comprensión más que los resultados.</p>
+<p>Ya que tenemos los datos, ahora veamos un poco de qué se tratan:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>spec_tbl_df [891 × 12] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+ $ PassengerId: num [1:891] 1 2 3 4 5 6 7 8 9 10 ...
+ $ Survived   : num [1:891] 0 1 1 1 0 0 0 0 1 1 ...
+ $ Pclass     : num [1:891] 3 1 3 1 3 3 1 3 3 2 ...
+ $ Name       : chr [1:891] "Braund, Mr. Owen Harris" "Cumings, Mrs. John Bradley (Florence Briggs Thayer)" "Heikkinen, Miss. Laina" "Futrelle, Mrs. Jacques Heath (Lily May Peel)" ...
+ $ Sex        : chr [1:891] "male" "female" "female" "female" ...
+ $ Age        : num [1:891] 22 38 26 35 35 NA 54 2 27 14 ...
+ $ SibSp      : num [1:891] 1 1 0 1 0 0 0 3 0 1 ...
+ $ Parch      : num [1:891] 0 0 0 0 0 0 0 1 2 0 ...
+ $ Ticket     : chr [1:891] "A/5 21171" "PC 17599" "STON/O2. 3101282" "113803" ...
+ $ Fare       : num [1:891] 7.25 71.28 7.92 53.1 8.05 ...
+ $ Cabin      : chr [1:891] NA "C85" NA "C123" ...
+ $ Embarked   : chr [1:891] "S" "C" "S" "S" ...
+ - attr(*, "spec")=
+  .. cols(
+  ..   PassengerId = col_double(),
+  ..   Survived = col_double(),
+  ..   Pclass = col_double(),
+  ..   Name = col_character(),
+  ..   Sex = col_character(),
+  ..   Age = col_double(),
+  ..   SibSp = col_double(),
+  ..   Parch = col_double(),
+  ..   Ticket = col_character(),
+  ..   Fare = col_double(),
+  ..   Cabin = col_character(),
+  ..   Embarked = col_character()
+  .. )
+ - attr(*, "problems")=&lt;externalptr&gt; </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>spec_tbl_df [418 × 11] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+ $ PassengerId: num [1:418] 892 893 894 895 896 897 898 899 900 901 ...
+ $ Pclass     : num [1:418] 3 3 2 3 3 3 3 2 3 3 ...
+ $ Name       : chr [1:418] "Kelly, Mr. James" "Wilkes, Mrs. James (Ellen Needs)" "Myles, Mr. Thomas Francis" "Wirz, Mr. Albert" ...
+ $ Sex        : chr [1:418] "male" "female" "male" "male" ...
+ $ Age        : num [1:418] 34.5 47 62 27 22 14 30 26 18 21 ...
+ $ SibSp      : num [1:418] 0 1 0 0 1 0 0 1 0 2 ...
+ $ Parch      : num [1:418] 0 0 0 0 1 0 0 1 0 0 ...
+ $ Ticket     : chr [1:418] "330911" "363272" "240276" "315154" ...
+ $ Fare       : num [1:418] 7.83 7 9.69 8.66 12.29 ...
+ $ Cabin      : chr [1:418] NA NA NA NA ...
+ $ Embarked   : chr [1:418] "Q" "S" "Q" "S" ...
+ - attr(*, "spec")=
+  .. cols(
+  ..   PassengerId = col_double(),
+  ..   Pclass = col_double(),
+  ..   Name = col_character(),
+  ..   Sex = col_character(),
+  ..   Age = col_double(),
+  ..   SibSp = col_double(),
+  ..   Parch = col_double(),
+  ..   Ticket = col_character(),
+  ..   Fare = col_double(),
+  ..   Cabin = col_character(),
+  ..   Embarked = col_character()
+  .. )
+ - attr(*, "problems")=&lt;externalptr&gt; </code></pre>
+</div>
+</div>
+<p>Puedes notar que los 2 archivos son similares en su composición, excepto que <code>train</code> tiene la variable <code>Survived</code> y <code>test</code> no. Además, <code>train</code> contiene casi el doble de registros (filas) que <code>test</code>.</p>
+<p>En Kaggle se explican qué significan los variables (diccionario) y ponen algunas notas. Estos datos son importantes para comprender el dataset y pensar en cómo ajustarlos si es necesario. En todo proyecto de datos es muy relevante entender qué representan los datos y cuáles son sus posibilidades.</p>
+<p><strong>Diccionario:</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dictionary.png" class="img-fluid figure-img" width="800"></p>
+</figure>
+</div>
+<p><strong>Notas:</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dictionary2.png" class="img-fluid figure-img" width="800"></p>
+</figure>
+</div>
+<p>Revisemos las primeras filas de los datos:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 12
+  PassengerId Survived Pclass Name    Sex     Age SibSp Parch Ticket  Fare Cabin
+        &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;
+1           1        0      3 Braund… male     22     1     0 A/5 2…  7.25 &lt;NA&gt; 
+2           2        1      1 Cuming… fema…    38     1     0 PC 17… 71.3  C85  
+3           3        1      3 Heikki… fema…    26     0     0 STON/…  7.92 &lt;NA&gt; 
+4           4        1      1 Futrel… fema…    35     1     0 113803 53.1  C123 
+5           5        0      3 Allen,… male     35     0     0 373450  8.05 &lt;NA&gt; 
+6           6        0      3 Moran,… male     NA     0     0 330877  8.46 &lt;NA&gt; 
+# … with 1 more variable: Embarked &lt;chr&gt;</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 11
+  PassengerId Pclass Name     Sex     Age SibSp Parch Ticket  Fare Cabin Embar…¹
+        &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  
+1         892      3 Kelly, … male   34.5     0     0 330911  7.83 &lt;NA&gt;  Q      
+2         893      3 Wilkes,… fema…  47       1     0 363272  7    &lt;NA&gt;  S      
+3         894      2 Myles, … male   62       0     0 240276  9.69 &lt;NA&gt;  Q      
+4         895      3 Wirz, M… male   27       0     0 315154  8.66 &lt;NA&gt;  S      
+5         896      3 Hirvone… fema…  22       1     1 31012… 12.3  &lt;NA&gt;  S      
+6         897      3 Svensso… male   14       0     0 7538    9.22 &lt;NA&gt;  S      
+# … with abbreviated variable name ¹​Embarked</code></pre>
+</div>
+</div>
+<p>Veamos más cosas de los datos. Usaremos la librería <code>skimr</code> y su función <code>skim</code> para explorar los datos y generar algunas primeras estadísticas de las variables.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">train</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Number of rows</td>
+<td style="text-align: left;">891</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Number of columns</td>
+<td style="text-align: left;">12</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">_______________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Column type frequency:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">character</td>
+<td style="text-align: left;">5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">________________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 13%">
+<col style="width: 19%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 8%">
+<col style="width: 12%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">min</th>
+<th style="text-align: right;">max</th>
+<th style="text-align: right;">empty</th>
+<th style="text-align: right;">n_unique</th>
+<th style="text-align: right;">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Name</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">82</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">891</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sex</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ticket</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">681</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Cabin</td>
+<td style="text-align: right;">687</td>
+<td style="text-align: right;">0.23</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">147</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Embarked</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 11%">
+<col style="width: 15%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 5%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 6%">
+<col style="width: 7%">
+<col style="width: 6%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">p0</th>
+<th style="text-align: right;">p25</th>
+<th style="text-align: right;">p50</th>
+<th style="text-align: right;">p75</th>
+<th style="text-align: right;">p100</th>
+<th style="text-align: left;">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">PassengerId</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">446.00</td>
+<td style="text-align: right;">257.35</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">223.50</td>
+<td style="text-align: right;">446.00</td>
+<td style="text-align: right;">668.5</td>
+<td style="text-align: right;">891.00</td>
+<td style="text-align: left;">▇▇▇▇▇</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Survived</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">0.38</td>
+<td style="text-align: right;">0.49</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: left;">▇▁▁▁▅</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Pclass</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">2.31</td>
+<td style="text-align: right;">0.84</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">2.00</td>
+<td style="text-align: right;">3.00</td>
+<td style="text-align: right;">3.0</td>
+<td style="text-align: right;">3.00</td>
+<td style="text-align: left;">▃▁▃▁▇</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Age</td>
+<td style="text-align: right;">177</td>
+<td style="text-align: right;">0.8</td>
+<td style="text-align: right;">29.70</td>
+<td style="text-align: right;">14.53</td>
+<td style="text-align: right;">0.42</td>
+<td style="text-align: right;">20.12</td>
+<td style="text-align: right;">28.00</td>
+<td style="text-align: right;">38.0</td>
+<td style="text-align: right;">80.00</td>
+<td style="text-align: left;">▂▇▅▂▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SibSp</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">0.52</td>
+<td style="text-align: right;">1.10</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">8.00</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Parch</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">0.38</td>
+<td style="text-align: right;">0.81</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">6.00</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Fare</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">32.20</td>
+<td style="text-align: right;">49.69</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">7.91</td>
+<td style="text-align: right;">14.45</td>
+<td style="text-align: right;">31.0</td>
+<td style="text-align: right;">512.33</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">test</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Number of rows</td>
+<td style="text-align: left;">418</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Number of columns</td>
+<td style="text-align: left;">11</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">_______________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Column type frequency:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">character</td>
+<td style="text-align: left;">5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">________________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 13%">
+<col style="width: 19%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 8%">
+<col style="width: 12%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">min</th>
+<th style="text-align: right;">max</th>
+<th style="text-align: right;">empty</th>
+<th style="text-align: right;">n_unique</th>
+<th style="text-align: right;">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Name</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">63</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">418</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sex</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ticket</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">363</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Cabin</td>
+<td style="text-align: right;">327</td>
+<td style="text-align: right;">0.22</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">76</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Embarked</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 10%">
+<col style="width: 14%">
+<col style="width: 8%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 6%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">p0</th>
+<th style="text-align: right;">p25</th>
+<th style="text-align: right;">p50</th>
+<th style="text-align: right;">p75</th>
+<th style="text-align: right;">p100</th>
+<th style="text-align: left;">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">PassengerId</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1100.50</td>
+<td style="text-align: right;">120.81</td>
+<td style="text-align: right;">892.00</td>
+<td style="text-align: right;">996.25</td>
+<td style="text-align: right;">1100.50</td>
+<td style="text-align: right;">1204.75</td>
+<td style="text-align: right;">1309.00</td>
+<td style="text-align: left;">▇▇▇▇▇</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Pclass</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">2.27</td>
+<td style="text-align: right;">0.84</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">3.00</td>
+<td style="text-align: right;">3.00</td>
+<td style="text-align: right;">3.00</td>
+<td style="text-align: left;">▃▁▃▁▇</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Age</td>
+<td style="text-align: right;">86</td>
+<td style="text-align: right;">0.79</td>
+<td style="text-align: right;">30.27</td>
+<td style="text-align: right;">14.18</td>
+<td style="text-align: right;">0.17</td>
+<td style="text-align: right;">21.00</td>
+<td style="text-align: right;">27.00</td>
+<td style="text-align: right;">39.00</td>
+<td style="text-align: right;">76.00</td>
+<td style="text-align: left;">▂▇▃▂▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SibSp</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">0.45</td>
+<td style="text-align: right;">0.90</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">8.00</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Parch</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">0.39</td>
+<td style="text-align: right;">0.98</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">9.00</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Fare</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">35.63</td>
+<td style="text-align: right;">55.91</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">7.90</td>
+<td style="text-align: right;">14.45</td>
+<td style="text-align: right;">31.50</td>
+<td style="text-align: right;">512.33</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Con el análisis anterior, nos damos cuenta que hay datos faltantes (missing data) o NA´s. En particular, en la variable <code>age</code>, que es la que tiene una gran cantidad de NA´s. Este dato es relevante, pues podría afectar bastante el algoritmo. Trabajar los datos faltantes es un área muy importante, por lo que no podemos dejar pasar este hecho. Ya abordaremos esto más adelante.</p>
+<p>Por ahora, dado que ambos set de datos son muy similares, los voy a unir para dejarlos en solo 1 objeto. Esto me será útil para el análisis y feature engineering de todo el conjunto. Luego lo dividiré nuevamente para efectos del algoritmo.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>all_data <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(<span class="fu">list</span>(<span class="st">"train"</span> <span class="ot">=</span> train, <span class="st">"test"</span> <span class="ot">=</span> test), <span class="at">.id =</span> <span class="st">"id"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(all_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 1,309
+Columns: 13
+$ id          &lt;chr&gt; "train", "train", "train", "train", "train", "train", "tra…
+$ PassengerId &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,…
+$ Survived    &lt;dbl&gt; 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0, 1…
+$ Pclass      &lt;dbl&gt; 3, 1, 3, 1, 3, 3, 1, 3, 3, 2, 3, 1, 3, 3, 3, 2, 3, 2, 3, 3…
+$ Name        &lt;chr&gt; "Braund, Mr. Owen Harris", "Cumings, Mrs. John Bradley (Fl…
+$ Sex         &lt;chr&gt; "male", "female", "female", "female", "male", "male", "mal…
+$ Age         &lt;dbl&gt; 22, 38, 26, 35, 35, NA, 54, 2, 27, 14, 4, 58, 20, 39, 14, …
+$ SibSp       &lt;dbl&gt; 1, 1, 0, 1, 0, 0, 0, 3, 0, 1, 1, 0, 0, 1, 0, 0, 4, 0, 1, 0…
+$ Parch       &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 1, 2, 0, 1, 0, 0, 5, 0, 0, 1, 0, 0, 0…
+$ Ticket      &lt;chr&gt; "A/5 21171", "PC 17599", "STON/O2. 3101282", "113803", "37…
+$ Fare        &lt;dbl&gt; 7.2500, 71.2833, 7.9250, 53.1000, 8.0500, 8.4583, 51.8625,…
+$ Cabin       &lt;chr&gt; NA, "C85", NA, "C123", NA, NA, "E46", NA, NA, NA, "G6", "C…
+$ Embarked    &lt;chr&gt; "S", "C", "S", "S", "S", "Q", "S", "S", "S", "C", "S", "S"…</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(all_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">all_data</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Number of rows</td>
+<td style="text-align: left;">1309</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Number of columns</td>
+<td style="text-align: left;">13</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">_______________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Column type frequency:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">character</td>
+<td style="text-align: left;">6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">________________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 13%">
+<col style="width: 19%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 8%">
+<col style="width: 12%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">min</th>
+<th style="text-align: right;">max</th>
+<th style="text-align: right;">empty</th>
+<th style="text-align: right;">n_unique</th>
+<th style="text-align: right;">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">id</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Name</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">82</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1307</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sex</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ticket</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">929</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Cabin</td>
+<td style="text-align: right;">1014</td>
+<td style="text-align: right;">0.23</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">186</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Embarked</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 10%">
+<col style="width: 15%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 8%">
+<col style="width: 6%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">p0</th>
+<th style="text-align: right;">p25</th>
+<th style="text-align: right;">p50</th>
+<th style="text-align: right;">p75</th>
+<th style="text-align: right;">p100</th>
+<th style="text-align: left;">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">PassengerId</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">655.00</td>
+<td style="text-align: right;">378.02</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">328.0</td>
+<td style="text-align: right;">655.00</td>
+<td style="text-align: right;">982.00</td>
+<td style="text-align: right;">1309.00</td>
+<td style="text-align: left;">▇▇▇▇▇</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Survived</td>
+<td style="text-align: right;">418</td>
+<td style="text-align: right;">0.68</td>
+<td style="text-align: right;">0.38</td>
+<td style="text-align: right;">0.49</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: left;">▇▁▁▁▅</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Pclass</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">2.29</td>
+<td style="text-align: right;">0.84</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">2.0</td>
+<td style="text-align: right;">3.00</td>
+<td style="text-align: right;">3.00</td>
+<td style="text-align: right;">3.00</td>
+<td style="text-align: left;">▃▁▃▁▇</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Age</td>
+<td style="text-align: right;">263</td>
+<td style="text-align: right;">0.80</td>
+<td style="text-align: right;">29.88</td>
+<td style="text-align: right;">14.41</td>
+<td style="text-align: right;">0.17</td>
+<td style="text-align: right;">21.0</td>
+<td style="text-align: right;">28.00</td>
+<td style="text-align: right;">39.00</td>
+<td style="text-align: right;">80.00</td>
+<td style="text-align: left;">▂▇▅▂▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SibSp</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">1.04</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">8.00</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Parch</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">0.39</td>
+<td style="text-align: right;">0.87</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">9.00</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Fare</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">33.30</td>
+<td style="text-align: right;">51.76</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">7.9</td>
+<td style="text-align: right;">14.45</td>
+<td style="text-align: right;">31.27</td>
+<td style="text-align: right;">512.33</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Fíjate que hice algo extra al unir los datos. Incluí una nueva variable <code>id</code> en donde se señala si los registros son de <code>test</code> o <code>train</code>.</p>
+<p>Veamos cuántas personas sobrevivieron (de los datos, que son una muestra de todos los pasajeros del Titanic, que eran más de 2200 en total).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(all_data<span class="sc">$</span>Survived)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  0   1 
+549 342 </code></pre>
+</div>
+</div>
+<p>Los datos clasificados como 0 no sobrevivieron y los 1; si. Podemos ver la misma tabla, pero en proporción.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">prop.table</span>(<span class="fu">table</span>(all_data<span class="sc">$</span>Survived)), <span class="dv">4</span>) <span class="sc">*</span> <span class="dv">100</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    0     1 
+61.62 38.38 </code></pre>
+</div>
+</div>
+<p>Veamos si el sexo nos da alguna información importante.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(all_data<span class="sc">$</span>Sex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+female   male 
+   466    843 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(all_data<span class="sc">$</span>Sex, all_data<span class="sc">$</span>Survived)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        
+           0   1
+  female  81 233
+  male   468 109</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>all_data <span class="sc">|&gt;</span> </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Survived)) <span class="sc">|&gt;</span> </span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Survived =</span> <span class="fu">factor</span>(Survived)) <span class="sc">|&gt;</span> </span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Sex, Survived) <span class="sc">|&gt;</span> </span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span> </span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Survived, n, <span class="at">fill =</span> Survived)) <span class="sc">+</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>all_data <span class="sc">|&gt;</span> </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Survived)) <span class="sc">|&gt;</span> </span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Survived =</span> <span class="fu">factor</span>(Survived)) <span class="sc">|&gt;</span> </span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Sex, Survived) <span class="sc">|&gt;</span> </span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span> </span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Survived, n, <span class="at">fill =</span> Sex)) <span class="sc">+</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>all_data <span class="sc">|&gt;</span> </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Survived <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">|&gt;</span> <span class="co"># Si sobreviven</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tabyl</span>(Sex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Sex   n   percent
+ female 233 0.6812865
+   male 109 0.3187135</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>all_data <span class="sc">|&gt;</span> </span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Survived <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">|&gt;</span> <span class="co"># No sobreviven</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tabyl</span>(Sex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Sex   n  percent
+ female  81 0.147541
+   male 468 0.852459</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>all_data <span class="sc">|&gt;</span> </span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Age)) <span class="sc">|&gt;</span> </span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Sex) <span class="sc">|&gt;</span> </span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(Age))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  Sex     mean
+  &lt;chr&gt;  &lt;dbl&gt;
+1 female  28.7
+2 male    30.6</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>all_data <span class="sc">|&gt;</span> </span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Age), <span class="sc">!</span><span class="fu">is.na</span>(Survived)) <span class="sc">|&gt;</span> </span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Sex, Survived) <span class="sc">|&gt;</span> </span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(Age))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+# Groups:   Sex [2]
+  Sex    Survived  mean
+  &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;
+1 female        0  25.0
+2 female        1  28.8
+3 male          0  31.6
+4 male          1  27.3</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>all_data <span class="sc">|&gt;</span> </span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Age), <span class="sc">!</span><span class="fu">is.na</span>(Survived)) <span class="sc">|&gt;</span> </span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Age, Sex)) <span class="sc">+</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>all_data <span class="sc">|&gt;</span> </span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Age), <span class="sc">!</span><span class="fu">is.na</span>(Survived)) <span class="sc">|&gt;</span> </span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Age, <span class="fu">factor</span>(Survived), <span class="at">fill =</span> Sex)) <span class="sc">+</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Revisemos algo de los datos las clases:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>all_data <span class="sc">|&gt;</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="fu">factor</span>(Pclass), <span class="at">fill =</span> <span class="fu">factor</span>(Pclass))) <span class="sc">+</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_discrete</span>(<span class="at">name =</span> <span class="st">"Class"</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"1st"</span>, <span class="st">"2nd"</span>, <span class="st">"3rd"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>all_data <span class="sc">|&gt;</span> </span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Survived)) <span class="sc">|&gt;</span> </span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="fu">factor</span>(Pclass), <span class="at">fill =</span> <span class="fu">factor</span>(Survived))) <span class="sc">+</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"dodge"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Acá aparece algo interesate. Las personas de tercera clase, en su mayoría, no sobrevivieron. A diferencia de los de primera clase, donde hubo más sobrevivientes que fallecidos (proporcionalmente).</p>
+<p>Revisemos el costo de los tickets.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>all_data <span class="sc">|&gt;</span> </span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Fare)) <span class="sc">+</span> </span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>all_data <span class="sc">|&gt;</span> </span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Survived)) <span class="sc">|&gt;</span> </span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Fare, <span class="at">fill =</span> <span class="fu">factor</span>(Survived))) <span class="sc">+</span> </span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Estos datos señalan en el mismo sentido de que las personas de clases más altas y con tickets más caros, sobrevivieron más.</p>
+</section>
+<section id="manejo-de-nas" class="level2">
+<h2 class="anchored" data-anchor-id="manejo-de-nas">Manejo de NA´s</h2>
+<p>Volvamos un poco a revisar los datos faltantes (NA´s).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(VIM<span class="sc">::</span><span class="fu">aggr</span>(all_data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ Missings per variable: 
+    Variable Count
+          id     0
+ PassengerId     0
+    Survived   418
+      Pclass     0
+        Name     0
+         Sex     0
+         Age   263
+       SibSp     0
+       Parch     0
+      Ticket     0
+        Fare     1
+       Cabin  1014
+    Embarked     2
+
+ Missings in combinations of variables: 
+              Combinations Count     Percent
+ 0:0:0:0:0:0:0:0:0:0:0:0:0   183 13.98013751
+ 0:0:0:0:0:0:0:0:0:0:0:0:1     2  0.15278839
+ 0:0:0:0:0:0:0:0:0:0:0:1:0   529 40.41252865
+ 0:0:0:0:0:0:1:0:0:0:0:0:0    19  1.45148969
+ 0:0:0:0:0:0:1:0:0:0:0:1:0   158 12.07028266
+ 0:0:1:0:0:0:0:0:0:0:0:0:0    87  6.64629488
+ 0:0:1:0:0:0:0:0:0:0:0:1:0   244 18.64018335
+ 0:0:1:0:0:0:0:0:0:0:1:1:0     1  0.07639419
+ 0:0:1:0:0:0:1:0:0:0:0:0:0     4  0.30557678
+ 0:0:1:0:0:0:1:0:0:0:0:1:0    82  6.26432391</code></pre>
+</div>
+</div>
+<p>Ya lo habíamos visto antes. Los registros tienen bastantes datos faltantes (missing data). Estos datos se presentan especialmente en las variables Age y Cabin. Survived tienen muchos NA´s, pues unimos los regitros al inicio por temas metodológicos, pero acá no tiene relevancia.</p>
+<p>Acá tenemos un tema muy relevante en proyectos de datos y es el manejar los datos faltantes y tomar decisiones al respecto. En este artículo no profundizaré demasiado en este tema, pues se escapa del objetivo de ser más demostrativo. Pero es un área relevante de estudio que posiblemente aborde en otro artículo más adelante.</p>
+<p>En este caso, tomaré 2 decisiones. Con respecto a la variable <code>Cabin</code> no la considaré para el desarrollo y entrenamiento del algoritmo, pues tiene un porcentaje muy alto de pérdida y adaptarlo a algo útil parece ser poco factible, en un primer momento. Con la variable <code>Age</code> pasa algo distinto, pues parece tener más relevancia en la probabilidad de sobrevivir.</p>
+<p>Entonces, haremos algo para completar esos datos. Una alternativa es imputar datos. Es decir, asumir la edad en base a algunos supuestos. Existen varias metodologías como calcular la media o mediana de todos los datos de edad y ponérselo a los NA´s. Otro método es aplicar algoritmos de machine learning para predecir ese dato e imputarlo.</p>
+<p>Veamos algunos datos de la edad:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(all_data<span class="sc">$</span>Age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+   0.17   21.00   28.00   29.88   39.00   80.00     263 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>all_data <span class="sc">|&gt;</span> </span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Age)) <span class="sc">+</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Debido a que la distribución de la edad se acerca a una distribución normal (histograma) y a que la media y mediana se a cercan bastante, podriamos usar el primer enfoque de amputación, que es usar la mediana para completar los datos faltantes. Te recuerdo que este es solo un enfoque posible. En proyectos reales, lo que se hace es probar muchos modelos y métodos y analizar su desempeño. Insisto, para efectos de este artículo, usaré este acercamiento.</p>
+<p>Verifiquemos las normalidad de los datos de edad. Primero, realizaremos un gráfico QQ plot, el cual consiste en comparar los cuantiles de la distribución observada con los cuantiles teóricos de una distribución normal con la misma media y desviación estándar que los datos. En la medida que los datos se ajusten a la línea proyectada, más se aproximan a una distribución normal.</p>
+<p>Aplicaré la función <code>lillie.test</code> de la librería <code>nortest</code> para usar el test de <em>Lilliefors</em>. Este test nace con la idea de resolver uno de los problemas del test <em>Kolmogorov-Smirnov</em> que es al no conocer la media y la varianza poblacional, tiene poca potencia estadística. El test <em>Lilliefors</em> asume que la media y varianza son desconocidas y es especialmente útil en muestras grandes.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(all_data<span class="sc">$</span>Age, <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">col =</span> <span class="st">"gray50"</span>)</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(all_data<span class="sc">$</span>Age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>nortest<span class="sc">::</span><span class="fu">lillie.test</span>(all_data<span class="sc">$</span>Age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Lilliefors (Kolmogorov-Smirnov) normality test
+
+data:  all_data$Age
+D = 0.078928, p-value &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>Vemos que tanto QQ plot y el test <em>Lilliefors</em> apuntan a que los datos tienen una distribución normal.</p>
+<p>Volvamos a ver los datos, separados por sexo:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>all_data <span class="sc">|&gt;</span> </span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Age)) <span class="sc">+</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span> Sex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><strong>Imputación de datos.</strong></p>
+<p>Podríamos imputar los datos faltantes usando las siguientes líneas de código.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>all_data<span class="sc">$</span>Age[<span class="fu">is.na</span>(all_data<span class="sc">$</span>Age)] <span class="ot">&lt;-</span> <span class="fu">median</span>(all_data<span class="sc">$</span>Age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>all_data<span class="sc">$</span>Fare[<span class="fu">is.na</span>(all_data<span class="sc">$</span>Fare)] <span class="ot">&lt;-</span> <span class="fu">mean</span>(all_data<span class="sc">$</span>Fare, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>all_data<span class="sc">$</span>Embarked[<span class="fu">is.na</span>(all_data<span class="sc">$</span>Embarked)] <span class="ot">&lt;-</span> <span class="fu">mode</span>(all_data<span class="sc">$</span>Embarked)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="feature-engineering" class="level2">
+<h2 class="anchored" data-anchor-id="feature-engineering">Feature Engineering</h2>
+<p>El dataset tiene algunas variables que son de dudosa ayuda para predecir y generar el algoritmo, al menos, a priori. Casi por sentido común. Aún cuando tomar decisiones por sentido común podría no ser la mejor alternativa, muchas veces nos equivocamos o traspasamos nuestros sesgos a los análisis. La idea siempre es tratar de dejar que “los datos hablen”. En este caso, como es un artículo más referencial, no profundizaré en la generación y manipulación de las variables para no confundir tanto, pero si haré un par de cosas que me parecen interesantes y que muestra las posibilidades del feature engineering.</p>
+<p>Las variables <code>Ticket</code>, <code>Name</code> y <code>Cabin</code> parecen ser datos poco informativos para saber si alguien sobrevivió o no al accidente. Sin embargo, no sería tan así. Es posible que la cabina tenga alguna relación con la sobrevivencia, quizás por cercanía a un pasillo o algo así. El n° de ticket también quizás se asocia a algo, no lo sabemos, es necesario investigar. Que como ya te mencioné, no lo haremos en esta ocasión jaja 😄</p>
+<p>Pero si revisemos un poco más el nombre de los pasajeros. Si revisas, el registro contiene el nombre de la personas y su título (Mr, Miss, Dr, Col, etc). Ese dato podría ser útil para la predicción. Quizás había algún tipo de jerarquía que favoreciera que se salvaran. También el apellido de las personas podría ser útil, más que nada por temas de agrupar a familias.</p>
+<p>Entonces, crearemos 2 nuevas variables: <code>Title</code> y <code>Surname</code>. Para ello, usaremos la función <code>mutate</code> y nos ayudaremos de las REGEX (expresiones regulares) para extraer los datos desde el nombre.</p>
+<p>Consejo: aprende REGEX. Es una gran herramienta en el análisis de datos y aplica no solo para programación en R, sino que para cualquier otro. Incluso se usa en navegadores web, email y diversas aplicaciones.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>all_data <span class="ot">&lt;-</span> all_data <span class="sc">|&gt;</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Title =</span> <span class="fu">str_extract</span>(Name, <span class="st">"(?&lt;=,[:space:])(.*?)[.]"</span>),</span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Surname =</span> <span class="fu">str_extract</span>(Name, <span class="st">".*(?=[,])"</span>)</span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Veamos como nos quedaron los datos…</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>all_data <span class="sc">|&gt;</span> </span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 15
+  id    Passen…¹ Survi…² Pclass Name  Sex     Age SibSp Parch Ticket  Fare Cabin
+  &lt;chr&gt;    &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;
+1 train        1       0      3 Brau… male     22     1     0 A/5 2…  7.25 &lt;NA&gt; 
+2 train        2       1      1 Cumi… fema…    38     1     0 PC 17… 71.3  C85  
+3 train        3       1      3 Heik… fema…    26     0     0 STON/…  7.92 &lt;NA&gt; 
+4 train        4       1      1 Futr… fema…    35     1     0 113803 53.1  C123 
+5 train        5       0      3 Alle… male     35     0     0 373450  8.05 &lt;NA&gt; 
+6 train        6       0      3 Mora… male     28     0     0 330877  8.46 &lt;NA&gt; 
+# … with 3 more variables: Embarked &lt;chr&gt;, Title &lt;chr&gt;, Surname &lt;chr&gt;, and
+#   abbreviated variable names ¹​PassengerId, ²​Survived</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(all_data<span class="sc">$</span>Title)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "Mr."           "Mrs."          "Miss."         "Master."      
+ [5] "Don."          "Rev."          "Dr."           "Mme."         
+ [9] "Ms."           "Major."        "Lady."         "Sir."         
+[13] "Mlle."         "Col."          "Capt."         "the Countess."
+[17] "Jonkheer."     "Dona."        </code></pre>
+</div>
+</div>
+<p>Podemos ampliar la variable Sex en base a los títulos. En especial, agregar algo que identifique a los niños. Si te fijaste, los sobrevivientes son en general más jóvenes. Además, existe esta frase típica de salvar a los niños y las mujeres primero. No tengo claro si eso es tan real, pero podría serlo. Así que agreguemos la posibilidad.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>Man <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Mr."</span>, <span class="st">"Sir."</span>, <span class="st">"Don."</span>, <span class="st">"Rev."</span>, <span class="st">"Major."</span>,</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Col."</span>, <span class="st">"Capt."</span>, <span class="st">"Jonkheer."</span>,</span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Dr."</span>, <span class="st">"Nobel."</span></span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a>Female <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Mrs."</span>, <span class="st">"Miss."</span>, <span class="st">"Mme."</span>, <span class="st">"Ms."</span>, <span class="st">"Lady."</span>, <span class="st">"Mlle."</span>, <span class="st">"the Countess."</span>, <span class="st">"Dona."</span>)</span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a>Boy <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Master."</span>)</span>
+<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-9"><a href="#cb56-9" aria-hidden="true" tabindex="-1"></a>all_data <span class="ot">&lt;-</span> all_data <span class="sc">|&gt;</span></span>
+<span id="cb56-10"><a href="#cb56-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">|&gt;</span></span>
+<span id="cb56-11"><a href="#cb56-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb56-12"><a href="#cb56-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">Sex =</span></span>
+<span id="cb56-13"><a href="#cb56-13" aria-hidden="true" tabindex="-1"></a>      <span class="fu">case_when</span>(</span>
+<span id="cb56-14"><a href="#cb56-14" aria-hidden="true" tabindex="-1"></a>        (Title <span class="sc">%in%</span> Man) <span class="sc">~</span> <span class="st">"Man"</span>,</span>
+<span id="cb56-15"><a href="#cb56-15" aria-hidden="true" tabindex="-1"></a>        (Title <span class="sc">%in%</span> Female) <span class="sc">~</span> <span class="st">"Female"</span>,</span>
+<span id="cb56-16"><a href="#cb56-16" aria-hidden="true" tabindex="-1"></a>        (Title <span class="sc">%in%</span> Boy) <span class="sc">~</span> <span class="st">"Boy"</span>,</span>
+<span id="cb56-17"><a href="#cb56-17" aria-hidden="true" tabindex="-1"></a>        <span class="cn">TRUE</span> <span class="sc">~</span> Title</span>
+<span id="cb56-18"><a href="#cb56-18" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb56-19"><a href="#cb56-19" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Revisemos cómo quedan los grupos con esta nueva clasificación:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>all_data <span class="sc">|&gt;</span> </span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Survived)) <span class="sc">|&gt;</span> </span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tabyl</span>(Sex, Survived)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Sex   0   1
+    Boy  17  23
+ Female  81 232
+    Man 451  87</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>all_data <span class="sc">|&gt;</span> </span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Survived)) <span class="sc">|&gt;</span> </span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Survived =</span> <span class="fu">factor</span>(Survived)) <span class="sc">|&gt;</span> </span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Sex, Survived) <span class="sc">|&gt;</span> </span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span> </span>
+<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Sex, n, <span class="at">fill =</span> Survived)) <span class="sc">+</span></span>
+<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Ahora vamos a crear una nueva variable, que es el tamaño de la familia. Para eso, sumaremos las variables <code>SibSp</code> (n° de hermanos y esposas/os) y <code>Parch</code> (n° de hijos y padres). A la suma le agregamos 1, pues agregamos al mismo pasajero al grupo familiar.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>all_data <span class="ot">&lt;-</span> all_data <span class="sc">|&gt;</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Family_size =</span> <span class="fu">as.numeric</span>(SibSp) <span class="sc">+</span> <span class="fu">as.numeric</span>(Parch) <span class="sc">+</span> <span class="dv">1</span>,</span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Family_type =</span> <span class="fu">factor</span>(<span class="fu">ifelse</span>(Family_size <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"Single"</span>,</span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ifelse</span>(Family_size <span class="sc">&lt;=</span> <span class="dv">3</span>, <span class="st">"Small"</span>, <span class="st">"Large"</span>)</span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a>    ))</span>
+<span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb60-8"><a href="#cb60-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(<span class="at">cols =</span> <span class="fu">c</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Revisemos nuevamente los datos faltantes. Esto es importante, pues muchos modelos de machine learning no soportan variables con NA´s o pueden alterar las predicciones.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(VIM<span class="sc">::</span><span class="fu">aggr</span>(all_data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ Missings per variable: 
+    Variable Count
+          id     0
+ PassengerId     0
+    Survived   418
+      Pclass     0
+        Name     0
+         Sex     0
+         Age     0
+       SibSp     0
+       Parch     0
+      Ticket     0
+        Fare     0
+       Cabin  1014
+    Embarked     0
+       Title     0
+     Surname     0
+ Family_size     0
+ Family_type     0
+
+ Missings in combinations of variables: 
+                      Combinations Count   Percent
+ 0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0   204 15.584416
+ 0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0:0   687 52.482811
+ 0:0:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0    91  6.951872
+ 0:0:1:0:0:0:0:0:0:0:0:1:0:0:0:0:0   327 24.980901</code></pre>
+</div>
+</div>
+<p>Por ahora, voy a dejar el análisis exploratorio hasta acá. Podríamos estar mucho tiempo más revisando y dándole vueltas al tema, pero creo que con lo que hemos visto ya te has hecho una buena idea de qué va ésto.</p>
+<p>Habitualmente, los proyecto de Ciencia de Datos destinan cerca del 80% del tiempo en este tipo de actividades.</p>
+</section>
+<section id="modelamiento-ml" class="level2">
+<h2 class="anchored" data-anchor-id="modelamiento-ml">Modelamiento ML</h2>
+<p>Para el modelamiento del algoritmo de machine learning (ML) usaremos la librería <code>H2O</code>.</p>
+<p><a href="https://h2o.ai/">H2O</a> funciona bastante distinto que otras librerías, pues lo que hace es levantar un servidor y nos conoctamos a él, y es en ese servidor donde se ejecutan los algoritmos. H2O es una plataforma de autoML o de modelos de machine learning pre-entrenados. En palabras simples, la configuración de los algoritmos viene ya lista “de fábrica”. En palabras más complejas, los modelos de autoML ajustan el tuneo de los hiperparámetros de forma automática o ya cuentan con valores predefinidos.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Separamos el dataset para los datos de entrenamiento</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>titanic_train <span class="ot">&lt;-</span> all_data <span class="sc">|&gt;</span></span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(id <span class="sc">==</span> <span class="st">"train"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(id, PassengerId, Name, Ticket, Cabin))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Analicemos los tipos de datos de <code>titanic_train</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(titanic_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [891 × 12] (S3: tbl_df/tbl/data.frame)
+ $ Survived   : num [1:891] 0 1 1 1 0 0 0 0 1 1 ...
+ $ Pclass     : num [1:891] 3 1 3 1 3 3 1 3 3 2 ...
+ $ Sex        : chr [1:891] "Man" "Female" "Female" "Female" ...
+ $ Age        : num [1:891] 22 38 26 35 35 28 54 2 27 14 ...
+ $ SibSp      : num [1:891] 1 1 0 1 0 0 0 3 0 1 ...
+ $ Parch      : num [1:891] 0 0 0 0 0 0 0 1 2 0 ...
+ $ Fare       : num [1:891] 7.25 71.28 7.92 53.1 8.05 ...
+ $ Embarked   : chr [1:891] "S" "C" "S" "S" ...
+ $ Title      : chr [1:891] "Mr." "Mrs." "Miss." "Mrs." ...
+ $ Surname    : chr [1:891] "Braund" "Cumings" "Heikkinen" "Futrelle" ...
+ $ Family_size: num [1:891] 2 2 1 2 1 1 1 5 3 2 ...
+ $ Family_type: Factor w/ 3 levels "Small","Single",..: 1 1 2 1 2 2 2 3 1 1 ...</code></pre>
+</div>
+</div>
+<p>Cambiaremos algunos tipos de datos por algo más útil.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>titanic_train <span class="ot">&lt;-</span> titanic_train <span class="sc">|&gt;</span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Survived =</span> <span class="fu">factor</span>(Survived),</span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Pclass =</span> <span class="fu">factor</span>(Pclass),</span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Sex =</span> <span class="fu">factor</span>(Sex),</span>
+<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Embarked =</span> <span class="fu">factor</span>(Embarked),</span>
+<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">Title =</span> <span class="fu">factor</span>(Title)</span>
+<span id="cb66-8"><a href="#cb66-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Ok. Tenemos nuestros datos de entrenamiento listos o, al menos, más preparados para ser analizados.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cargamos la librería de H2O</span></span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(h2o)</span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Creación de un cluster local con todos los cores disponibles</span></span>
+<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a><span class="fu">h2o.init</span>(</span>
+<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">ip =</span> <span class="st">"localhost"</span>,</span>
+<span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -1 indica que se empleen todos los cores disponibles</span></span>
+<span id="cb67-8"><a href="#cb67-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">nthreads =</span> <span class="sc">-</span><span class="dv">1</span>,</span>
+<span id="cb67-9"><a href="#cb67-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Máxima memoria disponible para el cluster</span></span>
+<span id="cb67-10"><a href="#cb67-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_mem_size =</span> <span class="st">"3g"</span></span>
+<span id="cb67-11"><a href="#cb67-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+H2O is not running yet, starting it now...
+
+Note:  In case of errors look at the following log files:
+    C:\Users\pvill\AppData\Local\Temp\Rtmp6bs63f\file6a4072b175ec/h2o_pvill_started_from_r.out
+    C:\Users\pvill\AppData\Local\Temp\Rtmp6bs63f\file6a4064e47f35/h2o_pvill_started_from_r.err
+
+
+Starting H2O JVM and connecting:  Connection successful!
+
+R is connected to the H2O cluster: 
+    H2O cluster uptime:         2 seconds 775 milliseconds 
+    H2O cluster timezone:       America/Santiago 
+    H2O data parsing timezone:  UTC 
+    H2O cluster version:        3.36.1.2 
+    H2O cluster version age:    4 months and 11 days !!! 
+    H2O cluster name:           H2O_started_from_R_pvill_qxv170 
+    H2O cluster total nodes:    1 
+    H2O cluster total memory:   2.98 GB 
+    H2O cluster total cores:    16 
+    H2O cluster allowed cores:  16 
+    H2O cluster healthy:        TRUE 
+    H2O Connection ip:          localhost 
+    H2O Connection port:        54321 
+    H2O Connection proxy:       NA 
+    H2O Internal Security:      FALSE 
+    R Version:                  R version 4.2.1 (2022-06-23 ucrt) </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Se eliminan los datos del cluster por si ya había sido iniciado</span></span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a><span class="fu">h2o.removeAll</span>()</span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Para que no se muestre la barra de progreso</span></span>
+<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a><span class="fu">h2o.no_progress</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>titanic_h2o <span class="ot">=</span> <span class="fu">as.h2o</span>(titanic_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Para nuestro caso, aplicaremos autoML o machine learning automatizado.</p>
+<p>En la <a href="https://docs.h2o.ai/h2o/latest-stable/h2o-docs/automl.html">documentación oficial de H2O</a> puedes ver más detalles.</p>
+<p>Vamos al tema y veamos cómo se podría implementar una solución simple de autoML.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Separación de las observaciones en conjunto de entrenamiento y test</span></span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>splits <span class="ot">&lt;-</span> <span class="fu">h2o.splitFrame</span>(<span class="at">data =</span> titanic_h2o, <span class="at">ratios =</span> <span class="fl">0.8</span>, <span class="at">seed =</span> <span class="dv">123</span>)</span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>titanic_train_h2o <span class="ot">&lt;-</span> splits[[<span class="dv">1</span>]]</span>
+<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a>titanic_test_h2o  <span class="ot">&lt;-</span> splits[[<span class="dv">2</span>]]</span>
+<span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-6"><a href="#cb71-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Se define la variable respuesta y los predictores</span></span>
+<span id="cb71-7"><a href="#cb71-7" aria-hidden="true" tabindex="-1"></a>response <span class="ot">&lt;-</span> <span class="st">"Survived"</span></span>
+<span id="cb71-8"><a href="#cb71-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-9"><a href="#cb71-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Para este modelo se emplean todos los predictores disponibles</span></span>
+<span id="cb71-10"><a href="#cb71-10" aria-hidden="true" tabindex="-1"></a>predictors  <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="fu">h2o.colnames</span>(titanic_h2o), response)</span>
+<span id="cb71-11"><a href="#cb71-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-12"><a href="#cb71-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Ejectutamos 20 modelos de autoML</span></span>
+<span id="cb71-13"><a href="#cb71-13" aria-hidden="true" tabindex="-1"></a>aml <span class="ot">&lt;-</span> <span class="fu">h2o.automl</span>(</span>
+<span id="cb71-14"><a href="#cb71-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> predictors, <span class="at">y =</span> response,</span>
+<span id="cb71-15"><a href="#cb71-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">training_frame =</span> titanic_train_h2o,</span>
+<span id="cb71-16"><a href="#cb71-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_models =</span> <span class="dv">20</span>,</span>
+<span id="cb71-17"><a href="#cb71-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">123</span></span>
+<span id="cb71-18"><a href="#cb71-18" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+03:43:13.238: AutoML: XGBoost is not available; skipping it.
+03:43:13.264: _train param, Dropping bad and constant columns: [Surname]
+03:43:14.149: _train param, Dropping bad and constant columns: [Surname]
+03:43:14.848: _train param, Dropping bad and constant columns: [Surname]
+03:43:15.724: _train param, Dropping bad and constant columns: [Surname]
+03:43:16.912: _train param, Dropping bad and constant columns: [Surname]
+03:43:19.725: _train param, Dropping bad and constant columns: [Surname]
+03:43:19.986: _train param, Dropping bad and constant columns: [Surname]
+03:43:20.478: _train param, Dropping bad and constant columns: [Surname]
+03:43:20.747: _train param, Dropping bad and constant columns: [Surname]
+03:46:22.718: _train param, Dropping unused columns: [Surname]
+03:46:23.399: _train param, Dropping unused columns: [Surname]</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ver autoML Leaderboard</span></span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>lb <span class="ot">&lt;-</span> aml<span class="sc">@</span>leaderboard</span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(lb, <span class="at">n =</span> <span class="fu">nrow</span>(lb)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                                 model_id       auc   logloss
+1                           XRT_1_AutoML_1_20221008_34313 0.8709619 0.4280390
+2  StackedEnsemble_BestOfFamily_1_AutoML_1_20221008_34313 0.8689309 0.4153067
+3                           GBM_2_AutoML_1_20221008_34313 0.8684124 0.4212379
+4     StackedEnsemble_AllModels_1_AutoML_1_20221008_34313 0.8656339 0.4143545
+5                           GBM_4_AutoML_1_20221008_34313 0.8644931 0.4242718
+6              GBM_grid_1_AutoML_1_20221008_34313_model_3 0.8636030 0.4252027
+7              GBM_grid_1_AutoML_1_20221008_34313_model_1 0.8635338 0.4239069
+8                           GBM_5_AutoML_1_20221008_34313 0.8622764 0.4245518
+9                           GLM_1_AutoML_1_20221008_34313 0.8607726 0.4308457
+10             GBM_grid_1_AutoML_1_20221008_34313_model_4 0.8603405 0.4310881
+11                          GBM_3_AutoML_1_20221008_34313 0.8595238 0.4300964
+12                          DRF_1_AutoML_1_20221008_34313 0.8591176 0.4954942
+13             GBM_grid_1_AutoML_1_20221008_34313_model_5 0.8572120 0.4396899
+14    DeepLearning_grid_2_AutoML_1_20221008_34313_model_1 0.8543600 0.4787892
+15                 DeepLearning_1_AutoML_1_20221008_34313 0.8499568 0.4481447
+16    DeepLearning_grid_2_AutoML_1_20221008_34313_model_2 0.8491660 0.4693684
+17                          GBM_1_AutoML_1_20221008_34313 0.8477487 0.4579601
+18             GBM_grid_1_AutoML_1_20221008_34313_model_2 0.8461974 0.4603829
+19    DeepLearning_grid_1_AutoML_1_20221008_34313_model_2 0.8450739 0.4765796
+20    DeepLearning_grid_3_AutoML_1_20221008_34313_model_1 0.8389508 0.4731186
+21    DeepLearning_grid_3_AutoML_1_20221008_34313_model_2 0.8379570 0.4686067
+22    DeepLearning_grid_1_AutoML_1_20221008_34313_model_1 0.8351266 0.4805536
+       aucpr mean_per_class_error      rmse       mse
+1  0.8346343            0.1859390 0.3661840 0.1340907
+2  0.8409394            0.1840722 0.3593080 0.1291023
+3  0.8327107            0.1849797 0.3617789 0.1308840
+4  0.8398073            0.1816654 0.3586963 0.1286630
+5  0.8276144            0.1848846 0.3614534 0.1306485
+6  0.8311913            0.1859260 0.3635181 0.1321454
+7  0.8353353            0.1885360 0.3626827 0.1315388
+8  0.8292195            0.1808141 0.3626516 0.1315162
+9  0.8366766            0.2003414 0.3684605 0.1357631
+10 0.8290372            0.1826938 0.3667785 0.1345264
+11 0.8246865            0.1873866 0.3651803 0.1333567
+12 0.8311538            0.1900095 0.3704124 0.1372053
+13 0.8172740            0.1861291 0.3691785 0.1362927
+14 0.8073969            0.2068317 0.3838420 0.1473347
+15 0.8138987            0.1995981 0.3746397 0.1403549
+16 0.8200406            0.2067237 0.3806173 0.1448695
+17 0.8225336            0.2232089 0.3811518 0.1452767
+18 0.8238082            0.2195575 0.3818452 0.1458057
+19 0.8142517            0.2068317 0.3872434 0.1499574
+20 0.8012208            0.2147438 0.3887060 0.1510923
+21 0.8188159            0.2043298 0.3762246 0.1415450
+22 0.8110971            0.2083614 0.3829747 0.1466696
+
+[22 rows x 7 columns] </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Podemos revisar el modelo ganador</span></span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>aml<span class="sc">@</span>leader</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Model Details:
+==============
+
+H2OBinomialModel: drf
+Model ID:  XRT_1_AutoML_1_20221008_34313 
+Model Summary: 
+  number_of_trees number_of_internal_trees model_size_in_bytes min_depth
+1              33                       33               39124        13
+  max_depth mean_depth min_leaves max_leaves mean_leaves
+1        20   17.72727         42        137    89.30303
+
+
+H2OBinomialMetrics: drf
+** Reported on training data. **
+** Metrics reported on Out-Of-Bag training samples **
+
+MSE:  0.1491174
+RMSE:  0.3861573
+LogLoss:  0.5119568
+Mean Per-Class Error:  0.2038026
+AUC:  0.8463313
+AUCPR:  0.8090878
+Gini:  0.6926627
+R^2:  0.3667232
+
+Confusion Matrix (vertical: actual; across: predicted) for F1-optimal threshold:
+         0   1    Error      Rate
+0      346  89 0.204598   =89/435
+1       54 212 0.203008   =54/266
+Totals 400 301 0.203994  =143/701
+
+Maximum Metrics: Maximum metrics at their respective thresholds
+                        metric threshold      value idx
+1                       max f1  0.437500   0.747795 179
+2                       max f2  0.378927   0.795292 202
+3                 max f0point5  0.755055   0.782353  73
+4                 max accuracy  0.651129   0.803138 103
+5                max precision  0.879121   0.963855  37
+6                   max recall  0.026050   1.000000 393
+7              max specificity  1.000000   0.997701   0
+8             max absolute_mcc  0.459596   0.585658 169
+9   max min_per_class_accuracy  0.437500   0.795402 179
+10 max mean_per_class_accuracy  0.459596   0.796413 169
+11                     max tns  1.000000 434.000000   0
+12                     max fns  1.000000 250.000000   0
+13                     max fps  0.000000 435.000000 399
+14                     max tps  0.026050 266.000000 393
+15                     max tnr  1.000000   0.997701   0
+16                     max fnr  1.000000   0.939850   0
+17                     max fpr  0.000000   1.000000 399
+18                     max tpr  0.026050   1.000000 393
+
+Gains/Lift Table: Extract with `h2o.gainsLift(&lt;model&gt;, &lt;data&gt;)` or `h2o.gainsLift(&lt;model&gt;, valid=&lt;T/F&gt;, xval=&lt;T/F&gt;)`
+
+H2OBinomialMetrics: drf
+** Reported on cross-validation data. **
+** 5-fold cross-validation on training data (Metrics computed for combined holdout predictions) **
+
+MSE:  0.1340907
+RMSE:  0.366184
+LogLoss:  0.428039
+Mean Per-Class Error:  0.185939
+AUC:  0.8709619
+AUCPR:  0.8346343
+Gini:  0.7419238
+R^2:  0.4305393
+
+Confusion Matrix (vertical: actual; across: predicted) for F1-optimal threshold:
+         0   1    Error      Rate
+0      355  80 0.183908   =80/435
+1       50 216 0.187970   =50/266
+Totals 405 296 0.185449  =130/701
+
+Maximum Metrics: Maximum metrics at their respective thresholds
+                        metric threshold      value idx
+1                       max f1  0.418827   0.768683 202
+2                       max f2  0.274074   0.821104 257
+3                 max f0point5  0.628670   0.789720 135
+4                 max accuracy  0.497812   0.823110 180
+5                max precision  1.000000   1.000000   0
+6                   max recall  0.046593   1.000000 394
+7              max specificity  1.000000   1.000000   0
+8             max absolute_mcc  0.496049   0.624389 181
+9   max min_per_class_accuracy  0.418827   0.812030 202
+10 max mean_per_class_accuracy  0.418827   0.814061 202
+11                     max tns  1.000000 435.000000   0
+12                     max fns  1.000000 263.000000   0
+13                     max fps  0.023070 435.000000 399
+14                     max tps  0.046593 266.000000 394
+15                     max tnr  1.000000   1.000000   0
+16                     max fnr  1.000000   0.988722   0
+17                     max fpr  0.023070   1.000000 399
+18                     max tpr  0.046593   1.000000 394
+
+Gains/Lift Table: Extract with `h2o.gainsLift(&lt;model&gt;, &lt;data&gt;)` or `h2o.gainsLift(&lt;model&gt;, valid=&lt;T/F&gt;, xval=&lt;T/F&gt;)`
+Cross-Validation Metrics Summary: 
+                             mean       sd cv_1_valid cv_2_valid cv_3_valid
+accuracy                 0.830233 0.029251   0.836879   0.871429   0.792857
+auc                      0.874299 0.027893   0.851602   0.907378   0.841389
+err                      0.169767 0.029251   0.163121   0.128571   0.207143
+err_count               23.800000 4.086563  23.000000  18.000000  29.000000
+f0point5                 0.763671 0.029804   0.733083   0.810277   0.743034
+f1                       0.789989 0.020935   0.772277   0.820000   0.768000
+f2                       0.818491 0.014345   0.815900   0.829959   0.794702
+lift_top_group           2.664176 0.313517   3.065218   2.857143   2.372881
+logloss                  0.432077 0.031004   0.432689   0.391192   0.478483
+max_per_class_error      0.187373 0.027715   0.168421   0.163265   0.222222
+mcc                      0.650161 0.049185   0.653039   0.720411   0.584946
+mean_per_class_accuracy  0.831079 0.025358   0.839703   0.863422   0.795669
+mean_per_class_error     0.168921 0.025358   0.160297   0.136578   0.204331
+mse                      0.135078 0.011345   0.135005   0.120964   0.152672
+pr_auc                   0.834787 0.042016   0.773003   0.882346   0.814953
+precision                0.747210 0.035625   0.709091   0.803922   0.727273
+r2                       0.422426 0.041388   0.385804   0.468290   0.373851
+recall                   0.838855 0.015019   0.847826   0.836735   0.813559
+rmse                     0.367275 0.015319   0.367430   0.347799   0.390732
+specificity              0.823302 0.044511   0.831579   0.890110   0.777778
+                        cv_4_valid cv_5_valid
+accuracy                  0.814286   0.835714
+auc                       0.876458   0.894668
+err                       0.185714   0.164286
+err_count                26.000000  23.000000
+f0point5                  0.768072   0.763889
+f1                        0.796875   0.792793
+f2                        0.827922   0.823970
+lift_top_group            2.333333   2.692308
+logloss                   0.429635   0.428385
+max_per_class_error       0.212500   0.170455
+mcc                       0.631219   0.661193
+mean_per_class_accuracy   0.818750   0.837850
+mean_per_class_error      0.181250   0.162150
+mse                       0.133763   0.132989
+pr_auc                    0.849705   0.853930
+precision                 0.750000   0.745763
+r2                        0.453803   0.430380
+recall                    0.850000   0.846154
+rmse                      0.365736   0.364676
+specificity               0.787500   0.829545</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importancia de las variables</span></span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="fu">h2o.varimp</span>(aml<span class="sc">@</span>leader)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Variable Importances: 
+      variable relative_importance scaled_importance percentage
+1        Title          940.399963          1.000000   0.283786
+2          Sex          586.606567          0.623784   0.177021
+3         Fare          567.343628          0.603300   0.171208
+4          Age          460.132050          0.489294   0.138855
+5       Pclass          328.859924          0.349702   0.099241
+6  Family_size          121.330360          0.129020   0.036614
+7        SibSp           91.768562          0.097585   0.027693
+8  Family_type           87.194229          0.092720   0.026313
+9     Embarked           85.729736          0.091163   0.025871
+10       Parch           44.400452          0.047214   0.013399</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">h2o.varimp_plot</span>(aml<span class="sc">@</span>leader)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-51-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Área bajo la curva AUC para los datos de entrenamiento</span></span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a><span class="fu">h2o.auc</span>(aml<span class="sc">@</span>leader, <span class="at">train =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8463313</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">h2o.performance</span>(<span class="at">model =</span> aml<span class="sc">@</span>leader, <span class="at">train =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>H2OBinomialMetrics: drf
+** Reported on training data. **
+** Metrics reported on Out-Of-Bag training samples **
+
+MSE:  0.1491174
+RMSE:  0.3861573
+LogLoss:  0.5119568
+Mean Per-Class Error:  0.2038026
+AUC:  0.8463313
+AUCPR:  0.8090878
+Gini:  0.6926627
+R^2:  0.3667232
+
+Confusion Matrix (vertical: actual; across: predicted) for F1-optimal threshold:
+         0   1    Error      Rate
+0      346  89 0.204598   =89/435
+1       54 212 0.203008   =54/266
+Totals 400 301 0.203994  =143/701
+
+Maximum Metrics: Maximum metrics at their respective thresholds
+                        metric threshold      value idx
+1                       max f1  0.437500   0.747795 179
+2                       max f2  0.378927   0.795292 202
+3                 max f0point5  0.755055   0.782353  73
+4                 max accuracy  0.651129   0.803138 103
+5                max precision  0.879121   0.963855  37
+6                   max recall  0.026050   1.000000 393
+7              max specificity  1.000000   0.997701   0
+8             max absolute_mcc  0.459596   0.585658 169
+9   max min_per_class_accuracy  0.437500   0.795402 179
+10 max mean_per_class_accuracy  0.459596   0.796413 169
+11                     max tns  1.000000 434.000000   0
+12                     max fns  1.000000 250.000000   0
+13                     max fps  0.000000 435.000000 399
+14                     max tps  0.026050 266.000000 393
+15                     max tnr  1.000000   0.997701   0
+16                     max fnr  1.000000   0.939850   0
+17                     max fpr  0.000000   1.000000 399
+18                     max tpr  0.026050   1.000000 393
+
+Gains/Lift Table: Extract with `h2o.gainsLift(&lt;model&gt;, &lt;data&gt;)` or `h2o.gainsLift(&lt;model&gt;, valid=&lt;T/F&gt;, xval=&lt;T/F&gt;)`</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Performance para datos de validación</span></span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a><span class="fu">h2o.auc</span>(aml<span class="sc">@</span>leader, <span class="at">xval =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8709619</code></pre>
+</div>
+</div>
+<p>Revisemos la curva entre <strong>Recall vs Precision</strong>.</p>
+<p>Estos 2 indicadores son de gran relevancia en la evaluación del desempeño de machine learninig. La Precisión (también llamada valor predictivo positivo) es la fracción de instancias relevantes entre las instancias recuperadas, mientras que el Recall (también conocida como sensibilidad) es la fracción de instancias relevantes que se recuperaron.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Precisionrecall.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<p>Puedes profundizar un poco más sobre este tema <a href="https://towardsdatascience.com/precision-and-recall-made-simple-afb5e098970f">en este artículo</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>perf <span class="ot">&lt;-</span> <span class="fu">h2o.performance</span>(<span class="at">model =</span> aml<span class="sc">@</span>leader, <span class="at">xval =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a>metrics <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">h2o.metric</span>(perf))</span>
+<span id="cb86-4"><a href="#cb86-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-5"><a href="#cb86-5" aria-hidden="true" tabindex="-1"></a>metrics <span class="sc">|&gt;</span></span>
+<span id="cb86-6"><a href="#cb86-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(recall, precision)) <span class="sc">+</span></span>
+<span id="cb86-7"><a href="#cb86-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb86-8"><a href="#cb86-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-54-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Predicciones para test</span></span>
+<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a>predictions <span class="ot">&lt;-</span> <span class="fu">h2o.predict</span>(<span class="at">object =</span> aml<span class="sc">@</span>leader, <span class="at">newdata =</span> titanic_test_h2o)</span>
+<span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a>predictions</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  predict         p0        p1
+1       1 0.33766234 0.6623377
+2       1 0.07670676 0.9232932
+3       1 0.16081239 0.8391876
+4       0 0.62626263 0.3737374
+5       0 0.76809858 0.2319014
+6       1 0.21647427 0.7835257
+
+[190 rows x 3 columns] </code></pre>
+</div>
+</div>
+<p>Para guardar el modelo generado en el directorio actual de tu computador y usarlo después, puedes usar este código:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="at">h2o.saveModel(object = aml@leader, path = getwd(), force = TRUE)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Separamos dataset en test</span></span>
+<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>titanic_test <span class="ot">&lt;-</span> all_data <span class="sc">|&gt;</span></span>
+<span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(id <span class="sc">==</span> <span class="st">"test"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb90-4"><a href="#cb90-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(id, Survived, PassengerId, Name, Ticket, Cabin))</span>
+<span id="cb90-5"><a href="#cb90-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb90-6"><a href="#cb90-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Creamos el objeto H2O</span></span>
+<span id="cb90-7"><a href="#cb90-7" aria-hidden="true" tabindex="-1"></a>titanic_test_h2o <span class="ot">&lt;-</span> <span class="fu">as.h2o</span>(titanic_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Predicciones en nuevo set de datos.</span></span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>predictions_test <span class="ot">&lt;-</span> <span class="fu">h2o.predict</span>(<span class="at">object =</span> aml<span class="sc">@</span>leader, <span class="at">newdata =</span> titanic_test_h2o)</span>
+<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-4"><a href="#cb91-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Separamos solo las predicciones.</span></span>
+<span id="cb91-5"><a href="#cb91-5" aria-hidden="true" tabindex="-1"></a>survived <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(predictions_test<span class="sc">$</span>predict)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Ya que tenemos nuestas predicciones realizadas, generaremos el archivo para luego subir a Kaggle.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>submission <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"gender_submission.csv"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span>)</span>
+<span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-4"><a href="#cb92-4" aria-hidden="true" tabindex="-1"></a>gender_submission <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">cbind</span>(submission, survived)) <span class="sc">|&gt;</span></span>
+<span id="cb92-5"><a href="#cb92-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">"Survived"</span> <span class="ot">=</span> predict)</span>
+<span id="cb92-6"><a href="#cb92-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-7"><a href="#cb92-7" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(gender_submission, <span class="st">"submission_autoML_leader_h2o.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Se apaga el cluster H2O</span></span>
+<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a><span class="fu">h2o.shutdown</span>(<span class="at">prompt =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="subir-a-kaggle" class="level2">
+<h2 class="anchored" data-anchor-id="subir-a-kaggle">Subir a Kaggle</h2>
+<p>Subimos nuestro archivo a <a href="https://www.kaggle.com/competitions/titanic/submit">Kaggle</a> y btenemos una puntuación de 0.76076</p>
+<p>No esta mal, pero podría ser mejor. Hace unos meses obtuve 0.79 usando un modelo de ML ensamblado GLM + GBM (Gradient Boosting Machine).</p>
+<p>En este caso, para mejorar el desempeño del algoritmo GBM (que fue el seleccionado como líder de la comparación de autoML), habría que tocar los hiperparámetros y reanalizar el feature engineering. Además, de ver opciones de otros modelos de machine learning. Pero considerar que el modelo que usamos para este artículo lo realizamos aplicando autoML. Es decir, usamos modelos pre-entrenados y con auto ajustes de hiperparámetros “out of the box” (predefinidos).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="kaggle.png" class="img-fluid figure-img" width="800"></p>
+</figure>
+</div>
+</section>
+<section id="conclusiones" class="level2">
+<h2 class="anchored" data-anchor-id="conclusiones">Conclusiones</h2>
+<p>Este artículo tiene fines demostrativos, no lo olvides. En la vida real, todo este proceso es (mucho) más largo y complejo. Existen muchas instancias de análisis estadísticos y mateméticos sobre los datos dsponibles. Además, es un proceso iterativo. O sea, generalmente se vuelve a etapas previas frecuentemente, se revisa lo que hay. Incluso, muchas veces es necesario investigar sobre la generación y captura de los datos. Del mismo modo, se generan muchos modelos y se realizan muchas pruebas hasta encontrar los de mejor desempeño y que tengan más explicabilidad (según sea el caso).</p>
+<p>Revisamos, además, el uso de una tecnología emergente que son los modelos de machine learning pre-entrenados o autoML. Este tipo de modelos están cada vez más difundidos, en especial, en ambientes cloud. Por ejemplo, <a href="https://cloud.google.com/automl/">Google</a> y Microsoft Azure tienen los suyos.</p>
+<p>El desarrollo de modelos de machine learning tradicional consume bastantes recursos, y que requieren un conocimiento del dominio y tiempo significativos para generar y comparar docenas de modelos. El autoML reduce el tiempo necesario para obtener modelos de aprendizaje automático listos para producción con gran eficiencia y facilidad. Estos elementos son vitales en la actualidad para muchas startups e industrias. Además, amplia las opciones en el uso de este tipo de tecnologías a más personas y organizaciones.</p>
+<p>A pesar de que parece magia todo ésto (o una caja negra que nadie sabe lo que pasa dentro), el uso de autoML ayuda a generar modelos de forma más rápida y facilita el desarrollo de modelos más completos en el corto plazo. Es una buena estrategia para screening.</p>
+<p>Ok. Entonces no necesitamos ingenieros, matemáticos o científicos de datos?</p>
+<p>No, para nada. Ciertamente estas tecnologías (autoML) democratizan el acceso a más personas, pero aún son necesarios los conocimientos y reflexiones de los expertos en el área para ajustar los modelos, controlar sesgos o problemas de equidad. Y, por cierto, que conozcan del negocio, pues finalmente el desarrollo de estas tecnologías buscan resolver problemáticas concretas. Sin mencionar todo el trabajo de comunicación, explicación y disfusión de los resultados, para los cual esos perfiles profesionales son de gran valor.</p>
+<p>Finalmente, este ejercicio que hemos visto acá es más demostrativo que otra cosa, pero espero haberte mostrado cómo se pueden entrenar algoritmos y usar modelos de ML para generar predicciones.</p>
+<p>Nos vemos!! 🤪</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp(/https:\/\/www\.paulovillarroel\.com\//);
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+      }
+    }
+});
+</script>
+<script src="https://giscus.app/client.js" data-repo="paulovillarroel/mi_blog" data-repo-id="R_kgDOH_9CVg" data-category="General" data-category-id="DIC_kwDOH_9CVs4CRgbc" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

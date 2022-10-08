@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/prediccion-titanic/index.html",
       "/posts/factores-en-r/index.html",
       "/posts/contribuye-al-codigo-abierto/index.html",
       "/posts/ruta-aprendizaje-python/index.html",

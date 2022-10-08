@@ -1,0 +1,660 @@
+---
+title: "¿Quién sobrevivió al accidente del Titanic?"
+description: "Entreno 20 modelos de Machine Learning para averiguarlo."
+author: "Paulo Villarroel"
+date: "2022-10-08"
+categories: [r, tutorial, machine learning]
+image: "titanic.jpg"
+---
+
+Bienvendo/a!! 😛
+
+Hoy vamos a hacer algo distinto. Vamos a tratar de predecir quién sobrevive de los pasajeros del Titanic, usando inteligencia artificial.
+
+Ojo. No voy a ser muy exhaustivo, ni tan profundo en el análisis ni usaré modelos de machine learning muy complejos, pues quiero que este artículo te sirva como ejemplo de lo que se puede llegar a hacer y sea simple de seguir. En la vida real la cosa es un poco distinta. Generalmente, se realizan múltiples pruebas con muchos modelos y se van seleccionando en base a su desempeño (ya veremos qué significa esto). Por otro lado, los datos tienden a estar mucho más sucios y el trabajo de limpieza es una de las actividades a la que más se le dedica tiempo y esfuerzo.
+
+Para efectos de este artículo, usarmos los datos de una competencia de Kaggle, en donde está un dataset (un conjunto de datos) sobre los pasajeros del Titanic, en donde se especifican algunas variables y quien sobrevivió o no. Puedes revisar los datos en [el siguiente enlace](https://www.kaggle.com/competitions/titanic/data).
+
+## Los datos
+
+Como te mencionada, los datos correponden a registros de pasajeros que se subieron en el Titanic. Si, el Titanic. Ese barco británico que naufragó en el océano Atlántico durante la noche del 14 y la madrugada del 15 de abril de 1912, mientras realizaba su viaje inaugural desde Southampton a Nueva York, tras chocar con un iceberg. En el hundimiento la gran mayoría de las personas que iban a bordo, lo que convierte a esta catástrofe en uno de los mayores naufragios de la historia.
+
+Hay una película de como 4 horas donde sale Di Caprio, también. La viste?
+
+Ok. Ya sabemos de qué van los datos.
+
+Los datos incluyen 3 archivos:
+
+-   gender_submission.csv
+
+-   test.csv
+
+-   train.csv
+
+El primero es un ejemplo de cómo se deben subir las predicciones a la web de Kaggle para participar de la competencia (Ah! La competencia tiene que ver con quién logra acertar más con las predicciones).
+
+El archivo test contiene datos de los pasajeros para realizar las pruebas del modelo de machine learning. No contiene datos sobre la sobrevivencia. Son los registros que hay que predecir.
+
+El archivo train contiene los datos de los pasajeros para realizar el entrenamiento del algoritmo de machine learninig. Este tiene especificado si el pasajero sobrevivió o no.
+
+Vamos con el tema...
+
+Cargamos las librerías:
+
+```{r}
+#| warning: false
+
+library(tidyverse)
+library(tidymodels)
+library(here)
+library(skimr)
+library(janitor)
+```
+
+Cargamos los datos:
+
+```{r}
+#| warning: false
+
+here::i_am("index.qmd")
+train <- read_csv("train.csv")
+test <- read_csv("test.csv")
+```
+
+## Análisis exploratorio
+
+Esta etapa es fundamental. el análisis exploratorio de datos es una de las primeras etapas en cualquier proyectos de ciencia de datos. El objetivo es analizar los datos para entender cómo están compuestos y qué representan. Habitualmente para estos fines, se pueden usar estadísticas descriptivas e inferenciales. Además, el uso de visualizaciones es un elemento super valioso.
+
+Por lo demás, de este análisis exploratorio, se pueden desprender distintas acciones de **Feature Engeneering**. Este es un paso muy importante en el aprendizaje automático. El feature engineering (o ingeniería de características) se refiere al proceso de diseño de características artificiales en un algoritmo. Estas características artificiales son utilizadas por ese algoritmo para mejorar su rendimiento y precisión.
+
+Este paso es fundamental en los modelos de machine learning. Aunque para efectos de este artículo, posiblemente no haré todo lo que se podría hacer, como expliqué al inicio, para privilegiar la comprensión más que los resultados.
+
+Ya que tenemos los datos, ahora veamos un poco de qué se tratan:
+
+```{r}
+#| warning: false
+
+str(train)
+```
+
+```{r}
+#| warning: false
+
+str(test)
+```
+
+Puedes notar que los 2 archivos son similares en su composición, excepto que `train` tiene la variable `Survived` y `test` no. Además, `train` contiene casi el doble de registros (filas) que `test`.
+
+En Kaggle se explican qué significan los variables (diccionario) y ponen algunas notas. Estos datos son importantes para comprender el dataset y pensar en cómo ajustarlos si es necesario. En todo proyecto de datos es muy relevante entender qué representan los datos y cuáles son sus posibilidades.
+
+**Diccionario:**
+
+![](dictionary.png){fig-align="center" width="800"}
+
+**Notas:**
+
+![](dictionary2.png){fig-align="center" width="800"}
+
+Revisemos las primeras filas de los datos:
+
+```{r}
+#| warning: false
+
+head(train)
+```
+
+```{r}
+#| warning: false
+
+head(test)
+```
+
+Veamos más cosas de los datos. Usaremos la librería `skimr` y su función `skim` para explorar los datos y generar algunas primeras estadísticas de las variables.
+
+```{r}
+#| warning: false
+
+skim(train)
+```
+
+```{r}
+#| warning: false
+
+skim(test)
+```
+
+Con el análisis anterior, nos damos cuenta que hay datos faltantes (missing data) o NA´s. En particular, en la variable `age`, que es la que tiene una gran cantidad de NA´s. Este dato es relevante, pues podría afectar bastante el algoritmo. Trabajar los datos faltantes es un área muy importante, por lo que no podemos dejar pasar este hecho. Ya abordaremos esto más adelante.
+
+Por ahora, dado que ambos set de datos son muy similares, los voy a unir para dejarlos en solo 1 objeto. Esto me será útil para el análisis y feature engineering de todo el conjunto. Luego lo dividiré nuevamente para efectos del algoritmo.
+
+```{r}
+#| warning: false
+
+all_data <- bind_rows(list("train" = train, "test" = test), .id = "id")
+```
+
+```{r}
+glimpse(all_data)
+```
+
+```{r}
+#| warning: false
+
+skim(all_data)
+```
+
+Fíjate que hice algo extra al unir los datos. Incluí una nueva variable `id` en donde se señala si los registros son de `test` o `train`.
+
+Veamos cuántas personas sobrevivieron (de los datos, que son una muestra de todos los pasajeros del Titanic, que eran más de 2200 en total).
+
+```{r}
+table(all_data$Survived)
+```
+
+Los datos clasificados como 0 no sobrevivieron y los 1; si. Podemos ver la misma tabla, pero en proporción.
+
+```{r}
+round(prop.table(table(all_data$Survived)), 4) * 100
+```
+
+Veamos si el sexo nos da alguna información importante.
+
+```{r}
+table(all_data$Sex)
+```
+
+```{r}
+table(all_data$Sex, all_data$Survived)
+```
+
+```{r}
+#| warning: false
+
+all_data |> 
+  filter(!is.na(Survived)) |> 
+  mutate(Survived = factor(Survived)) |> 
+  group_by(Sex, Survived) |> 
+  summarise(n = n()) |> 
+  ggplot(aes(Survived, n, fill = Survived)) +
+  geom_col(show.legend = FALSE)
+```
+
+```{r}
+#| warning: false
+
+all_data |> 
+  filter(!is.na(Survived)) |> 
+  mutate(Survived = factor(Survived)) |> 
+  group_by(Sex, Survived) |> 
+  summarise(n = n()) |> 
+  ggplot(aes(Survived, n, fill = Sex)) +
+  geom_col(position = "dodge")
+```
+
+```{r}
+all_data |> 
+  filter(Survived == 1) |> # Si sobreviven
+  tabyl(Sex)
+```
+
+```{r}
+all_data |> 
+  filter(Survived == 0) |> # No sobreviven
+  tabyl(Sex)
+```
+
+```{r}
+all_data |> 
+  filter(!is.na(Age)) |> 
+  group_by(Sex) |> 
+  summarise(mean = mean(Age))
+```
+
+```{r}
+#| warning: false
+
+all_data |> 
+  filter(!is.na(Age), !is.na(Survived)) |> 
+  group_by(Sex, Survived) |> 
+  summarise(mean = mean(Age))
+```
+
+```{r}
+all_data |> 
+  filter(!is.na(Age), !is.na(Survived)) |> 
+  ggplot(aes(Age, Sex)) +
+  geom_boxplot()
+```
+
+```{r}
+all_data |> 
+  filter(!is.na(Age), !is.na(Survived)) |> 
+  ggplot(aes(Age, factor(Survived), fill = Sex)) +
+  geom_boxplot()
+```
+
+Revisemos algo de los datos las clases:
+
+```{r}
+all_data |>
+  ggplot(aes(factor(Pclass), fill = factor(Pclass))) +
+  geom_bar() +
+  scale_fill_discrete(name = "Class", labels = c("1st", "2nd", "3rd"))
+```
+
+```{r}
+all_data |> 
+  filter(!is.na(Survived)) |> 
+  ggplot(aes(factor(Pclass), fill = factor(Survived))) +
+  geom_bar(position = "dodge")
+```
+
+Acá aparece algo interesate. Las personas de tercera clase, en su mayoría, no sobrevivieron. A diferencia de los de primera clase, donde hubo más sobrevivientes que fallecidos (proporcionalmente).
+
+Revisemos el costo de los tickets.
+
+```{r}
+#| warning: false
+
+all_data |> 
+  ggplot(aes(Fare)) + 
+  geom_histogram(bins = 30)
+```
+
+```{r}
+#| warning: false
+
+all_data |> 
+  filter(!is.na(Survived)) |> 
+  ggplot(aes(Fare, fill = factor(Survived))) + 
+  geom_density(alpha = 0.6)
+```
+
+Estos datos señalan en el mismo sentido de que las personas de clases más altas y con tickets más caros, sobrevivieron más.
+
+## Manejo de NA´s
+
+Volvamos un poco a revisar los datos faltantes (NA´s).
+
+```{r}
+#| warning: false
+
+summary(VIM::aggr(all_data))
+```
+
+Ya lo habíamos visto antes. Los registros tienen bastantes datos faltantes (missing data). Estos datos se presentan especialmente en las variables Age y Cabin. Survived tienen muchos NA´s, pues unimos los regitros al inicio por temas metodológicos, pero acá no tiene relevancia.
+
+Acá tenemos un tema muy relevante en proyectos de datos y es el manejar los datos faltantes y tomar decisiones al respecto. En este artículo no profundizaré demasiado en este tema, pues se escapa del objetivo de ser más demostrativo. Pero es un área relevante de estudio que posiblemente aborde en otro artículo más adelante.
+
+En este caso, tomaré 2 decisiones. Con respecto a la variable `Cabin` no la considaré para el desarrollo y entrenamiento del algoritmo, pues tiene un porcentaje muy alto de pérdida y adaptarlo a algo útil parece ser poco factible, en un primer momento. Con la variable `Age` pasa algo distinto, pues parece tener más relevancia en la probabilidad de sobrevivir.
+
+Entonces, haremos algo para completar esos datos. Una alternativa es imputar datos. Es decir, asumir la edad en base a algunos supuestos. Existen varias metodologías como calcular la media o mediana de todos los datos de edad y ponérselo a los NA´s. Otro método es aplicar algoritmos de machine learning para predecir ese dato e imputarlo.
+
+Veamos algunos datos de la edad:
+
+```{r}
+summary(all_data$Age)
+```
+
+```{r}
+#| warning: false
+
+all_data |> 
+  ggplot(aes(Age)) +
+  geom_histogram()
+```
+
+Debido a que la distribución de la edad se acerca a una distribución normal (histograma) y a que la media y mediana se a cercan bastante, podriamos usar el primer enfoque de amputación, que es usar la mediana para completar los datos faltantes. Te recuerdo que este es solo un enfoque posible. En proyectos reales, lo que se hace es probar muchos modelos y métodos y analizar su desempeño. Insisto, para efectos de este artículo, usaré este acercamiento.
+
+Verifiquemos las normalidad de los datos de edad. Primero, realizaremos un gráfico QQ plot, el cual consiste en comparar los cuantiles de la distribución observada con los cuantiles teóricos de una distribución normal con la misma media y desviación estándar que los datos. En la medida que los datos se ajusten a la línea proyectada, más se aproximan a una distribución normal.
+
+Aplicaré la función `lillie.test` de la librería `nortest` para usar el test de *Lilliefors*. Este test nace con la idea de resolver uno de los problemas del test *Kolmogorov-Smirnov* que es al no conocer la media y la varianza poblacional, tiene poca potencia estadística. El test *Lilliefors* asume que la media y varianza son desconocidas y es especialmente útil en muestras grandes.
+
+```{r}
+qqnorm(all_data$Age, pch = 19, col = "gray50")
+qqline(all_data$Age)
+```
+
+```{r}
+nortest::lillie.test(all_data$Age)
+```
+
+Vemos que tanto QQ plot y el test *Lilliefors* apuntan a que los datos tienen una distribución normal.
+
+Volvamos a ver los datos, separados por sexo:
+
+```{r}
+#| warning: false
+
+all_data |> 
+  ggplot(aes(Age)) +
+  geom_histogram() +
+  facet_grid(~ Sex)
+```
+
+**Imputación de datos.**
+
+Podríamos imputar los datos faltantes usando las siguientes líneas de código.
+
+```{r}
+all_data$Age[is.na(all_data$Age)] <- median(all_data$Age, na.rm = TRUE)
+all_data$Fare[is.na(all_data$Fare)] <- mean(all_data$Fare, na.rm = TRUE)
+all_data$Embarked[is.na(all_data$Embarked)] <- mode(all_data$Embarked)
+```
+
+## Feature Engineering
+
+El dataset tiene algunas variables que son de dudosa ayuda para predecir y generar el algoritmo, al menos, a priori. Casi por sentido común. Aún cuando tomar decisiones por sentido común podría no ser la mejor alternativa, muchas veces nos equivocamos o traspasamos nuestros sesgos a los análisis. La idea siempre es tratar de dejar que "los datos hablen". En este caso, como es un artículo más referencial, no profundizaré en la generación y manipulación de las variables para no confundir tanto, pero si haré un par de cosas que me parecen interesantes y que muestra las posibilidades del feature engineering.
+
+Las variables `Ticket`, `Name` y `Cabin` parecen ser datos poco informativos para saber si alguien sobrevivió o no al accidente. Sin embargo, no sería tan así. Es posible que la cabina tenga alguna relación con la sobrevivencia, quizás por cercanía a un pasillo o algo así. El n° de ticket también quizás se asocia a algo, no lo sabemos, es necesario investigar. Que como ya te mencioné, no lo haremos en esta ocasión jaja 😄
+
+Pero si revisemos un poco más el nombre de los pasajeros. Si revisas, el registro contiene el nombre de la personas y su título (Mr, Miss, Dr, Col, etc). Ese dato podría ser útil para la predicción. Quizás había algún tipo de jerarquía que favoreciera que se salvaran. También el apellido de las personas podría ser útil, más que nada por temas de agrupar a familias.
+
+Entonces, crearemos 2 nuevas variables: `Title` y `Surname`. Para ello, usaremos la función `mutate` y nos ayudaremos de las REGEX (expresiones regulares) para extraer los datos desde el nombre.
+
+Consejo: aprende REGEX. Es una gran herramienta en el análisis de datos y aplica no solo para programación en R, sino que para cualquier otro. Incluso se usa en navegadores web, email y diversas aplicaciones.
+
+```{r}
+all_data <- all_data |>
+  mutate(
+    Title = str_extract(Name, "(?<=,[:space:])(.*?)[.]"),
+    Surname = str_extract(Name, ".*(?=[,])")
+  )
+```
+
+Veamos como nos quedaron los datos...
+
+```{r}
+all_data |> 
+  head()
+```
+
+```{r}
+unique(all_data$Title)
+```
+
+Podemos ampliar la variable Sex en base a los títulos. En especial, agregar algo que identifique a los niños. Si te fijaste, los sobrevivientes son en general más jóvenes. Además, existe esta frase típica de salvar a los niños y las mujeres primero. No tengo claro si eso es tan real, pero podría serlo. Así que agreguemos la posibilidad.
+
+```{r}
+Man <- c(
+  "Mr.", "Sir.", "Don.", "Rev.", "Major.",
+  "Col.", "Capt.", "Jonkheer.",
+  "Dr.", "Nobel."
+)
+Female <- c("Mrs.", "Miss.", "Mme.", "Ms.", "Lady.", "Mlle.", "the Countess.", "Dona.")
+Boy <- c("Master.")
+
+all_data <- all_data |>
+  rowwise() |>
+  mutate(
+    Sex =
+      case_when(
+        (Title %in% Man) ~ "Man",
+        (Title %in% Female) ~ "Female",
+        (Title %in% Boy) ~ "Boy",
+        TRUE ~ Title
+      )
+  )
+```
+
+Revisemos cómo quedan los grupos con esta nueva clasificación:
+
+```{r}
+#| warning: false
+
+all_data |> 
+  filter(!is.na(Survived)) |> 
+  tabyl(Sex, Survived)
+```
+
+```{r}
+#| warning: false
+
+all_data |> 
+  filter(!is.na(Survived)) |> 
+  mutate(Survived = factor(Survived)) |> 
+  group_by(Sex, Survived) |> 
+  summarise(n = n()) |> 
+  ggplot(aes(Sex, n, fill = Survived)) +
+  geom_col(position = "dodge")
+```
+
+Ahora vamos a crear una nueva variable, que es el tamaño de la familia. Para eso, sumaremos las variables `SibSp` (n° de hermanos y esposas/os) y `Parch` (n° de hijos y padres). A la suma le agregamos 1, pues agregamos al mismo pasajero al grupo familiar.
+
+```{r}
+all_data <- all_data |>
+  mutate(
+    Family_size = as.numeric(SibSp) + as.numeric(Parch) + 1,
+    Family_type = factor(ifelse(Family_size == 1, "Single",
+      ifelse(Family_size <= 3, "Small", "Large")
+    ))
+  ) |> 
+  unnest(cols = c())
+```
+
+Revisemos nuevamente los datos faltantes. Esto es importante, pues muchos modelos de machine learning no soportan variables con NA´s o pueden alterar las predicciones.
+
+```{r}
+#| warning: false
+
+summary(VIM::aggr(all_data))
+```
+
+Por ahora, voy a dejar el análisis exploratorio hasta acá. Podríamos estar mucho tiempo más revisando y dándole vueltas al tema, pero creo que con lo que hemos visto ya te has hecho una buena idea de qué va ésto.
+
+Habitualmente, los proyecto de Ciencia de Datos destinan cerca del 80% del tiempo en este tipo de actividades.
+
+## Modelamiento ML
+
+Para el modelamiento del algoritmo de machine learning (ML) usaremos la librería `H2O`.
+
+[H2O](https://h2o.ai/) funciona bastante distinto que otras librerías, pues lo que hace es levantar un servidor y nos conoctamos a él, y es en ese servidor donde se ejecutan los algoritmos. H2O es una plataforma de autoML o de modelos de machine learning pre-entrenados. En palabras simples, la configuración de los algoritmos viene ya lista "de fábrica". En palabras más complejas, los modelos de autoML ajustan el tuneo de los hiperparámetros de forma automática o ya cuentan con valores predefinidos.
+
+```{r}
+# Separamos el dataset para los datos de entrenamiento
+titanic_train <- all_data |>
+  filter(id == "train") |>
+  select(-c(id, PassengerId, Name, Ticket, Cabin))
+```
+
+Analicemos los tipos de datos de `titanic_train`:
+
+```{r}
+str(titanic_train)
+```
+
+Cambiaremos algunos tipos de datos por algo más útil.
+
+```{r}
+titanic_train <- titanic_train |>
+  mutate(
+    Survived = factor(Survived),
+    Pclass = factor(Pclass),
+    Sex = factor(Sex),
+    Embarked = factor(Embarked),
+    Title = factor(Title)
+  )
+```
+
+Ok. Tenemos nuestros datos de entrenamiento listos o, al menos, más preparados para ser analizados.
+
+```{r}
+#| warning: false
+
+# Cargamos la librería de H2O
+library(h2o)
+
+# Creación de un cluster local con todos los cores disponibles
+h2o.init(
+  ip = "localhost",
+  # -1 indica que se empleen todos los cores disponibles
+  nthreads = -1,
+  # Máxima memoria disponible para el cluster
+  max_mem_size = "3g"
+)
+
+# Se eliminan los datos del cluster por si ya había sido iniciado
+h2o.removeAll()
+
+# Para que no se muestre la barra de progreso
+h2o.no_progress()
+```
+
+```{r}
+titanic_h2o = as.h2o(titanic_train)
+```
+
+Para nuestro caso, aplicaremos autoML o machine learning automatizado.
+
+En la [documentación oficial de H2O](https://docs.h2o.ai/h2o/latest-stable/h2o-docs/automl.html) puedes ver más detalles.
+
+Vamos al tema y veamos cómo se podría implementar una solución simple de autoML.
+
+```{r}
+#| warning: false
+
+# Separación de las observaciones en conjunto de entrenamiento y test
+splits <- h2o.splitFrame(data = titanic_h2o, ratios = 0.8, seed = 123)
+titanic_train_h2o <- splits[[1]]
+titanic_test_h2o  <- splits[[2]]
+
+# Se define la variable respuesta y los predictores
+response <- "Survived"
+
+# Para este modelo se emplean todos los predictores disponibles
+predictors  <- setdiff(h2o.colnames(titanic_h2o), response)
+
+# Ejectutamos 20 modelos de autoML
+aml <- h2o.automl(
+  x = predictors, y = response,
+  training_frame = titanic_train_h2o,
+  max_models = 20,
+  seed = 123
+)
+```
+
+```{r}
+# Ver autoML Leaderboard
+lb <- aml@leaderboard
+print(lb, n = nrow(lb)) 
+```
+
+```{r}
+# Podemos revisar el modelo ganador
+aml@leader
+```
+
+```{r}
+# Importancia de las variables
+h2o.varimp(aml@leader)
+h2o.varimp_plot(aml@leader)
+```
+
+```{r}
+# Área bajo la curva AUC para los datos de entrenamiento
+h2o.auc(aml@leader, train = TRUE)
+h2o.performance(model = aml@leader, train = TRUE)
+```
+
+```{r}
+# Performance para datos de validación
+h2o.auc(aml@leader, xval = TRUE)
+```
+
+Revisemos la curva entre **Recall vs Precision**.
+
+Estos 2 indicadores son de gran relevancia en la evaluación del desempeño de machine learninig. La Precisión (también llamada valor predictivo positivo) es la fracción de instancias relevantes entre las instancias recuperadas, mientras que el Recall (también conocida como sensibilidad) es la fracción de instancias relevantes que se recuperaron.
+
+![](Precisionrecall.png){fig-align="center"}
+
+Puedes profundizar un poco más sobre este tema [en este artículo](https://towardsdatascience.com/precision-and-recall-made-simple-afb5e098970f).
+
+```{r}
+perf <- h2o.performance(model = aml@leader, xval = TRUE)
+
+metrics <- as.data.frame(h2o.metric(perf))
+
+metrics |>
+  ggplot(aes(recall, precision)) +
+  geom_line() +
+  theme_minimal()
+```
+
+```{r}
+# Predicciones para test
+predictions <- h2o.predict(object = aml@leader, newdata = titanic_test_h2o)
+predictions
+```
+
+Para guardar el modelo generado en el directorio actual de tu computador y usarlo después, puedes usar este código:
+
+```{yaml}
+h2o.saveModel(object = aml@leader, path = getwd(), force = TRUE)
+```
+
+```{r}
+# Separamos dataset en test
+titanic_test <- all_data |>
+  filter(id == "test") |>
+  select(-c(id, Survived, PassengerId, Name, Ticket, Cabin))
+
+# Creamos el objeto H2O
+titanic_test_h2o <- as.h2o(titanic_test)
+```
+
+```{r}
+#| warning: false
+
+# Predicciones en nuevo set de datos.
+predictions_test <- h2o.predict(object = aml@leader, newdata = titanic_test_h2o)
+
+# Separamos solo las predicciones.
+survived <- as.data.frame(predictions_test$predict)
+```
+
+Ya que tenemos nuestas predicciones realizadas, generaremos el archivo para luego subir a Kaggle.
+
+```{r}
+#| warning: false
+
+submission <- read_csv("gender_submission.csv") |>
+  select(1)
+
+gender_submission <- as.data.frame(cbind(submission, survived)) |>
+  rename("Survived" = predict)
+
+write.csv(gender_submission, "submission_autoML_leader_h2o.csv", row.names = FALSE)
+```
+
+```{r}
+# Se apaga el cluster H2O
+h2o.shutdown(prompt = FALSE)
+```
+
+## Subir a Kaggle
+
+Subimos nuestro archivo a [Kaggle](https://www.kaggle.com/competitions/titanic/submit) y btenemos una puntuación de 0.76076
+
+No esta mal, pero podría ser mejor. Hace unos meses obtuve 0.79 usando un modelo de ML ensamblado GLM + GBM (Gradient Boosting Machine).
+
+En este caso, para mejorar el desempeño del algoritmo GBM (que fue el seleccionado como líder de la comparación de autoML), habría que tocar los hiperparámetros y reanalizar el feature engineering. Además, de ver opciones de otros modelos de machine learning. Pero considerar que el modelo que usamos para este artículo lo realizamos aplicando autoML. Es decir, usamos modelos pre-entrenados y con auto ajustes de hiperparámetros "out of the box" (predefinidos).
+
+![](kaggle.png){fig-align="center" width="800"}
+
+## Conclusiones
+
+Este artículo tiene fines demostrativos, no lo olvides. En la vida real, todo este proceso es (mucho) más largo y complejo. Existen muchas instancias de análisis estadísticos y mateméticos sobre los datos dsponibles. Además, es un proceso iterativo. O sea, generalmente se vuelve a etapas previas frecuentemente, se revisa lo que hay. Incluso, muchas veces es necesario investigar sobre la generación y captura de los datos. Del mismo modo, se generan muchos modelos y se realizan muchas pruebas hasta encontrar los de mejor desempeño y que tengan más explicabilidad (según sea el caso).
+
+Revisamos, además, el uso de una tecnología emergente que son los modelos de machine learning pre-entrenados o autoML. Este tipo de modelos están cada vez más difundidos, en especial, en ambientes cloud. Por ejemplo, [Google](https://cloud.google.com/automl/) y Microsoft Azure tienen los suyos.
+
+El desarrollo de modelos de machine learning tradicional consume bastantes recursos, y que requieren un conocimiento del dominio y tiempo significativos para generar y comparar docenas de modelos. El autoML reduce el tiempo necesario para obtener modelos de aprendizaje automático listos para producción con gran eficiencia y facilidad. Estos elementos son vitales en la actualidad para muchas startups e industrias. Además, amplia las opciones en el uso de este tipo de tecnologías a más personas y organizaciones.
+
+A pesar de que parece magia todo ésto (o una caja negra que nadie sabe lo que pasa dentro), el uso de autoML ayuda a generar modelos de forma más rápida y facilita el desarrollo de modelos más completos en el corto plazo. Es una buena estrategia para screening.
+
+Ok. Entonces no necesitamos ingenieros, matemáticos o científicos de datos?
+
+No, para nada. Ciertamente estas tecnologías (autoML) democratizan el acceso a más personas, pero aún son necesarios los conocimientos y reflexiones de los expertos en el área para ajustar los modelos, controlar sesgos o problemas de equidad. Y, por cierto, que conozcan del negocio, pues finalmente el desarrollo de estas tecnologías buscan resolver problemáticas concretas. Sin mencionar todo el trabajo de comunicación, explicación y disfusión de los resultados, para los cual esos perfiles profesionales son de gran valor.
+
+Finalmente, este ejercicio que hemos visto acá es más demostrativo que otra cosa, pero espero haberte mostrado cómo se pueden entrenar algoritmos y usar modelos de ML para generar predicciones.
+
+Nos vemos!! 🤪
