@@ -637,7 +637,7 @@ Subimos nuestro archivo a [Kaggle](https://www.kaggle.com/competitions/titanic/s
 
 No esta mal, pero podría ser mejor. Hace unos meses obtuve 0.79 usando un modelo de ML ensamblado GLM + GBM (Gradient Boosting Machine).
 
-En este caso, para mejorar el desempeño del algoritmo GBM (que fue el seleccionado como líder de la comparación de autoML), habría que tocar los hiperparámetros y reanalizar el feature engineering. Además, de ver opciones de otros modelos de machine learning. Pero considerar que el modelo que usamos para este artículo lo realizamos aplicando autoML. Es decir, usamos modelos pre-entrenados y con auto ajustes de hiperparámetros "out of the box" (predefinidos).
+En este caso, para mejorar el desempeño del algoritmo que fue el seleccionado como líder de la comparación de autoML, habría que tocar los hiperparámetros y reanalizar el feature engineering. Además, de ver opciones de otros modelos de machine learning. Pero considerar que el modelo que usamos para este artículo lo realizamos aplicando autoML. Es decir, usamos modelos pre-entrenados y con auto ajustes de hiperparámetros "out of the box" (predefinidos).
 
 ![](kaggle.png){fig-align="center" width="800"}
 

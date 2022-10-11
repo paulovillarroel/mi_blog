@@ -1624,19 +1624,19 @@ D = 0.078928, p-value &lt; 2.2e-16</code></pre>
 H2O is not running yet, starting it now...
 
 Note:  In case of errors look at the following log files:
-    C:\Users\pvill\AppData\Local\Temp\Rtmp6bs63f\file6a4072b175ec/h2o_pvill_started_from_r.out
-    C:\Users\pvill\AppData\Local\Temp\Rtmp6bs63f\file6a4064e47f35/h2o_pvill_started_from_r.err
+    C:\Users\pvill\AppData\Local\Temp\RtmpKqv3Sm\file49e063167b99/h2o_pvill_started_from_r.out
+    C:\Users\pvill\AppData\Local\Temp\RtmpKqv3Sm\file49e05503cf2/h2o_pvill_started_from_r.err
 
 
 Starting H2O JVM and connecting:  Connection successful!
 
 R is connected to the H2O cluster: 
-    H2O cluster uptime:         2 seconds 775 milliseconds 
+    H2O cluster uptime:         3 seconds 13 milliseconds 
     H2O cluster timezone:       America/Santiago 
     H2O data parsing timezone:  UTC 
     H2O cluster version:        3.36.1.2 
-    H2O cluster version age:    4 months and 11 days !!! 
-    H2O cluster name:           H2O_started_from_R_pvill_qxv170 
+    H2O cluster version age:    4 months and 14 days !!! 
+    H2O cluster name:           H2O_started_from_R_pvill_dvi556 
     H2O cluster total nodes:    1 
     H2O cluster total memory:   2.98 GB 
     H2O cluster total cores:    16 
@@ -1681,18 +1681,18 @@ R is connected to the H2O cluster:
 <span id="cb71-18"><a href="#cb71-18" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-03:43:13.238: AutoML: XGBoost is not available; skipping it.
-03:43:13.264: _train param, Dropping bad and constant columns: [Surname]
-03:43:14.149: _train param, Dropping bad and constant columns: [Surname]
-03:43:14.848: _train param, Dropping bad and constant columns: [Surname]
-03:43:15.724: _train param, Dropping bad and constant columns: [Surname]
-03:43:16.912: _train param, Dropping bad and constant columns: [Surname]
-03:43:19.725: _train param, Dropping bad and constant columns: [Surname]
-03:43:19.986: _train param, Dropping bad and constant columns: [Surname]
-03:43:20.478: _train param, Dropping bad and constant columns: [Surname]
-03:43:20.747: _train param, Dropping bad and constant columns: [Surname]
-03:46:22.718: _train param, Dropping unused columns: [Surname]
-03:46:23.399: _train param, Dropping unused columns: [Surname]</code></pre>
+21:41:30.162: AutoML: XGBoost is not available; skipping it.
+21:41:30.194: _train param, Dropping bad and constant columns: [Surname]
+21:41:31.127: _train param, Dropping bad and constant columns: [Surname]
+21:41:32.298: _train param, Dropping bad and constant columns: [Surname]
+21:41:35.628: _train param, Dropping bad and constant columns: [Surname]
+21:41:36.99: _train param, Dropping bad and constant columns: [Surname]
+21:41:36.531: _train param, Dropping bad and constant columns: [Surname]
+21:41:36.819: _train param, Dropping bad and constant columns: [Surname]
+21:41:37.376: _train param, Dropping bad and constant columns: [Surname]
+21:41:37.614: _train param, Dropping bad and constant columns: [Surname]
+21:44:40.160: _train param, Dropping unused columns: [Surname]
+21:44:40.765: _train param, Dropping unused columns: [Surname]</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -1700,52 +1700,52 @@ R is connected to the H2O cluster:
 <span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>lb <span class="ot">&lt;-</span> aml<span class="sc">@</span>leaderboard</span>
 <span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(lb, <span class="at">n =</span> <span class="fu">nrow</span>(lb)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>                                                 model_id       auc   logloss
-1                           XRT_1_AutoML_1_20221008_34313 0.8709619 0.4280390
-2  StackedEnsemble_BestOfFamily_1_AutoML_1_20221008_34313 0.8689309 0.4153067
-3                           GBM_2_AutoML_1_20221008_34313 0.8684124 0.4212379
-4     StackedEnsemble_AllModels_1_AutoML_1_20221008_34313 0.8656339 0.4143545
-5                           GBM_4_AutoML_1_20221008_34313 0.8644931 0.4242718
-6              GBM_grid_1_AutoML_1_20221008_34313_model_3 0.8636030 0.4252027
-7              GBM_grid_1_AutoML_1_20221008_34313_model_1 0.8635338 0.4239069
-8                           GBM_5_AutoML_1_20221008_34313 0.8622764 0.4245518
-9                           GLM_1_AutoML_1_20221008_34313 0.8607726 0.4308457
-10             GBM_grid_1_AutoML_1_20221008_34313_model_4 0.8603405 0.4310881
-11                          GBM_3_AutoML_1_20221008_34313 0.8595238 0.4300964
-12                          DRF_1_AutoML_1_20221008_34313 0.8591176 0.4954942
-13             GBM_grid_1_AutoML_1_20221008_34313_model_5 0.8572120 0.4396899
-14    DeepLearning_grid_2_AutoML_1_20221008_34313_model_1 0.8543600 0.4787892
-15                 DeepLearning_1_AutoML_1_20221008_34313 0.8499568 0.4481447
-16    DeepLearning_grid_2_AutoML_1_20221008_34313_model_2 0.8491660 0.4693684
-17                          GBM_1_AutoML_1_20221008_34313 0.8477487 0.4579601
-18             GBM_grid_1_AutoML_1_20221008_34313_model_2 0.8461974 0.4603829
-19    DeepLearning_grid_1_AutoML_1_20221008_34313_model_2 0.8450739 0.4765796
-20    DeepLearning_grid_3_AutoML_1_20221008_34313_model_1 0.8389508 0.4731186
-21    DeepLearning_grid_3_AutoML_1_20221008_34313_model_2 0.8379570 0.4686067
-22    DeepLearning_grid_1_AutoML_1_20221008_34313_model_1 0.8351266 0.4805536
+<pre><code>                                                  model_id       auc   logloss
+1                           XRT_1_AutoML_1_20221010_214130 0.8709619 0.4280390
+2  StackedEnsemble_BestOfFamily_1_AutoML_1_20221010_214130 0.8690779 0.4140445
+3                           GBM_2_AutoML_1_20221010_214130 0.8684124 0.4212379
+4     StackedEnsemble_AllModels_1_AutoML_1_20221010_214130 0.8663037 0.4145804
+5                           GBM_4_AutoML_1_20221010_214130 0.8644931 0.4242718
+6              GBM_grid_1_AutoML_1_20221010_214130_model_3 0.8636030 0.4252027
+7              GBM_grid_1_AutoML_1_20221010_214130_model_1 0.8635338 0.4239069
+8                  DeepLearning_1_AutoML_1_20221010_214130 0.8626178 0.4320347
+9                           GBM_5_AutoML_1_20221010_214130 0.8622764 0.4245518
+10                          GLM_1_AutoML_1_20221010_214130 0.8607726 0.4308457
+11             GBM_grid_1_AutoML_1_20221010_214130_model_4 0.8603405 0.4310881
+12                          GBM_3_AutoML_1_20221010_214130 0.8595238 0.4300964
+13                          DRF_1_AutoML_1_20221010_214130 0.8591176 0.4954942
+14             GBM_grid_1_AutoML_1_20221010_214130_model_5 0.8572120 0.4396899
+15    DeepLearning_grid_3_AutoML_1_20221010_214130_model_1 0.8512791 0.4625890
+16    DeepLearning_grid_3_AutoML_1_20221010_214130_model_2 0.8506568 0.4663310
+17    DeepLearning_grid_2_AutoML_1_20221010_214130_model_2 0.8496802 0.4718726
+18                          GBM_1_AutoML_1_20221010_214130 0.8477487 0.4579601
+19             GBM_grid_1_AutoML_1_20221010_214130_model_2 0.8461974 0.4603829
+20    DeepLearning_grid_1_AutoML_1_20221010_214130_model_2 0.8455449 0.4957408
+21    DeepLearning_grid_2_AutoML_1_20221010_214130_model_1 0.8392144 0.4972406
+22    DeepLearning_grid_1_AutoML_1_20221010_214130_model_1 0.8355198 0.5140406
        aucpr mean_per_class_error      rmse       mse
 1  0.8346343            0.1859390 0.3661840 0.1340907
-2  0.8409394            0.1840722 0.3593080 0.1291023
+2  0.8426019            0.1844914 0.3589868 0.1288715
 3  0.8327107            0.1849797 0.3617789 0.1308840
-4  0.8398073            0.1816654 0.3586963 0.1286630
+4  0.8409399            0.1853167 0.3593422 0.1291268
 5  0.8276144            0.1848846 0.3614534 0.1306485
 6  0.8311913            0.1859260 0.3635181 0.1321454
 7  0.8353353            0.1885360 0.3626827 0.1315388
-8  0.8292195            0.1808141 0.3626516 0.1315162
-9  0.8366766            0.2003414 0.3684605 0.1357631
-10 0.8290372            0.1826938 0.3667785 0.1345264
-11 0.8246865            0.1873866 0.3651803 0.1333567
-12 0.8311538            0.1900095 0.3704124 0.1372053
-13 0.8172740            0.1861291 0.3691785 0.1362927
-14 0.8073969            0.2068317 0.3838420 0.1473347
-15 0.8138987            0.1995981 0.3746397 0.1403549
-16 0.8200406            0.2067237 0.3806173 0.1448695
-17 0.8225336            0.2232089 0.3811518 0.1452767
-18 0.8238082            0.2195575 0.3818452 0.1458057
-19 0.8142517            0.2068317 0.3872434 0.1499574
-20 0.8012208            0.2147438 0.3887060 0.1510923
-21 0.8188159            0.2043298 0.3762246 0.1415450
-22 0.8110971            0.2083614 0.3829747 0.1466696
+8  0.8336359            0.2043298 0.3692982 0.1363812
+9  0.8292195            0.1808141 0.3626516 0.1315162
+10 0.8366766            0.2003414 0.3684605 0.1357631
+11 0.8290372            0.1826938 0.3667785 0.1345264
+12 0.8246865            0.1873866 0.3651803 0.1333567
+13 0.8311538            0.1900095 0.3704124 0.1372053
+14 0.8172740            0.1861291 0.3691785 0.1362927
+15 0.8130343            0.1922954 0.3737121 0.1396607
+16 0.8185264            0.2143765 0.3795230 0.1440377
+17 0.8201751            0.2036946 0.3777009 0.1426580
+18 0.8225336            0.2232089 0.3811518 0.1452767
+19 0.8238082            0.2195575 0.3818452 0.1458057
+20 0.8129985            0.2084003 0.3875612 0.1502037
+21 0.7961089            0.2102800 0.3905101 0.1524981
+22 0.7946029            0.2078731 0.3939549 0.1552004
 
 [22 rows x 7 columns] </code></pre>
 </div>
@@ -1758,10 +1758,10 @@ R is connected to the H2O cluster:
 ==============
 
 H2OBinomialModel: drf
-Model ID:  XRT_1_AutoML_1_20221008_34313 
+Model ID:  XRT_1_AutoML_1_20221010_214130 
 Model Summary: 
   number_of_trees number_of_internal_trees model_size_in_bytes min_depth
-1              33                       33               39124        13
+1              33                       33               39122        13
   max_depth mean_depth min_leaves max_leaves mean_leaves
 1        20   17.72727         42        137    89.30303
 
@@ -2050,7 +2050,7 @@ Gains/Lift Table: Extract with `h2o.gainsLift(&lt;model&gt;, &lt;data&gt;)` or `
 <h2 class="anchored" data-anchor-id="subir-a-kaggle">Subir a Kaggle</h2>
 <p>Subimos nuestro archivo a <a href="https://www.kaggle.com/competitions/titanic/submit">Kaggle</a> y btenemos una puntuación de 0.76076</p>
 <p>No esta mal, pero podría ser mejor. Hace unos meses obtuve 0.79 usando un modelo de ML ensamblado GLM + GBM (Gradient Boosting Machine).</p>
-<p>En este caso, para mejorar el desempeño del algoritmo GBM (que fue el seleccionado como líder de la comparación de autoML), habría que tocar los hiperparámetros y reanalizar el feature engineering. Además, de ver opciones de otros modelos de machine learning. Pero considerar que el modelo que usamos para este artículo lo realizamos aplicando autoML. Es decir, usamos modelos pre-entrenados y con auto ajustes de hiperparámetros “out of the box” (predefinidos).</p>
+<p>En este caso, para mejorar el desempeño del algoritmo que fue el seleccionado como líder de la comparación de autoML, habría que tocar los hiperparámetros y reanalizar el feature engineering. Además, de ver opciones de otros modelos de machine learning. Pero considerar que el modelo que usamos para este artículo lo realizamos aplicando autoML. Es decir, usamos modelos pre-entrenados y con auto ajustes de hiperparámetros “out of the box” (predefinidos).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="kaggle.png" class="img-fluid figure-img" width="800"></p>
@@ -2072,6 +2072,34 @@ Gains/Lift Table: Extract with `h2o.gainsLift(&lt;model&gt;, &lt;data&gt;)` or `
 </section>
 
 </main> <!-- /main -->
+<!-- Begin Mailchimp Signup Form -->
+<div id="mc_embed_signup" style="padding-bottom: 1em; max-width: 400px;" class="ms-auto me-auto">
+  <p style="font-weight: 600; margin-bottom: 0;">Te gusta el blog?</p>
+  <span style="font-size: 0.9em;">Registra tu email para estar al día de nuevos posts:</span>
+<form action="https://paulovillarroel.us18.list-manage.com/subscribe/post?u=6f35784775dbfe6d2bea44baf&amp;id=924d686f18&amp;f_id=00cf7fe7f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate="">
+    <div id="mc_embed_signup_scroll">
+	
+        <div class="input-group mt-1 mb-2">
+        <input type="email" class="form-control" placeholder="Email" aria-label="Email" name="EMAIL" style="font-size: 0.8em; padding: .2em;">
+        </div>              
+
+	<div id="mce-responses" class="clear foot">
+		<div class="response" id="mce-error-response" style="display:none"></div>
+		<div class="response" id="mce-success-response" style="display:none"></div>
+	</div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_6f35784775dbfe6d2bea44baf_924d686f18" tabindex="-1" value=""></div>
+        <div class="optionalParent">
+            <div class="clear foot" style="display: flex; align-items: center; justify-content: center;">
+              
+              
+                <input type="submit" value="Suscríbete" name="suscribete" style="min-width: 150px; font-size: 0.8em;" id="mc-embedded-subscribe" class="button btn btn-light btn-sm ms-auto me-auto">
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
