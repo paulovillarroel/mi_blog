@@ -10,3 +10,7 @@ title-block-banner: true
 # Table of content settings
 toc: true
 toc-depth: 2
+
+# Subscribe
+include-after-body:
+  - ../signup.html
