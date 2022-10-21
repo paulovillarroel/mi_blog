@@ -8,6 +8,7 @@ website:
   repo-url: https://github.com/paulovillarroel/mi_blog
   repo-actions: [issue]
   google-analytics: "G-RNWVZS7ZL8"
+  page-footer: "Paulo Villarroel, 2022" 
   navbar:
     right:
       - about.qmd
