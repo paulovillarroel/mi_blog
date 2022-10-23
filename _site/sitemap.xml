@@ -2,11 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.paulovillarroel.com/index.html</loc>
-    <lastmod>2022-10-23T03:08:34.334Z</lastmod>
+    <lastmod>2022-10-23T03:13:27.739Z</lastmod>
   </url>
   <url>
     <loc>https://www.paulovillarroel.com/posts/compras-publicas/index.html</loc>
-    <lastmod>2022-10-23T02:59:33.190Z</lastmod>
+    <lastmod>2022-10-23T03:13:41.600Z</lastmod>
   </url>
   <url>
     <loc>https://www.paulovillarroel.com/posts/factores-en-r/index.html</loc>
@@ -18,7 +18,7 @@
   </url>
   <url>
     <loc>https://www.paulovillarroel.com/posts/prediccion-titanic/index.html</loc>
-    <lastmod>2022-10-23T02:53:41.622Z</lastmod>
+    <lastmod>2022-10-23T03:13:50.233Z</lastmod>
   </url>
   <url>
     <loc>https://www.paulovillarroel.com/posts/creando-mi-primer-blog-con-quarto/index.html</loc>
@@ -27,5 +27,9 @@
   <url>
     <loc>https://www.paulovillarroel.com/posts/ruta-aprendizaje-python/index.html</loc>
     <lastmod>2022-10-23T03:04:55.047Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.paulovillarroel.com/posts/personalizado-el-blog/index.html</loc>
+    <lastmod>2022-10-23T03:13:32.898Z</lastmod>
   </url>
 </urlset>
