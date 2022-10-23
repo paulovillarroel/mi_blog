@@ -1,0 +1,46 @@
+---
+title: "¿A quién le compra más el Estado?"
+description: "Uso datos abiertos de compras públicas para averiguar los proveedores top en tratos directos."
+author: "Paulo Villarroel"
+date: "2022-10-15"
+categories: [tutorial, r, datos abiertos]
+image: "public.jpg"
+---
+
+```{r}
+library(tidyverse)
+library(CausalImpact)
+library(janitor)
+library(zoo)
+```
+
+```{r}
+here::i_am("index.qmd")
+```
+
+```{r}
+stays <- read_csv2("data.csv", locale = locale(encoding = "latin1")) |> 
+  clean_names() |> 
+  dplyr::select(3)
+```
+
+```{r}
+stays_ts <- zoo(stays)
+```
+
+```{r}
+pre_period <- c(1, 446)
+post_period <- c(447, 616)
+
+impact <- CausalImpact(stays_ts, pre_period, post_period)
+
+plot(impact)
+```
+
+```{r}
+summary(impact)
+```
+
+```{r}
+summary(impact, "report")
+```

@@ -3,6 +3,7 @@
     "listing": "/index.html",
     "items": [
       "/posts/compras-publicas/index.html",
+      "/posts/estancias-hospitalarias/index.html",
       "/posts/prediccion-titanic/index.html",
       "/posts/factores-en-r/index.html",
       "/posts/contribuye-al-codigo-abierto/index.html",
