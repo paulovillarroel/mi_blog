@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.paulovillarroel.com/index.html</loc>
-    <lastmod>2022-10-23T03:13:27.739Z</lastmod>
+    <lastmod>2022-10-28T00:29:43.186Z</lastmod>
   </url>
   <url>
     <loc>https://www.paulovillarroel.com/posts/compras-publicas/index.html</loc>
@@ -31,5 +31,9 @@
   <url>
     <loc>https://www.paulovillarroel.com/posts/personalizado-el-blog/index.html</loc>
     <lastmod>2022-10-23T03:13:32.898Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.paulovillarroel.com/posts/descargar-datos-github/index.html</loc>
+    <lastmod>2022-10-28T00:26:05.669Z</lastmod>
   </url>
 </urlset>
