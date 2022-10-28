@@ -137,6 +137,7 @@ gtag('config', 'G-RNWVZS7ZL8', { 'anonymize_ip': true});
 </script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -369,7 +370,7 @@ gtag('config', 'G-RNWVZS7ZL8', { 'anonymize_ip': true});
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Segundos: "</span>, toc <span class="op">-</span> tic) <span class="co"># Resulstado en milisegundos</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Segundos:  0.42979449999999986</code></pre>
+<pre><code>Segundos:  0.07435119999900053</code></pre>
 </div>
 </div>
 <p>Forma 2: usando <code>ttictoc</code></p>
@@ -383,7 +384,7 @@ gtag('config', 'G-RNWVZS7ZL8', { 'anonymize_ip': true});
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Segundos: "</span>, elapsed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Segundos:  0.1373408999999981</code></pre>
+<pre><code>Segundos:  0.06629780000002938</code></pre>
 </div>
 </div>
 <p>Los resultados pueden variar entre una ejecución y otra y se ven afectado por la calidad de la conexión a internet, pero vemos que entre ambos ejemplos no hay muchas diferencias en tiempo.</p>
@@ -398,7 +399,7 @@ gtag('config', 'G-RNWVZS7ZL8', { 'anonymize_ip': true});
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>beds_r_bench <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(url) </span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>0.59 sec elapsed</code></pre>
+<pre><code>0.15 sec elapsed</code></pre>
 </div>
 </div>
 <p>Al igual que lo mencionado antes, los resultados pueden variar entre una ejecución y otra del códico. Sin embargo, al parecer esta forma es más lenta que en Python. Bueno, el <code>tidyverse</code> a pesar de que me encanta, no es la cosa más rápida en general. Para ello, hay otras librerías con mejor desempeño como <code>vroom</code> (que es parte de <code>tidyverse</code> de igual forma) y <code>data.table</code>.</p>
@@ -409,7 +410,7 @@ gtag('config', 'G-RNWVZS7ZL8', { 'anonymize_ip': true});
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>beds_r_bench1 <span class="ot">&lt;-</span> vroom<span class="sc">::</span><span class="fu">vroom</span>(url) </span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>0.31 sec elapsed</code></pre>
+<pre><code>0.16 sec elapsed</code></pre>
 </div>
 </div>
 <p>Usando data.table:</p>
@@ -421,10 +422,12 @@ gtag('config', 'G-RNWVZS7ZL8', { 'anonymize_ip': true});
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>beds_r_bench2 <span class="ot">&lt;-</span> data.table<span class="sc">::</span><span class="fu">fread</span>(url) </span>
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>0.47 sec elapsed</code></pre>
+<pre><code>0.07 sec elapsed</code></pre>
 </div>
 </div>
-<p>Al parecer <code>data.table</code> es más rápido, al menos en este ejemplo. Hagamos algo loco… por que hasta ahora solo han sido unas cuantas ejecuciones de cada código y puede no ser muy representativo.</p>
+<p>Ambos tiempos están cercanos, a veces gana <code>data.table</code> otras <code>vroom</code>, pero van cambiando constantemente en la medida que ejecutamos nuevas pruebas.</p>
+<p>¿Podemos solucionar eso?</p>
+<p>Hagamos algo loco… porque hasta ahora solo han sido unas cuantas ejecuciones de cada código y puede no ser muy representativo.</p>
 <p>Qué tal si corremos el código 1000 veces?</p>
 <p>Si, mil.</p>
 <p>Para suerte de nosotros, no tenemos que estar apretando el botón todas esas veces, sino que podemos usar alguna librería de <em>bencharking</em> para eso.</p>
@@ -443,9 +446,9 @@ gtag('config', 'G-RNWVZS7ZL8', { 'anonymize_ip': true});
                                                                                                                     expr
  url &lt;- "https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto20/NumeroVentiladores_std.csv"
                                                                               beds_fread_bench &lt;- data.table::fread(url)
-      min       lq     mean   median       uq       max neval cld
-        0        0     1277     1200     1800    169500  1000  a 
- 11403400 14353300 20653423 16403350 18825850 466079000  1000   b</code></pre>
+      min       lq        mean   median       uq       max neval cld
+        0        1     1361.59     1300     2001     19901  1000  a 
+ 11468101 15399052 21544789.11 19157751 22793351 280058401  1000   b</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -461,37 +464,39 @@ gtag('config', 'G-RNWVZS7ZL8', { 'anonymize_ip': true});
                                                                                                                     expr
  url &lt;- "https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto20/NumeroVentiladores_std.csv"
                                                                                    beds_vroom_bench &lt;- vroom::vroom(url)
-      min       lq        mean    median        uq       max neval cld
-        0        0      1191.4       100      1800     19400  1000  a 
- 77591200 96365150 116003579.9 106687450 118518250 669067900  1000   b</code></pre>
+      min        lq         mean      median        uq       max neval cld
+        0       101      1107.31       850.5      1801     11101  1000  a 
+ 91071301 125492802 153726785.42 141691301.0 163883802 691454301  1000   b</code></pre>
 </div>
 </div>
-<p>Como he mencionado, con cada ejecución pueden variar los resultados. El output de este microbench está en nanosegundos. Para efectos de comparación y mejor entendimiento, usaré la mediana y lo pasaré a segundos. Dejó un resultado que obtuve.</p>
+<p>Como he mencionado, con cada ejecución pueden variar los resultados. El output de este microbench está en nanosegundos. Para efectos de comparación y mejor entendimiento, usaré la mediana (ojo con la media en todo caso) y lo pasaré a segundos. Dejo un resultado que obtuve hace unos minutos, a modo de ejemplo.</p>
 <p><em>Nota: los datos mostrados en las tablas del benchmark pueden diferir.</em></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># data.table</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>datatable_1000 <span class="ot">&lt;-</span> <span class="dv">15865750</span> <span class="sc">/</span> <span class="fl">1.0000E+9</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>datatable_1000 <span class="ot">&lt;-</span> <span class="dv">16549550</span> <span class="sc">/</span> <span class="fl">1.0000E+9</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Segundos:"</span>, datatable_1000))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Segundos: 0.01586575"</code></pre>
+<pre><code>[1] "Segundos: 0.01654955"</code></pre>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># vroom</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>vroom_1000 <span class="ot">&lt;-</span> <span class="dv">99581050</span> <span class="sc">/</span> <span class="fl">1.0000E+9</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>vroom_1000 <span class="ot">&lt;-</span> <span class="dv">89001800</span> <span class="sc">/</span> <span class="fl">1.0000E+9</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Segundos:"</span>, vroom_1000))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Segundos: 0.09958105"</code></pre>
+<pre><code>[1] "Segundos: 0.0890018"</code></pre>
 </div>
 </div>
-<p>Diferencia porcentual relativa:</p>
+<p><strong>Diferencia porcentual relativa:</strong></p>
+<p>Usaremos la siguiente fórmula para el cálculo.</p>
+<p><span class="math inline">\(| (x2 - x1) | / ((x2 + x1)/2) * 100\)</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>(<span class="fu">abs</span>(vroom_1000) <span class="sc">-</span> <span class="fu">abs</span>(datatable_1000)) <span class="sc">/</span> ((<span class="fu">abs</span>(datatable_1000) <span class="sc">+</span> <span class="fu">abs</span>(vroom_1000)) <span class="sc">/</span> <span class="dv">2</span>) <span class="sc">*</span> <span class="dv">100</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">abs</span>(vroom_1000 <span class="sc">-</span> datatable_1000) <span class="sc">/</span> ((datatable_1000 <span class="sc">+</span> vroom_1000) <span class="sc">/</span> <span class="dv">2</span>) <span class="sc">*</span> <span class="dv">100</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 145.0284</code></pre>
+<pre><code>[1] 137.2834</code></pre>
 </div>
 </div>
-<p>Vemos que <code>data.table</code> es un 145% más rápido. No deja de ser interesante ese dato.</p>
+<p>Vemos que <code>data.table</code> es un 137% más rápido. No deja de ser interesante ese dato.</p>
 </section>
 </section>
 <section id="finalmente" class="level2">

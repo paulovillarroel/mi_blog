@@ -194,7 +194,11 @@ beds_r_bench2 <- data.table::fread(url)
 toc()
 ```
 
-Al parecer `data.table` es más rápido, al menos en este ejemplo. Hagamos algo loco... por que hasta ahora solo han sido unas cuantas ejecuciones de cada código y puede no ser muy representativo.
+Ambos tiempos están cercanos, a veces gana `data.table` otras `vroom`, pero van cambiando constantemente en la medida que ejecutamos nuevas pruebas.
+
+¿Podemos solucionar eso?
+
+Hagamos algo loco... porque hasta ahora solo han sido unas cuantas ejecuciones de cada código y puede no ser muy representativo.
 
 Qué tal si corremos el código 1000 veces?
 
@@ -228,29 +232,33 @@ bench_vroom <- microbenchmark(
 bench_vroom
 ```
 
-Como he mencionado, con cada ejecución pueden variar los resultados. El output de este microbench está en nanosegundos. Para efectos de comparación y mejor entendimiento, usaré la mediana y lo pasaré a segundos. Dejó un resultado que obtuve.
+Como he mencionado, con cada ejecución pueden variar los resultados. El output de este microbench está en nanosegundos. Para efectos de comparación y mejor entendimiento, usaré la mediana (ojo con la media en todo caso) y lo pasaré a segundos. Dejo un resultado que obtuve hace unos minutos, a modo de ejemplo.
 
 *Nota: los datos mostrados en las tablas del benchmark pueden diferir.*
 
 ```{r}
 # data.table
-datatable_1000 <- 15865750 / 1.0000E+9
+datatable_1000 <- 16549550 / 1.0000E+9
 print(paste("Segundos:", datatable_1000))
 ```
 
 ```{r}
 # vroom
-vroom_1000 <- 99581050 / 1.0000E+9
+vroom_1000 <- 89001800 / 1.0000E+9
 print(paste("Segundos:", vroom_1000))
 ```
 
-Diferencia porcentual relativa:
+**Diferencia porcentual relativa:**
+
+Usaremos la siguiente fórmula para el cálculo.
+
+$| (x2 - x1) | / ((x2 + x1)/2) * 100$
 
 ```{r}
-(abs(vroom_1000) - abs(datatable_1000)) / ((abs(datatable_1000) + abs(vroom_1000)) / 2) * 100
+abs(vroom_1000 - datatable_1000) / ((datatable_1000 + vroom_1000) / 2) * 100
 ```
 
-Vemos que `data.table` es un 145% más rápido. No deja de ser interesante ese dato.
+Vemos que `data.table` es un 137% más rápido. No deja de ser interesante ese dato.
 
 ## Finalmente
 
