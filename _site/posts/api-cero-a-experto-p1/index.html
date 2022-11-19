@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Paulo Villarroel">
+<meta name="dcterms.date" content="2022-11-21">
+<meta name="description" content="Este es el comienzo de una serie de artículos en donde revisaremos cómo trabajar usando API´s de forma profesional. Revisamos los fundamentos para que comiences este viaje.">
+
+<title>PauloVillarroel.com - API de cero a experto (parte 1)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-RNWVZS7ZL8"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-RNWVZS7ZL8', { 'anonymize_ip': true});
+</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">PauloVillarroel.com</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">Sobre mí</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/paulovillarroel"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/Chazkon"><i class="bi bi-twitter" role="img">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/paulovillarroeltapia/"><i class="bi bi-linkedin" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">API de cero a experto (parte 1)</h1>
+                  <div>
+        <div class="description">
+          Este es el comienzo de una serie de artículos en donde revisaremos cómo trabajar usando API´s de forma profesional. Revisamos los fundamentos para que comiences este viaje.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">python</div>
+                <div class="quarto-category">tutorial</div>
+                <div class="quarto-category">api</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Paulo Villarroel </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">November 21, 2022</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#por-qué-aprender-a-usar-una-api" id="toc-por-qué-aprender-a-usar-una-api" class="nav-link active" data-scroll-target="#por-qué-aprender-a-usar-una-api">¿Por qué aprender a usar una API?</a></li>
+  <li><a href="#qué-es-una-api" id="toc-qué-es-una-api" class="nav-link" data-scroll-target="#qué-es-una-api">¿Qué es una API?</a></li>
+  <li><a href="#funciones-crud" id="toc-funciones-crud" class="nav-link" data-scroll-target="#funciones-crud">Funciones CRUD</a></li>
+  <li><a href="#tipos-de-api" id="toc-tipos-de-api" class="nav-link" data-scroll-target="#tipos-de-api">Tipos de API</a></li>
+  <li><a href="#en-resumen" id="toc-en-resumen" class="nav-link" data-scroll-target="#en-resumen">En resumen</a></li>
+  <li><a href="#qué-se-viene" id="toc-qué-se-viene" class="nav-link" data-scroll-target="#qué-se-viene">¿Qué se viene?</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/paulovillarroel/mi_blog/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<p>Hola!!!</p>
+<p>Gracias por estar por estos lados nuevamente.</p>
+<p>Con este artículo pretendo iniciar una serie de tutoriales para enseñar a consumir datos desde una API. No tengo claro cuántos serán en total, pero como siempre, deseo hacerlo muy de a poco y simples, de modo que puedas sentirte cómodo/a al final de todo.</p>
+<p>Para estos tutoriales usaré Python (versión 3.10), pero recuerda que más allá del lenguaje, lo importante es comprender la lógica que está detrás y los fundamentos de programación. El lenguaje no es más que una herramienta y si bien la sintaxis puede variar (la forma en que se escribe el código), si puedes entender cómo funciona, te será muy simple adaptarlo a tu lenguaje favorito.</p>
+<p>Ok!!</p>
+<p>Entonces partamos…</p>
+<section id="por-qué-aprender-a-usar-una-api" class="level1">
+<h1>¿Por qué aprender a usar una API?</h1>
+<p>Si estás partiendo en la programación y en análisis de datos, de seguro que te has trabajado con el típico dataset iris o el de los autos jajaja. Con unos clásicos.</p>
+<p>También es posible que estés usando archivos Excel para analizarlos o algunos CSV.</p>
+<p>La cosa es que todos esos datos están ordenados y en formatos más o menos fáciles de trabajar. Pero en la vida real, la historia es muy distinta. Te encontrarás con ese tipo de archivos, pero actualmente la forma más común de interactuar con datos es de otra forma y lo es usando las API.</p>
+<p>Es un mundo que debes estudiar, pues tarde o temprano te vas a ver en la necesidad de trabajar usando una API. No es tan complejo, pero requiere de ciertos conocimientos y de práctica.</p>
+<p>Si me preguntas, a día de hoy, el saber de API es una cosa básica, al menos, el saber hacer solicitudes y manipular los datos de respuesta.</p>
+<p>Tranquilo/a!!!</p>
+<p>Veremos todo es de a poco.</p>
+</section>
+<section id="qué-es-una-api" class="level1">
+<h1>¿Qué es una API?</h1>
+<p>De forma simple, podemos entender a un API como una forma en que 2 sistemas informáticos se comunican entre ellos. Para poder hacerlo, es necesario que estos sistemas “hablen el mismo lenguaje” para que se puedan entender. Con lenguaje no me refiero a lenguaje de programación, sino a un conjunto de reglas y protocolos que son conocidos y acordados por ambas partes. Es como hablar con alguien. Si vas a una tienda y quieres comprar una bebida, te acercas al vendedor y le dices: “Hola!! Me da una bebida en lata, por favor”. Si todo anda bien, el vendedor te va a preguntar cuál bebida quieres y te indicará las que tiene disponibles. Tu eliges la que gustes y la compras. Esto que parece básico y trivial, para las computadoras no es tan simple, ni trivial. Deben existir una serie de acuerdos y formas de comunicación para que las partes se logren entender. Imagina que vuelves al mismo local para comprar otra bebida, pero esta vez se lo pides de esta forma: “Witam, czy mogę prosić o napój z puszki!”. Seguramente, el vendedor te va a mirar con una cara media rara, con cara de WTF! 🥴 Y es que se lo pediste en polaco!! Claro, le pediste una bebida en lata, igual que antes, pero esta vez en un idioma que él no entiende. Eso hace que no logres obtener lo que quieres. Con las API´s pasa lo mismo. Ambas partes deben entenderse para poder comunicarse y lograr una comunicación entre ellas. Para eso están los protocolos y definiciones que te mencioné hace un rato.</p>
+<p>API significa "interfaz de programación de aplicaciones" (del inglés “Application Programming Interface”).</p>
+<p>La comunicación entre las partes funciona como una pregunta (solicitud) y una respuesta. Como el ejemplo de las bebidas.</p>
+<p>Ahora, las partes tienden a llamarse servidor y cliente, donde el cliente es quien hace la solicitud y el servidor es el que responde. Piensa en el servidor como la base de datos que contiene (y almacena) los datos y en los clientes como las páginas web, aplicaciones de teléfonos o programas que consumen los datos de esos servidores. Habitualmente las personas acceden a los datos desde los clientes, pero también se puede hacer directamente a los servidores. En eso trabajan los ingenieros de datos o backend. Aunque eso es otro tema.</p>
+<p>Las API pueden funcionar de cuatro maneras diferentes, según el momento y el motivo de su creación.</p>
+<ul>
+<li><p>SOAP&nbsp;</p></li>
+<li><p>RPC</p></li>
+<li><p>WebSocket</p></li>
+<li><p>REST</p></li>
+</ul>
+<p>Para efectos de este tutorial, usaré la <strong>API REST</strong>, que tiende a ser una de las más comunes y con la que te vas a encontrar frecuentemente en muchas de las aplicaciones, en especial, en las web.</p>
+<p>En las API REST, el cliente envía las solicitudes al servidor como datos. El servidor utiliza esta entrada del cliente para iniciar funciones internas y devuelve los datos de salida al cliente. Una API REST es una API que cumple los principios de diseño del estilo de arquitectura REST o <em>transferencia de estado representacional</em>. También se llaman a las API REST como API RESTful<em>.</em></p>
+<p>Este dato es importante…</p>
+<p>Las API REST no son un protocolo de comunicación en si mismo, sino una arquitectura de diseño. Esta arquitectura está plasmada en la tesis de Roy Fielding, <a href="https://www.ics.uci.edu/~fielding/pubs/dissertation/fielding_dissertation_2up.pdf">"Architectural Styles and the Design of Network-based Software Architectures"</a>, en donde se señala que las API son RESTful siempre que cumplan con las 6 limitaciones principales de un sistema RESTful:</p>
+<ul>
+<li><p><strong>Arquitectura cliente-servidor:</strong>&nbsp;la arquitectura REST está compuesta por clientes, servidores y recursos; y administra las solicitudes con HTTP.</p></li>
+<li><p><strong>Sistema sin estado:</strong>&nbsp;el contenido de los clientes no se almacena en el servidor entre las solicitudes. En su lugar, la información sobre el estado de la sesión está en posesión del cliente.</p></li>
+<li><p><strong>Capacidad de almacenamiento en caché:</strong>&nbsp;el almacenamiento en caché elimina la necesidad de algunas interacciones cliente-servidor.</p></li>
+<li><p><strong>Sistema en capas:</strong>&nbsp;las interacciones cliente-servidor pueden estar mediadas por capas adicionales. Estas capas pueden ofrecer funcionalidades adicionales, como equilibrio de carga, cachés compartidos o seguridad.</p></li>
+<li><p><strong>Disponibilidad del código según se solicite (opcional):</strong>&nbsp;los servidores pueden ampliar las funciones de un cliente transfiriendo código ejecutable.</p></li>
+<li><p><strong>Interfaz uniforme:</strong>&nbsp;esta limitación es fundamental para el diseño de las API de RESTful.</p></li>
+</ul>
+<p><em>Fuente:</em> <a href="https://www.redhat.com/es/topics/api/what-are-application-programming-interfaces" class="uri">https://www.redhat.com/es/topics/api/what-are-application-programming-interfaces</a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="schema.png" class="img-fluid figure-img" width="800"></p>
+<p></p><figcaption class="figure-caption">Esquema básico de comunicación con API</figcaption><p></p>
+</figure>
+</div>
+<p>Para no dejar de mencionarlo, aunque realmente no lo veremos acá, es que este tema de la comunicación entre servidores y clientes es tan relevante (pero MUY relevante) que hay muchas personas y grupos trabajando en nuevos protocolos y formas de hacer la comuncación más rápida y segura. Un ejemplo de ello es <strong>GraphQL</strong>. Facebook desarrolló GraphQL y comenzó a utilizarlo en aplicaciones móviles en el 2012. En 2015, se habilitó la especificación de <a href="https://graphql.org/foundation/">GraphQL como open source</a>.</p>
+</section>
+<section id="funciones-crud" class="level1">
+<h1>Funciones CRUD</h1>
+<p>Las API REST funcionan por medio de solicitudes HTTP y pueden ejecutar funciones típicas de bases de datos. Si estás familiarizado/a con SQL, de seguro ésto lo conoces. Si no tienes idea qué es SQL, deberías preocuparte si lo que haces es análisis de datos. Pero ese tema se escapa de este tutorial, pero lo veremos mas adelante.</p>
+<p>Si te interesa aprender SQL (que deberías!!!!!!), en internet está repleto de cursos gratuitos, libros y videos de YouTube. Pero te recomiendo que veas un pequeño trozo del <a href="https://youtu.be/uUdKAYl-F7g?t=399">siguiente video</a> (hasta el minuto 10, el link te lo dejé marcado desde donde empezar). Ese video no es de API propiamente tal, pero los conceptos de las funciones de bases de datos aplican perfectamente. Así que dale una mirada a esos minutos y sigue con el artículo.</p>
+<p>Sigamos…</p>
+<p>REST define un conjunto de funciones como GET, PUT, DELETE, etc. que los clientes pueden utilizar para acceder a los datos del servidor. Sin embargo, las GET (obtener) te las encontrarás por todas partes y son las que debes manejar sí o sí en una API. Es lo básico.</p>
+<p>Por eso, en esta serie de artículos me dedicaré principalmente a este tipo de métodos.</p>
+</section>
+<section id="tipos-de-api" class="level1">
+<h1>Tipos de API</h1>
+<p>Otra forma de clasificar a las API es por las funciones que desarrollan, pudiendo ser privadas o públicas. Las privadas se usan al interior de las instituciones para conectar aplicaciones dentro de ella. Las públicas están, como sun nombre lo indica, abiertas a personas externas. En este último tipo, se pueden requerir claves o credenciales de acceso, o bien, pueden ser de libre acceso.</p>
+<p>Estas credenciales de acceso pueden ser pricipalmente de 2 tipos:</p>
+<ol type="1">
+<li><p><strong>Tokens de autenticación<br>
+<br>
+</strong>Se utilizan para autorizar a los usuarios a hacer la llamada a la API. Los tokens de autenticación comprueban que los usuarios son quienes dicen ser y que tienen los derechos de acceso para esa llamada concreta a la API. Por ejemplo, cuando inicia sesión en el servidor de correo electrónico, el cliente de correo electrónico utiliza tokens de autenticación para un acceso seguro.</p></li>
+<li><p><strong>Claves de API<br>
+<br>
+</strong>Las claves de API verifican el programa o la aplicación que hace la llamada a la API. Identifican la aplicación y se aseguran de que tiene los derechos de acceso necesarios para hacer la llamada a la API en cuestión. Las claves de API no son tan seguras como los tokens, pero permiten supervisar la API para recopilar datos sobre su uso. Es posible que haya notado una larga cadena de caracteres y números en la URL de su navegador cuando visita diferentes sitios web. Esta cadena es una clave de la API que el sitio web utiliza para hacer llamadas internas a la API.</p></li>
+</ol>
+<p><em>Fuente:</em> <a href="https://aws.amazon.com/es/what-is/api/#seo-faq-pairs#how-to-secure-a-rest-api">https://aws.amazon.com/es/what-is/api/#seo-faq-pairs#how-to-secure-a-rest-api</a></p>
+<p>Esto que acabamos de ver es super importante. Es necesario que aprendas a autenticarte en la consulta de la API, pues es muy frecuente que éstas estén protegidas por temas de seguridad, ya sea por un token o una clave.</p>
+</section>
+<section id="en-resumen" class="level1">
+<h1>En resumen</h1>
+<p>Vimos bastantes conceptos y fundamentos sobre las API, y que son necesario que tengas en tu mente. Es importante que entiendas cómo funcionan “por detrás”, al menos, desde lo básico.</p>
+<ul>
+<li><p>Revisamos la importancia de conocer sobre las API.</p></li>
+<li><p>Vimos qué son las API y cómo permiten que los sistemas se comuniquen.</p></li>
+<li><p>Explicamos qué son los servidores y los clientes.</p></li>
+<li><p>Mencionamos las funciones más clasicas de las API.</p></li>
+</ul>
+</section>
+<section id="qué-se-viene" class="level1">
+<h1>¿Qué se viene?</h1>
+<p>En el próximo artículo ya empezaremos a ver código de Python y veremos los primeros pasos para consumir una API.</p>
+<p>Saludos!!! 🤗</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<div>
+<hr>
+
+<iframe src="https://embeds.beehiiv.com/274e86f2-9411-4829-afd2-e4879f66212f" data-test-id="beehiiv-embed" width="100%" height="320" frameborder="0" scrolling="no" style="border-radius: 4px; border: 2px solid #e5e7eb; margin: 0; background-color: transparent;"></iframe>
+
+<hr>
+</div>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp(/https:\/\/www\.paulovillarroel\.com\//);
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+      }
+    }
+});
+</script>
+<script src="https://giscus.app/client.js" data-repo="paulovillarroel/mi_blog" data-repo-id="R_kgDOH_9CVg" data-category="General" data-category-id="DIC_kwDOH_9CVs4CRgbc" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">Paulo Villarroel, 2022</div>
+  </div>
+</footer>
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
