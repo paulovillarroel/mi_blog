@@ -2,7 +2,7 @@
 title: "API de cero a experto (parte 1)"
 description: "Este es el comienzo de una serie de artículos en donde revisaremos cómo trabajar usando API´s de forma profesional. Revisamos los fundamentos para que comiences este viaje."
 author: "Paulo Villarroel"
-date: "2022-11-21"
+date: "2022-11-19"
 categories: [python, tutorial, api]
 image: "wool.jpg"
 ---
@@ -129,3 +129,5 @@ Vimos bastantes conceptos y fundamentos sobre las API, y que son necesario que t
 En el próximo artículo ya empezaremos a ver código de Python y veremos los primeros pasos para consumir una API.
 
 Saludos!!! 🤗
+
+Recuerda leer el [resto de mis artículos](https://www.paulovillarroel.com/).
