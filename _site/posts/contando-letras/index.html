@@ -343,7 +343,7 @@ gtag('config', 'G-RNWVZS7ZL8', { 'anonymize_ip': true});
 <pre><code>[1] "Number of vowels: 7"
 [1] "Number of vowels: 10"
 [1] "Number of vowels: 0"
-Test passed 🎉</code></pre>
+Test passed 😸</code></pre>
 </div>
 </div>
 <p>Genial!!!!</p>
@@ -511,7 +511,7 @@ a e o u
 <pre><code>[1] "Vowel: e / Freq: 3"
 [1] "Vowel: o / Freq: 3"
 [1] "No vowels in text"
-Test passed 🥳</code></pre>
+Test passed 🎉</code></pre>
 </div>
 </div>
 <p>Yuju!!!! 😍</p>
@@ -522,42 +522,41 @@ Test passed 🥳</code></pre>
 <pre><code>[1] "Vowel: e / Freq: 3" "Vowel: o / Freq: 3"</code></pre>
 </div>
 </div>
-<p>Epa! Acá las vocales e y o tienen ambas una frecuencia de 3 y son las más altas. Nuestro código no resuelve bien eso. Muestra correctamente las vocales, pero el mensaje es extraño. Se podría hacer mejor.</p>
-<p>Es tu turno!! Inténtalo.</p>
+<p>Epa! Acá las vocales e y o tienen ambas una frecuencia de 3 y son las más altas. Nuestro código no resuelve bien eso. Muestra correctamente las vocales, pero el mensaje es extraño, sale repetido y no se entiende bien. ¿Se podría hacer mejor?</p>
+<p>Es tu turno!! Inténtalo.<br>
+</p>
 <p>Ahora te voy a mostrar unas cuantas soluciones, pero con menos código. Es más complejo de entender si no sabes bien lo que hace cada función, pero me parece interesante mostrarte otras opciones de resolver el problema original (el de contar vocales).</p>
+<p>Dale unas vueltas e investiga cada una.</p>
 <p><strong>Opción 1:</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>get_count_vowels <span class="ot">&lt;-</span> <span class="cf">function</span>(text){</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  vowels <span class="ot">&lt;-</span> <span class="fu">nchar</span>(<span class="fu">gsub</span>(<span class="st">"[^aeiou]"</span>, <span class="st">""</span>, text, <span class="at">ignore.case =</span> <span class="cn">TRUE</span>))</span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"Number of vowels: "</span>, vowels))</span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_count_vowels</span>(<span class="st">"Esta es otra frase"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="fu">get_count_vowels</span>(<span class="st">"Esta es otra frase"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Number of vowels: 7"</code></pre>
 </div>
 </div>
 <p><strong>Opción 2:</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr) <span class="co"># Usando esta librería</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>count_vowels_lib <span class="ot">&lt;-</span> <span class="cf">function</span>(text){</span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_count</span>(text, <span class="st">"[AEIOUaeiou]"</span>)</span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">count_vowels_lib</span>(<span class="st">"Esta es una prueba de texto"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr) <span class="co"># Usando esta librería</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>count_vowels_lib <span class="ot">&lt;-</span> <span class="cf">function</span>(text) {</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_count</span>(text, <span class="st">"[AEIOUaeiou]"</span>)</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="fu">count_vowels_lib</span>(<span class="st">"Esta es una prueba de texto"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 11</code></pre>
 </div>
 </div>
 <p><strong>Opción 3:</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>getCount <span class="op">=</span> <span class="kw">lambda</span> s: <span class="bu">sum</span>(s.count(i) <span class="cf">for</span> i <span class="kw">in</span> <span class="st">'aeiou'</span>) <span class="co"># Opción un poco críptica</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>getCount(<span class="st">"Frase linda"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>getCount <span class="op">=</span> <span class="kw">lambda</span> s: <span class="bu">sum</span>(s.count(i) <span class="cf">for</span> i <span class="kw">in</span> <span class="st">'aeiou'</span>) <span class="co"># Opción un poco críptica</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>getCount(<span class="st">"Frase linda"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>4</code></pre>
 </div>

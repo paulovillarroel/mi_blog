@@ -300,11 +300,13 @@ Te dejo tarea para la casa. Mira el resultado siguiente:
 max_vowels("eeeoooaqui")
 ```
 
-Epa! Acá las vocales e y o tienen ambas una frecuencia de 3 y son las más altas. Nuestro código no resuelve bien eso. Muestra correctamente las vocales, pero el mensaje es extraño. Se podría hacer mejor.
+Epa! Acá las vocales e y o tienen ambas una frecuencia de 3 y son las más altas. Nuestro código no resuelve bien eso. Muestra correctamente las vocales, pero el mensaje es extraño, sale repetido y no se entiende bien. ¿Se podría hacer mejor?
 
-Es tu turno!! Inténtalo.
+Es tu turno!! Inténtalo.\
 
 Ahora te voy a mostrar unas cuantas soluciones, pero con menos código. Es más complejo de entender si no sabes bien lo que hace cada función, pero me parece interesante mostrarte otras opciones de resolver el problema original (el de contar vocales).
+
+Dale unas vueltas e investiga cada una.
 
 **Opción 1:**
 
@@ -313,9 +315,7 @@ get_count_vowels <- function(text){
   vowels <- nchar(gsub("[^aeiou]", "", text, ignore.case = TRUE))
   print(paste0("Number of vowels: ", vowels))
 }
-```
 
-```{r}
 get_count_vowels("Esta es otra frase")
 ```
 
@@ -324,12 +324,10 @@ get_count_vowels("Esta es otra frase")
 ```{r}
 library(stringr) # Usando esta librería
 
-count_vowels_lib <- function(text){
+count_vowels_lib <- function(text) {
   str_count(text, "[AEIOUaeiou]")
-  }
-```
+}
 
-```{r}
 count_vowels_lib("Esta es una prueba de texto")
 ```
 
@@ -337,9 +335,7 @@ count_vowels_lib("Esta es una prueba de texto")
 
 ```{python}
 getCount = lambda s: sum(s.count(i) for i in 'aeiou') # Opción un poco críptica
-```
 
-```{python}
 getCount("Frase linda")
 ```
 
