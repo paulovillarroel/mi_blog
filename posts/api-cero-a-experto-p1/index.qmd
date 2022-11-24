@@ -13,7 +13,7 @@ Gracias por estar por estos lados nuevamente.
 
 Con este artículo pretendo iniciar una serie de tutoriales para enseñar a consumir datos desde una API. No tengo claro cuántos serán en total, pero como siempre, deseo hacerlo muy de a poco y simples, de modo que puedas sentirte cómodo/a al final de todo.
 
-Para estos tutoriales usaré Python (versión 3.10), pero recuerda que más allá del lenguaje, lo importante es comprender la lógica que está detrás y los fundamentos de programación. El lenguaje no es más que una herramienta y si bien la sintaxis puede variar (la forma en que se escribe el código), si puedes entender cómo funciona, te será muy simple adaptarlo a tu lenguaje favorito.
+Para estos tutoriales usaré mayormente Python (versión 3.10), pero recuerda que más allá del lenguaje, lo importante es comprender la lógica que está detrás y los fundamentos de programación. El lenguaje no es más que una herramienta y si bien la sintaxis puede variar (la forma en que se escribe el código), si puedes entender cómo funciona, te será muy simple adaptarlo a tu lenguaje favorito.
 
 Ok!!
 
@@ -39,13 +39,13 @@ Veremos todo es de a poco.
 
 De forma simple, podemos entender a un API como una forma en que 2 sistemas informáticos se comunican entre ellos. Para poder hacerlo, es necesario que estos sistemas "hablen el mismo lenguaje" para que se puedan entender. Con lenguaje no me refiero a lenguaje de programación, sino a un conjunto de reglas y protocolos que son conocidos y acordados por ambas partes. Es como hablar con alguien. Si vas a una tienda y quieres comprar una bebida, te acercas al vendedor y le dices: "Hola!! Me da una bebida en lata, por favor". Si todo anda bien, el vendedor te va a preguntar cuál bebida quieres y te indicará las que tiene disponibles. Tu eliges la que gustes y la compras. Esto que parece básico y trivial, para las computadoras no es tan simple, ni trivial. Deben existir una serie de acuerdos y formas de comunicación para que las partes se logren entender. Imagina que vuelves al mismo local para comprar otra bebida, pero esta vez se lo pides de esta forma: "Witam, czy mogę prosić o napój z puszki!". Seguramente, el vendedor te va a mirar con una cara media rara, con cara de WTF! 🥴 Y es que se lo pediste en polaco!! Claro, le pediste una bebida en lata, igual que antes, pero esta vez en un idioma que él no entiende. Eso hace que no logres obtener lo que quieres. Con las API´s pasa lo mismo. Ambas partes deben entenderse para poder comunicarse y lograr una comunicación entre ellas. Para eso están los protocolos y definiciones que te mencioné hace un rato.
 
-API significa \"interfaz de programación de aplicaciones\" (del inglés "Application Programming Interface").
+API? API significa "interfaz de programación de aplicaciones" (del inglés "Application Programming Interface"), para que lo tengas presente.
 
-La comunicación entre las partes funciona como una pregunta (solicitud) y una respuesta. Como el ejemplo de las bebidas.
+La comunicación entre las partes funciona como una pregunta (solicitud o *query*) y una respuesta. Como el ejemplo de las bebidas.
 
 Ahora, las partes tienden a llamarse servidor y cliente, donde el cliente es quien hace la solicitud y el servidor es el que responde. Piensa en el servidor como la base de datos que contiene (y almacena) los datos y en los clientes como las páginas web, aplicaciones de teléfonos o programas que consumen los datos de esos servidores. Habitualmente las personas acceden a los datos desde los clientes, pero también se puede hacer directamente a los servidores. En eso trabajan los ingenieros de datos o backend. Aunque eso es otro tema.
 
-Las API pueden funcionar de cuatro maneras diferentes, según el momento y el motivo de su creación.
+Las API pueden funcionar de cuatro maneras diferentes, según el momento y el motivo de su creación:
 
 -   SOAP 
 
@@ -55,14 +55,13 @@ Las API pueden funcionar de cuatro maneras diferentes, según el momento y el mo
 
 -   REST
 
-Para efectos de este tutorial, usaré la **API REST**, que tiende a ser una de las más comunes y con la que te vas a encontrar frecuentemente en muchas de las aplicaciones, en especial, en las web.
+Para efectos de esta serie de tutoriales, usaré la **API REST**, que tiende a ser una de las más comunes y con la que te vas a encontrar frecuentemente en muchas de las aplicaciones, en especial, en las web.
 
-En las API REST, el cliente envía las solicitudes al servidor como datos. El servidor utiliza esta entrada del cliente para iniciar funciones internas y devuelve los datos de salida al cliente.
-Una API REST es una API que cumple los principios de diseño del estilo de arquitectura REST o *transferencia de estado representacional*. También se llaman a las API REST como API RESTful*.*
+En las API REST, el cliente envía las solicitudes al servidor como datos. El servidor utiliza esta entrada del cliente para iniciar funciones internas y devuelve los datos de salida al cliente. Una API REST es una API que cumple los principios de diseño del estilo de arquitectura REST o *transferencia de estado representacional*. También se llaman a las API REST como API RESTful*.*
 
 Este dato es importante...
 
-Las API REST no son un protocolo de comunicación en si mismo, sino una arquitectura de diseño. Esta arquitectura está plasmada en la tesis de Roy Fielding, [\"Architectural Styles and the Design of Network-based Software Architectures\"](https://www.ics.uci.edu/~fielding/pubs/dissertation/fielding_dissertation_2up.pdf), en donde se señala que las API son RESTful siempre que cumplan con las 6 limitaciones principales de un sistema RESTful:
+Las API REST no son un protocolo de comunicación en si mismo, sino una arquitectura de diseño. Esta arquitectura está plasmada en la tesis de Roy Fielding, ["Architectural Styles and the Design of Network-based Software Architectures"](https://www.ics.uci.edu/~fielding/pubs/dissertation/fielding_dissertation_2up.pdf), en donde se señala que las API son RESTful siempre que cumplan con las 6 limitaciones principales de un sistema RESTful:
 
 -   **Arquitectura cliente-servidor:** la arquitectura REST está compuesta por clientes, servidores y recursos; y administra las solicitudes con HTTP.
 

@@ -1,0 +1,354 @@
+---
+title: "Contando letras"
+description: "Resolvemos un reto de lógica de programación, aprovechamos de hacerlos de varias formas y los lanzamos con unos test unitarios además!"
+author: "Paulo Villarroel"
+date: "2022-11-23"
+categories: [r, python, tutorial, katas]
+image: "letters.jpg"
+---
+
+Hola!!
+
+Que bueno que estés por estos lados nuevamente! Porque ya has leído mis otros artículos, verdad??
+
+Verdad!!??
+
+Ojito...
+
+jajajaja 🤣
+
+Ya, ok... En serio. Lo que vamos a ver en este artículo es algo interesante. O es lo que pienso. Lo que haré es resolver un reto de lógica de programación (o *kata* le dicen algunos). Pero quiero darle una pequeña vuelta de tuerca al tema. No quiero que solo sea poner el código y punto. Sino que explicaré varias formas de resolverlo, algunas más verbosas (es decir, con más líneas de código) para que sea más simple de seguir la lógica y el paso a paso. La idea es evitar la "magia" o códigos que hacen todo por debajo y uno ni se entera. Los explicaré de forma progresiva. También usaré otras formas de resolverlo con menos código. Mi intención es que veas que, generalmente, hay varias formas de resolver las cosas en programación. No hay mejores o peores perse, pero hay algunos que son más eficientes que otros o que son mas legibles y comprensibles.
+
+Para resolverlo usaré, principalmente, el lenguaje de progamación R y también pondré algo en Python por ahí. Me interesa que entiendas la lógica de la solución, el lenguaje que uses es lo de menos.
+
+Por esos mismos motivos (para la lógica), es que evitaré usar librerías o dependencias externas a las del propio lenguaje y que tienden a estar presentes en muchos lenguajes, quizás con una sintaxis (la forma en cómo se escribe) algo distinta, pero que hacen lo mismo. Y como te mencioné, no busco generar el código más corto, eficiente o lindo, sino que sea fácil de entender.
+
+Estamos?
+
+# El problema
+
+El problema no es nuevo ni una creación mía, sino que es de una web clásica en donde puedes encontrar muchos desafíos o retos de código, llamada [CodeWars](https://www.codewars.com/).
+
+El desafío que veremos ahora dice así:
+
+[![](kata-vowels.jpg){fig-align="center" width="800"}](https://www.codewars.com/kata/54ff3102c1bad923760001f3/r)
+
+Básicamente, la idea es crear una función que permita contar las vocales que tiene un determinado texto.
+
+Se entiende?
+
+Es simple. A priori, al menos.
+
+# Soluciones
+
+Ya. Tenemos nuestro desafío, ahora veamos cómo podemos resolverlo.
+
+Mi primer approach será con R. Crearé una función que cuente las vocales de un texto que le pasemos a esa función. Recuerda que para crear o definir una función se usa `function`. A ella le agregamos un parámetro `text`, que será el texto que queremos analizar y contar las vocales.
+
+Antes de partir, vamos a definir unos test unitarios. Los test unitarios son pruebas que consisten en aislar una parte del código y comprobar que funciona a lo esperado. Son pequeños tests que validan el comportamiento de un objeto y la lógica, fundamentalmente. En R, para realizar este tipo de test usaremos la librería `testthat`. Se escapa de los alcances de este artículo, pero te recomiendo que aprendas a realizar *testing*, pues es una forma de asegurarte que las cosas salen como deberían salir, lo cual es especialmente útil cuando tienes desarrollos un poco más extensos, hay varias personas metiendo mano o haces cambios en el código y no quieres roper nada (roper es un término usado en programación para aludir a que ya no funciona bien algo). Si corremos el código que te dejo abajo verás que arroja puros errores!!!!! No!!!!!!!
+
+Bueno, qué esperas? Si no hemos definido ninguna función ni nada jajajaj 🤪
+
+```{r}
+library(testthat) # librería para test unitarios en R
+```
+
+```{yaml}
+test_count_vowels <- test_that("Example Tests", {
+  expect_equal(count_vowels("Esta es otra frase"), "Number of vowels: 7")
+  expect_equal(count_vowels("Mañana salimos al parque"), "Number of vowels: 10")
+  expect_equal(count_vowels(""), "Number of vowels: 0")
+})
+
+# ── Error (Line 2): Example Tests ───────────────────────────────────────────────
+# Error in `count_vowels("Esta es otra frase")`: could not find function "count_vowels"
+# Backtrace:
+#  1. testthat::expect_equal(count_vowels("Esta es otra frase"), "Number of vowels: 7")
+#  2. testthat::quasi_label(enquo(object), label, arg = "object")
+#  3. rlang::eval_bare(expr, quo_get_env(quo))
+```
+
+Ok. Ya tenemos nuetro test que falla por todos lados. Ahora debemos arreglarlo.
+
+Partiremos definiendo nuestra función `count_vowels`, que como te mencioné antes, le pasaremos como argumento un texto en el parámetro `text`.
+
+A ver... mi lógica de pensamiento es la siguiente... como necesito contar las vocales que tiene un texto, primero le tengo que decir al computador cuáles son las letras que deseo contar (las vocales). Una vez que tenga eso claro, voy a buscar esas vocales en el texto, contar cuántas hay y sumarlas.
+
+Tener en mente la lógica es lo básico. Antes de ponder a escribir código. Primero diseña la solución (o algo parecido) en tu mente. Muchas veces yo uso un lápiz y papel para tirar dibujos que me permitan entender los pasos y partes.
+
+Vamos con el código. Dentro de la función especificamos:
+
+-   Creamos el objeto `vowels` que es un vector de *strings* con las vocales.
+
+-   Para poder buscar las vocales en el texto, necesito separar el texto en todas sus letras, porque mi búsqueda y conteo es por letra, no por un conjunto de ellas.
+
+-   Creamos el objeto `split_text` que será un vector con todas las letras del texto ya separadas. Para evitar complicaciones, pondremos todo a minúsculas. Recuerda que C no es igual a c, por ejemplo. Este tema no lo había considerado al inicio, pero me di cuenta que no sumaba bien con algunas palabras y era por el asunto de las mayúsculas.
+
+-   Como deseo contar las vocales dentro del texto (ya separado por letras), usaré un *for* para ello. Dejaré un objeto `char_count = 0` en donde iré acumulando las sumas de vocales.
+
+-   Implemento el *for*. Fíjate que en la medida que recorro el vector del texto separado y encuentro una vocal, sumo 1 y lo voy acumulando. Para realizar esab búsqueda, usé `char %in% vowels`.
+
+-   Te recomiendo que veas la documentación del operador `%in%` para más detalles, pero lo que hace es lo que te mencioné, recorre un vector por cada uno de sus elementos.
+
+-   Finalmente, imprimo por consola ese número acumulado de letras. Le puse un mensaje para que sea más entendible la salida del código.
+
+Así quedaría esa implementación:
+
+```{r}
+count_vowels <- function(text) {
+  vowels <- c("a", "e", "i", "o", "u")
+  split_text <- tolower(unlist(strsplit(text, "")))
+  char_count <- 0
+
+  for (char in split_text) {
+    if (char %in% vowels) {
+      char_count <- char_count + 1
+    }
+  }
+  print(paste0("Number of vowels: ", char_count))
+}
+```
+
+Podemos probarla con algunos ejemplos:
+
+```{r}
+count_vowels("hllp")
+count_vowels("paulo")
+count_vowels("Mañana salimos al parque")
+```
+
+Ok... al parecer funciona... Veamos cómo le va a nuestra función con el test unitario:
+
+```{r}
+test_count_vowels <- test_that("Example Tests", {
+  expect_equal(count_vowels("Esta es otra frase"), "Number of vowels: 7")
+  expect_equal(count_vowels("Mañana salimos al parque"), "Number of vowels: 10")
+  expect_equal(count_vowels(""), "Number of vowels: 0")
+})
+```
+
+Genial!!!!
+
+Pasamos!!!! 🎉
+
+Veamos una implementación similar, pero esta vez en Python:
+
+```{python}
+def getCount(text):
+    text = text.lower()
+    vowels = ['a','e','i','o','u']
+    numVowels = 0
+    
+    for char in text:
+        if (char in vowels):
+            numVowels += 1
+    
+    print(f"Number of vowels: {numVowels}")
+```
+
+Revisemos unos ejemplos:
+
+```{python}
+getCount("paulo")
+getCount("Mañana salimos al parque")
+```
+
+Ok... tenemos nuestras primeras formas de resolver este desafío de código.
+
+Hagamos una pequeña variación al desafío. Anteriomente estábamos contando todas las vocales que tenía un texto. ¿Pero qué pasa si ahora lo que queremos saber es cuál es la vocal que más repite?
+
+Hagamos nuestros test primero, que como ya sabes, van a fallar porque no tenemos nada aún.
+
+```{yaml}
+test_count_vowels <- test_that("Example Tests", {
+  expect_equal(max_vowels("Esto es un texto"), "Vowel: e / Freq: 3")
+  expect_equal(max_vowels("Hoy hizo calor"), "Vowel: o / Freq: 3")
+  expect_equal(max_vowels(""), "No vowels in text")
+})
+
+# ── Error (Line 2): Example Tests ───────────────────────────────────────────────
+# Error in `max_vowels("Esto es un texto")`: could not find function "max_vowels"
+# Backtrace:
+#  1. testthat::expect_equal(max_vowels("Esto es un texto"), "Vowel: e / Freq: 3")
+#  2. testthat::quasi_label(enquo(object), label, arg = "object")
+#  3. rlang::eval_bare(expr, quo_get_env(quo))
+```
+
+Vamos a usar parte de lo que tenemos realizado ya, y su lógica por cierto. Finalmente, igual necesitamos identificar las vocales que hay en el texto, pero en esta ocasión, en vez de sumarlas, lo que haremos es contar cada vocal cuántas apariciones tiene y seleccionaremos la que tiene mayor frecuencia.
+
+La diferencia más relevante con el reto anterior es que ahora debemos contar individualmente cada vocal. Antes solo acumulábamos la suma de las aparaciones. Para eso, me parece que más lógico armar una tabla con las vocales que tiene el texto y la frecuencia de cada una.
+
+```{r}
+text <- "Esta es una prueba del texto"
+
+vowels <- c("a", "e", "i", "o", "u")
+split_text <- tolower(unlist(strsplit(text, "")))
+table_freq <- data.frame(table(split_text[split_text %in% vowels]))
+```
+
+El objeto `table_freq` contiene la tabla que te mencionaba. Fíjate que lo que hice fue transformar una tabla media rara a un dataframe, que es más útil para trabajar y calcular el máximo de frecuencias.
+
+```{r}
+table(split_text[split_text %in% vowels])
+```
+
+```{r}
+data.frame(table(split_text[split_text %in% vowels]))
+```
+
+Con esa tabla ya hecha, lo que debemos hacer es buscar la frecuencia más alta (`max`) e indicar la vocal que corresponde a ese valor. Para eso, analiza esta línea de código `table_freq$Var1[table_freq$Freq == max]`
+
+```{r}
+max_vowels <- function(text) {
+  vowels <- c("a", "e", "i", "o", "u")
+  split_text <- tolower(unlist(strsplit(text, "")))
+  table_freq <- data.frame(table(split_text[split_text %in% vowels]))
+  max <- max(table_freq$Freq)
+  max_vowels_text <- table_freq$Var1[table_freq$Freq == max]
+
+  print(paste0("Vowel: ", max_vowels_text, " / Freq: ", max))
+}
+```
+
+```{r}
+max_vowels("La salud necesita mejores personas")
+```
+
+Volvamos a probar nuestros test...
+
+```{yaml}
+test_count_vowels <- test_that("Example Tests", {
+  expect_equal(max_vowels("Esto es un texto"), "Vowel: e / Freq: 3")
+  expect_equal(max_vowels("Hoy hizo calor"), "Vowel: o / Freq: 3")
+  expect_equal(max_vowels(""), "No vowels in text")
+})
+
+# [1] "Vowel: e / Freq: 3"
+# [1] "Vowel: o / Freq: 3"
+# [1] "Vowel:  / Freq: -Inf"
+# ── Failure (Line 2): Example Tests ─────────────────────────────────────────────
+# max_vowels("Esto es un texto") not equal to "Vowel: 3 / Freq: 3".
+# 1/1 mismatches
+# x[1]: "Vowel: e / Freq: 3"
+# y[1]: "Vowel: 3 / Freq: 3"
+# 
+# ── Warning (Line 4): Example Tests ─────────────────────────────────────────────
+# no non-missing arguments to max; returning -Inf
+# Backtrace:
+#  1. testthat::expect_equal(max_vowels(""), "No vowels in text")
+#  4. global max_vowels("")
+# 
+# ── Failure (Line 4): Example Tests ─────────────────────────────────────────────
+# max_vowels("") not equal to "No vowels in text".
+# 1/1 mismatches
+# x[1]: "Vowel:  / Freq: -Inf"
+# y[1]: "No vowels in text"
+```
+
+Mmmmmmm. A ver. Los 2 primeros test pasaron, pero el tercero falló, el que tiene un argumento vacío.
+
+En el ejemplo anterior, cuando le pasamos un argumento vacio no arrojó error, pero acá si. Posiblemente el tema pasa por la tabla.
+
+```{r}
+text <- ""
+
+vowels <- c("a", "e", "i", "o", "u")
+split_text <- tolower(unlist(strsplit(text, "")))
+table_freq <- data.frame(table(split_text[split_text %in% vowels]))
+
+table_freq
+```
+
+Si le pasamos un texto vacío, no se genera la tabla, nos da como resultado `0 rows`. Bueno, es lógico. Si no hay nada, la tabla no existe básicamente. Para resolver este problema, podríamos agregar un condicional a la función. Lo que debería pasar es que cuando se detecte que el texto es vacío, nos de un mensaje de error o algo similar, y si no es así, que haga el tema de la tabla y todo lo demás.
+
+```{r}
+max_vowels <- function(text) {
+  vowels <- c("a", "e", "i", "o", "u")
+  split_text <- tolower(unlist(strsplit(text, "")))
+
+  if (text == "") {
+    
+    print("No vowels in text")
+    
+  } else {
+    
+    table_freq <- data.frame(table(split_text[split_text %in% vowels]))
+    max <- max(table_freq$Freq)
+    max_vowels_text <- table_freq$Var1[table_freq$Freq == max]
+
+    print(paste0("Vowel: ", max_vowels_text, " / Freq: ", max))
+    
+  }
+}
+```
+
+Corramos nuevamente nuestros lindos test unitarios:
+
+```{r}
+test_count_vowels <- test_that("Example Tests", {
+  expect_equal(max_vowels("Esto es un texto"), "Vowel: e / Freq: 3")
+  expect_equal(max_vowels("Hoy hizo calor"), "Vowel: o / Freq: 3")
+  expect_equal(max_vowels(""), "No vowels in text")
+})
+```
+
+Yuju!!!! 😍
+
+Te dejo tarea para la casa. Mira el resultado siguiente:
+
+```{r}
+max_vowels("eeeoooaqui")
+```
+
+Epa! Acá las vocales e y o tienen ambas una frecuencia de 3 y son las más altas. Nuestro código no resuelve bien eso. Muestra correctamente las vocales, pero el mensaje es extraño. Se podría hacer mejor.
+
+Es tu turno!! Inténtalo.
+
+Ahora te voy a mostrar unas cuantas soluciones, pero con menos código. Es más complejo de entender si no sabes bien lo que hace cada función, pero me parece interesante mostrarte otras opciones de resolver el problema original (el de contar vocales).
+
+**Opción 1:**
+
+```{r}
+get_count_vowels <- function(text){
+  vowels <- nchar(gsub("[^aeiou]", "", text, ignore.case = TRUE))
+  print(paste0("Number of vowels: ", vowels))
+}
+```
+
+```{r}
+get_count_vowels("Esta es otra frase")
+```
+
+**Opción 2:**
+
+```{r}
+library(stringr) # Usando esta librería
+
+count_vowels_lib <- function(text){
+  str_count(text, "[AEIOUaeiou]")
+  }
+```
+
+```{r}
+count_vowels_lib("Esta es una prueba de texto")
+```
+
+**Opción 3:**
+
+```{python}
+getCount = lambda s: sum(s.count(i) for i in 'aeiou') # Opción un poco críptica
+```
+
+```{python}
+getCount("Frase linda")
+```
+
+# Finalmente
+
+Uf! Teminamos este artículo. Espero que te haya gustado y, principalmente, haya sido de utilidad.
+
+Espero haber sido claro en la lógica de pensamiento y la forma de resolver un problema. Además, de mostrarte muchas formas de abordarlo en distintos idiomas. Y algo que quizás pasó medio desapercibido, pero es muy relevante, son los [test unitarios](https://testthat.r-lib.org/) y la arquitectura de desarrollo TDD (T*est Driven Development)*. Esto ayuda mucho a tener un código sostenible y si le haces cambios y falla, te vas a dar cuenta.
+
+Recuerda dejar tus comentarios e inscribirte en el blog (en la sección de más abajo).
+
+Nos vemos!! 🤗
