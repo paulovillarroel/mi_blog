@@ -1,6 +1,6 @@
 ---
 title: "Contando letras"
-description: "Resolvemos un reto de lógica de programación, aprovechamos de hacerlos de varias formas y los lanzamos con unos test unitarios además!"
+description: "Resolvemos un reto de lógica de programación, aprovechamos de hacerlos de varias formas y nos lanzamos con unos test unitarios además!"
 author: "Paulo Villarroel"
 date: "2022-11-23"
 categories: [r, python, tutorial, katas]
