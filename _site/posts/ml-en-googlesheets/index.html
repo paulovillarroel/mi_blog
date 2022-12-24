@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Paulo Villarroel">
+<meta name="dcterms.date" content="2022-12-24">
+<meta name="description" content="Las hojas de cálculo las usamos en casi todo y para todo. En este artículo te explico cómo integrarlos, utilizando algoritmos de Google para predicción.">
+
+<title>PauloVillarroel.com - Usa la inteligencia artificial en tu hoja de cálculo</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-RNWVZS7ZL8"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-RNWVZS7ZL8', { 'anonymize_ip': true});
+</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">PauloVillarroel.com</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">Sobre mí</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/paulovillarroel"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/Chazkon"><i class="bi bi-twitter" role="img">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/paulovillarroeltapia/"><i class="bi bi-linkedin" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Usa la inteligencia artificial en tu hoja de cálculo</h1>
+                  <div>
+        <div class="description">
+          Las hojas de cálculo las usamos en casi todo y para todo. En este artículo te explico cómo integrarlos, utilizando algoritmos de Google para predicción.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">tutorial</div>
+                <div class="quarto-category">machine learning</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Paulo Villarroel </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">December 24, 2022</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#qué-es-la-inteligencia-artificial" id="toc-qué-es-la-inteligencia-artificial" class="nav-link active" data-scroll-target="#qué-es-la-inteligencia-artificial">¿Qué es la inteligencia artificial?</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  <li><a href="#instalar-plugin" id="toc-instalar-plugin" class="nav-link" data-scroll-target="#instalar-plugin">Instalar plugin</a></li>
+  <li><a href="#veamos-los-datos" id="toc-veamos-los-datos" class="nav-link" data-scroll-target="#veamos-los-datos">Veamos los datos</a></li>
+  <li><a href="#hagamos-la-predicción" id="toc-hagamos-la-predicción" class="nav-link" data-scroll-target="#hagamos-la-predicción">Hagamos la predicción</a></li>
+  <li><a href="#explicando-el-modelo" id="toc-explicando-el-modelo" class="nav-link" data-scroll-target="#explicando-el-modelo">Explicando el modelo</a></li>
+  <li><a href="#usemos-el-modelo" id="toc-usemos-el-modelo" class="nav-link" data-scroll-target="#usemos-el-modelo">Usemos el modelo</a></li>
+  <li><a href="#conclusiones" id="toc-conclusiones" class="nav-link" data-scroll-target="#conclusiones">Conclusiones</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/paulovillarroel/mi_blog/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<p>Hola!</p>
+<p>Bienvenido/a por estos lados. Si ya has leído post anteriores, muchas gracias por volver. Si es tu primera, espero que te sea útil e interesante.</p>
+<p>Hoy te traigo un tutorial que creo te va a interesar… usaremos modelos de inteligencia artificial de aprendizaje supervisado para predecir algunas cosas.</p>
+<p>Pero…</p>
+<p>Usando una hoja de cálculo de Google. Si, ese que se parece a Excel. Y solo con unos clics.</p>
+<p>Te sorprenderás! Serás capaz de usar por ti mismo/a un modelo de inteligencia artificial con tus datos e increiblemente simple. Sigue leyendo. Te voy a explicar paso a paso cómo usarlo y, a grandes rasgos, cómo interpretarlo.</p>
+<section id="qué-es-la-inteligencia-artificial" class="level2">
+<h2 class="anchored" data-anchor-id="qué-es-la-inteligencia-artificial">¿Qué es la inteligencia artificial?</h2>
+<p>La inteligencia artificial (IA) es una tecnología que permite a las máquinas imitar el comportamiento inteligente de los humanos. Esto significa que las máquinas con IA pueden hacer cosas que normalmente requerirían inteligencia humana, como reconocer patrones, aprender de experiencias pasadas y tomar decisiones basadas en información.</p>
+<p>Hay diferentes tipos de IA, pero en general, todos trabajan utilizando algoritmos y datos para “enseñar” a las máquinas a hacer cosas de manera más eficiente y precisa. Por ejemplo, una máquina con IA puede analizar grandes cantidades de información médica para ayudar a los médicos a diagnosticar enfermedades, o puede ayudar a una empresa a predecir qué productos serán más populares en el futuro.</p>
+<p>La IA es una tecnología muy útil y puede ayudarnos a hacer muchas cosas más eficientes y rápidas, pero también es importante recordar que es solo una herramienta y no puede reemplazar completamente a la inteligencia humana. Además, es importante utilizar la IA de manera responsable y ética para asegurarnos de que está beneficiando a la humanidad en lugar de causar problemas.</p>
+<p>En el campo de la inteligencia artificial (IA), existen diferentes tipos de aprendizaje automático. Algunos de los tipos más comunes incluyen:</p>
+<ol type="1">
+<li><p>Aprendizaje supervisado.</p></li>
+<li><p>Aprendizaje no supervisado.</p></li>
+<li><p>Aprendizaje por refuerzo.</p></li>
+</ol>
+<p>El modelo de IA que vamos a usar en este tutorial es de <strong>aprendizaje supervisado.</strong></p>
+<p>El aprendizaje supervisado es un tipo de aprendizaje automático en el que una máquina o modelo de aprendizaje automático es entrenado con un conjunto de datos etiquetados previamente. Los datos etiquetados incluyen un conjunto de entradas (también conocidas como características) y una etiqueta de salida (también conocida como la clase o el objetivo). La máquina utiliza estos datos para aprender a predecir la etiqueta de salida para nuevas entradas.</p>
+<p>Por ejemplo, si estamos entrenando un modelo de aprendizaje automático para reconocer rostros, podríamos proporcionarle un conjunto de imágenes de rostros etiquetadas con el nombre de la persona en cada imagen. El modelo utilizaría estos datos para aprender a reconocer rostros y predecir el nombre de la persona en nuevas imágenes.</p>
+<p>El aprendizaje supervisado es un tipo de aprendizaje automático muy común y es utilizado en una amplia variedad de aplicaciones, como la clasificación de correos electrónicos como spam o no spam, la detección de fraudes en transacciones financieras y la predicción del precio de una propiedad. Es una forma efectiva de aprender a partir de datos etiquetados, pero requiere un conjunto de datos etiquetado previamente y puede no ser tan efectivo cuando el conjunto de datos no está bien equilibrado o no está completamente limpio.</p>
+<p>Ok… Ya con estos conceptos generales en mente, avancemos en el tema. Iremos paso a paso.</p>
+<p>Para efectos de demostración, usaré los mismos datos de ejemplo que proporciona Google. Ah! Lo mencioné, pero no lo expliqué. Usarmos <a href="https://www.tensorflow.org/">TensorFlow de Google</a>.</p>
+</section>
+<section id="section" class="level2">
+<h2 class="anchored" data-anchor-id="section"></h2>
+<p>¿Qué es TensorFlow?</p>
+<p>TensorFlow es una biblioteca de software de código abierto para el aprendizaje automático y el cálculo numérico. Fue desarrollada por Google y se utiliza ampliamente en la industria y en la investigación para construir y entrenar modelos de aprendizaje automático.</p>
+<p>Es muy flexible y se puede utilizar para construir y entrenar una amplia variedad de modelos de aprendizaje automático, desde redes neuronales simples hasta modelos más complejos como redes neuronales profundas. También es muy escalable y se puede utilizar en una amplia gama de plataformas, desde computadoras personales hasta servidores de alta escala y dispositivos móviles.</p>
+<p>TensorFlow es ampliamente utilizado en muchas áreas, como la visión por computadora, el procesamiento del lenguaje natural, la detección de fraudes y la predicción del precio de las acciones. Es una de las bibliotecas de aprendizaje automático más populares y ampliamente utilizadas en la industria y en la investigación.</p>
+<p>Perfecto.</p>
+</section>
+<section id="instalar-plugin" class="level2">
+<h2 class="anchored" data-anchor-id="instalar-plugin">Instalar plugin</h2>
+<p>Para los efectos del tutorial, debemos instalar una extensión de Google Sheets para poder usar TensorFlow en ella. Para eso, tenemos que ir al <a href="https://workspace.google.com/marketplace/app/simple_ml_for_sheets/685936641092">Marketplace de Google</a> e instalar el plugin Simple ML for Sheets.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="plugin.jpg" class="img-fluid figure-img" width="800"></p>
+</figure>
+</div>
+<p>Bueno, no lo mencioné, pero debes tener una cuenta de Google y haber iniciado la sesión antes de instalar este plugin.</p>
+</section>
+<section id="veamos-los-datos" class="level2">
+<h2 class="anchored" data-anchor-id="veamos-los-datos">Veamos los datos</h2>
+<p>Usaremos los datos que nos proporciona Google.</p>
+<p>Anda a <a href="https://docs.google.com/spreadsheets/d/1Ve7umK4W6wBje1QZQVbPIH3djCl2uwfwXvezGliCpss/copy">este link</a> y cópiate la plantilla de Google Sheets.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="copia-sheets.jpg" class="img-fluid figure-img" width="800"></p>
+</figure>
+</div>
+<p>Esta plantilla tiene 4 datasets o conjuntos de datos precargados. Para nuestro tutorial, usaremos el de lo pingüinos, que es el caso 1. Este sirve para mostrar el uso de TensorFLow para completar los datos faltantes aplicando algunos modelos de predicción.</p>
+<p>Los datos mostrados corresponden a una serie de mediciones de los pingüinos como el largo del pico, peso, largo de sus aletas y sexo. Esto, para 3 tipos de especies de pingúinos de la Antártica: Chinstrap, Gentoo y Adelie.</p>
+<p>Seguramente si ya tienes algo de experiencia en programación, este dataset te suene. Pues si, es uno de los clásicos que se usa para enseñar distintos modelos de ML.</p>
+<p><img src="dataset.jpg" class="img-fluid" width="800"></p>
+<p>Ok. Con el plugin ya instalado y los datos ya disponibles, veamos algo…</p>
+<p>Fíjate que las primeras 30 filas no contiene datos de la especie del pingüino. Esos espacios en blanco (o datos faltantes) son los que por medio de un modelo de ML trataremos de predecir cuál debería ir en cada caso.</p>
+</section>
+<section id="hagamos-la-predicción" class="level2">
+<h2 class="anchored" data-anchor-id="hagamos-la-predicción">Hagamos la predicción</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="extension1.jpg" class="img-fluid figure-img" width="800"></p>
+</figure>
+</div>
+<p>En la pestaña de arriba, vamos a <code>Extensiones</code>, luego a <code>Simple ML for Sheets</code> y hacemos clic en <code>Start</code>.</p>
+<p>Se abrirá una pequeña ventana a la derecha de la planilla.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="predict.jpg" class="img-fluid figure-img" width="300"></p>
+</figure>
+</div>
+<p>Fíjate en un par de cosas…</p>
+<p>Haremos una predicción de los datos faltantes. Si haces clic en el listado te saldrán varias opciones. Por ahora usaremos la primera: <code>Predict missing values</code>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="predict2.jpg" class="img-fluid figure-img" width="300"></p>
+</figure>
+</div>
+<p>Luego, nos aseguramos que la columna indicada es la de <code>Species</code>, que es donde están los datos vacíos.</p>
+<p>En la parte de <code>Souce columns</code> podemos ver el tipo de datos de cada columna del set de datos.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="types.jpg" class="img-fluid figure-img" width="300"></p>
+</figure>
+</div>
+<p><code>Cat</code> corresponde a datos categóricos y <code>Num</code> a datos numéricos.</p>
+<p>Nuestros datos a predecir son categóricos. Este detalle es importante a la hora de diseñar modelos de aprendizaje automáticos, pero eso se escapa de este tutorial, así que no lo veremos acá por ahora.</p>
+<p>En la siguiente opción podemos especificar el modeloo algoritmo de ML que usaremos. Para este tutorial vamos a usar un <code>Decision Tree</code>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="algorithm.jpg" class="img-fluid figure-img" width="300"></p>
+</figure>
+</div>
+<p>Usaremos ese modelo, pues es uno de los más simples de entender, es fácil de graficar y de explicar. Tiene limitaciones y muchas veces hay modelos más útiles y con mejor desempeño, pero para partir está ok.</p>
+<p>Una vez ya seleccionadas todas esas opciones, apreta el botón <strong>Predict</strong>.</p>
+<p>Luego de unos segundos, en la plantilla se van crear 2 columnas: una con los valores de la predicción (donde están vacios) y otra con un porcentaje (llamada <code>Pred:Conf.species</code>). Esta columna indica qué tan “seguro” está el modelo sobre el predicciones en la columna <strong>Pred:species</strong>. Este valor va de 0% a 100%. Como este es un modelo de clasificación, esta métrica corresponde al <em>Accuracy</em>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="accuracy.jpg" class="img-fluid figure-img" width="300"></p>
+</figure>
+</div>
+<p>A continuación te muestro los valores que me arrojaron a mi. Ojo, que esas cifras podrían variar en tu caso.</p>
+<p><img src="dataset2.jpg" class="img-fluid" width="800"></p>
+<p>Nota que aún cuando el modelo que usamos en de los más simples, sus resultados son bastante buenos.</p>
+<p>Un detalle relevante es que esa capacidad de predicción y <em>accuracy</em> se basa en los datos de entrenamiento. Es decir, el modelo se entrena con un determinado numero de datos y luego aplica el modelo sobre dato que no ha visto. Para ello, hay diversas técnicas para mejorar el poder predictivo de los algoritmos y es, también, uno de los pasos más importantes en el diseño e implementación de modelos de ML. Hay, además, modelos pre-entrenados. Es decir, que alguien ya los entrenó, habotualmente con miles o millones de datos y que los puedes usar con determinados ajustes. Pero de eso, no hablaremos ahora.</p>
+</section>
+<section id="explicando-el-modelo" class="level2">
+<h2 class="anchored" data-anchor-id="explicando-el-modelo">Explicando el modelo</h2>
+<p>Ya, ok. Todo muy lindo. Pero esto parece magia. O sea, selecciono un par de cosas, apreto un botón y me dice los valores que faltan.</p>
+<p>Bueno, eso es algo que no debe pasar o que de alguna forma, debemos reducir. La caja negra que está detrás de los modelos de ML puede ser muy simple de entender o imposible definitivamente. El tema de la <strong>explicabilidad y transparencia algorítmica</strong> es un área de estudio muy relevante en el uso ético de datos, más aún cuando cada día más el uso de IA está más extenso y de fácil acceso.</p>
+<p>Este es un tutorial nada más, pero todo este tema es algo que jamás debemos pasar por alto. Mucho menos en salud o en la toma de decisiones de política pública. Dicho eso, sigamos…</p>
+<p>El plugin de TensorFlow tiene algunas opciones para explicar el modelo y sus resultados.<br>
+A ver, no es tan configurable como uno podría hacerlo programando el modelo, pero me parece interesante que incluya este tipo de cosas.</p>
+<p>Veamos…</p>
+<p>En la primera parte, ahora seleccionamos <code>Understand a model</code>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="predict3.jpg" class="img-fluid figure-img" width="300"></p>
+</figure>
+</div>
+<p>Luego, en la sección de Model, elegimos el modelo para “explicar”. Los modelos se guardan con la fecha y hora en que fueron ejecutadoscpor defecto. Si es el primero que haces, bueno, solo tendrás 1 opción para seleccionar. Si has hecho varias, fíjate bien cuál seleccionas.</p>
+<p>Hay una opción de cambiar el nombre al modelo para que se más simple saber cuál es cuál. Para ello, anda a Manage models y renombra los que desees. También puedes eliminar los que ya no necesites.</p>
+<p>Marca la opción de <code>Include sheet data</code> y dale al botón de <strong>Understand</strong>.</p>
+<p>Se abrirá una ventana con variada información.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="understand1.jpg" class="img-fluid figure-img" width="800"></p>
+</figure>
+</div>
+<p>No todas las pestañas contienen información, pues depende del modelo que hayamos usado.</p>
+<p>Veamos la <strong>importancia de las variables.</strong></p>
+<p><img src="understand2.jpg" class="img-fluid" width="800"></p>
+<p>La importancia de las variables permite analizar qué tanto influye una variable (entiende eso como las columnas del set de datos) para predecir, en nuestro caso, la especie del pingüino.</p>
+<p>Fíjate en la última sección: SUM_SCORE</p>
+<pre><code>Variable Importance: SUM_SCORE:
+    1. "bill_length_mm" 144.918849 ################
+    2.         "island" 98.055598 ##########
+    3.    "body_mass_g"  5.873762 </code></pre>
+<p>Para predecir la especie, el modelo usa principalmente esas 3 variables, pero fundamentalmente el largo de la aleta (<code>bill_length_mm</code>), pues obtiene un puntaje mayor. La isla también parece ser importante para determinar la especie.</p>
+<p>Si usas otros modelos, te van a aparecer muchas otras más métricas. Si quieres ver qué significan, puedes visitar su <a href="https://ydf.readthedocs.io/en/latest/metrics.html">documentación oficial</a>.</p>
+<p>La última pestaña corresponde a un gráfico del modelo (plot).</p>
+<p><img src="understand3.jpg" class="img-fluid" width="800"></p>
+<p>Ok… no es el gráfico más lindo del mundo jajajja 😅</p>
+<p>Ya, pero lo que trata de mostrar el el camino que siguió para tomar la decisión de clasificación de las especies. Son las reglas que se usaron, finalmente,</p>
+<pre><code>Tree #0:
+    "bill_length_mm"&gt;=43.15 [s:0.493991 n:281 np:152 miss:1] ; val:"Adelie" prob:[0.44484, 0.359431, 0.19573]
+        ├─(pos)─ "island" is in [BITMAP] {Dream, Torgersen} [s:0.645103 n:152 np:57 miss:0] ; val:"Gentoo" prob:[0.0328947, 0.618421, 0.348684]
+        |        ├─(pos)─ "bill_length_mm"&gt;=46.05 [s:0.107149 n:57 np:43 miss:0] ; val:"Chinstrap" prob:[0.0701754, 0, 0.929825]
+        |        |        ├─(pos)─ val:"Chinstrap" prob:[0, 0, 1]
+        |        |        └─(neg)─ "body_mass_g"&gt;=3975 [s:0.419554 n:14 np:5 miss:1] ; val:"Chinstrap" prob:[0.285714, 0, 0.714286]
+        |        |                 ├─(pos)─ val:"Adelie" prob:[0.8, 0, 0.2]
+        |        |                 └─(neg)─ val:"Chinstrap" prob:[0, 0, 1]
+        |        └─(neg)─ val:"Gentoo" prob:[0.0105263, 0.989474, 0]
+        └─(neg)─ val:"Adelie" prob:[0.930233, 0.0542636, 0.0155039]</code></pre>
+<p>¿Recuerdas que era el largo de la aleta la variable más importante?</p>
+<p>Bueno, fíjate que acá está al inicio del árbol, pues es la que permite una mayor discriminación de especies. Por ejemplo, si el largo de la aleta en menor de 43.14 mm con un 93% de probabilidades la especie es Adelie. Debes seguir el camino.</p>
+</section>
+<section id="usemos-el-modelo" class="level2">
+<h2 class="anchored" data-anchor-id="usemos-el-modelo">Usemos el modelo</h2>
+<p>Hasta ahora todo bien. Pero una de las gracias es poder usar el modelo con nuevos datos y predecir, en este caso, la especie.</p>
+<p>Acá es relevante que el modelo que usemos haya tenido buenos resultados y nos de cierta seguridad de que va a predecir bien.</p>
+<p>En la plantilla, crea una nueva hoja en blanco y pone algunos datos de pingüinos en las variables, dejando el de la especie en blanco. Los datos te los puedes inventar siquieres, pero ten ojo con no poner cosas muy extrañas, de lo contrario, los resultados serán cualquier cosa, pues no son coherentes. O sea, poner un peso de 10.000 gramos es como extramo por ejemplo. Imagina que la idea de este ejemplo es que tienes datos de unos pingüinos y quieres saber su especie. Son datos que deben estar dentro de cierta lógica.</p>
+<p>Una vez que tengas los datos en la nueva hoja (asegúrate que los nombres las columnas sean iguales a las originales), seleccionamos la opcion de <code>Make predictions with a model</code>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="predict4.jpg" class="img-fluid figure-img" width="300"></p>
+</figure>
+</div>
+<p>Luego, elegimos el modelo que usaremos para esas predicciones. Es el mismo que teníamos antes o uno nuevo si es es que hiciste más pruebas.</p>
+<p>Dale al botón Predict.</p>
+<p>Al igual que antes, se crearán 2 columnas, una con la especia predicha y otra con el porcentaje de confianza que habíamos visto antes.</p>
+<p>Estos son mis resultados:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dataset3.jpg" class="img-fluid figure-img" width="800"></p>
+</figure>
+</div>
+<p>Hay más opciones como guardar el modelo para poder usarlo después o poder usar otros modelos de clasificación como <code>Random Forest</code> o <code>Gradient Booted Trees</code>.</p>
+<p>Prueba alguno de ellos y ve que te resulta.</p>
+</section>
+<section id="conclusiones" class="level2">
+<h2 class="anchored" data-anchor-id="conclusiones">Conclusiones</h2>
+<p>La inteligencia artificial está cada día más presente en nuestras vidas, aunque no nos demos cuenta. Por eso es importante entenderla.</p>
+<p>Este tutorial busca acercar la IA a las personas que lo ven muy lejano o que no saben programar este tipo de cosas. Pero ojo, como te mencioné antes, debe usarse con responsabilidad y sentido ético. Este ejmplo de los pingüinos es entretenido, pero otra cosa es clasificar a personas para decidir si van a recibir un beneficio social o si son atendidos en la urgencia. Ve este tutorial como lo que es, un ejemplo que de cada día la IA está más cerca. Y que se nos abre todo un mundo por delante. Posiblemente en algún tiempo más (no mucho) una de las competencias más buscadas será la de saber aplicar modelos de ML en distintas plataformas e integrarlas, más que saber escribir código propiamente tal. Eso si, demandará mayor niveles de conocimientos, manejo ético de datos y entender en profundidad los que estamos haciendo.</p>
+<p>Ah!!! No te dije algo importante 😁</p>
+<p>La primera parte de este artículo fue escrita casi totalmente por <strong>chatGPT</strong>, una intelegiencia artificial que fue entrenada para mantener conversaciones naturales.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<div>
+<hr>
+
+<iframe src="https://embeds.beehiiv.com/274e86f2-9411-4829-afd2-e4879f66212f" data-test-id="beehiiv-embed" width="100%" height="320" frameborder="0" scrolling="no" style="border-radius: 4px; border: 2px solid #e5e7eb; margin: 0; background-color: transparent;"></iframe>
+
+<hr>
+</div>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp(/https:\/\/www\.paulovillarroel\.com\//);
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+      }
+    }
+});
+</script>
+<script src="https://giscus.app/client.js" data-repo="paulovillarroel/mi_blog" data-repo-id="R_kgDOH_9CVg" data-category="General" data-category-id="DIC_kwDOH_9CVs4CRgbc" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">Paulo Villarroel, 2022</div>
+  </div>
+</footer>
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
