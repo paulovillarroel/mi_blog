@@ -1,6 +1,6 @@
 ---
 title: "Usa la inteligencia artificial en tu hoja de cálculo"
-description: "Las hojas de cálculo las usamos en casi todo y para todo. En este artículo te explico cómo integrarlos, utilizando algoritmos de Google para predicción."
+description: "Las hojas de cálculo las usamos en casi todo y para todo. En este artículo te explico cómo usar IA utilizando algoritmos de Google para predicción."
 author: "Paulo Villarroel"
 date: "2022-12-24"
 categories: [tutorial, machine learning]
@@ -174,7 +174,7 @@ Fíjate en la última sección: SUM_SCORE
         2.         "island" 98.055598 ##########
         3.    "body_mass_g"  5.873762 
 
-Para predecir la especie, el modelo usa principalmente esas 3 variables, pero fundamentalmente el largo de la aleta (`bill_length_mm`), pues obtiene un puntaje mayor. La isla también parece ser importante para determinar la especie.
+Para predecir la especie, el modelo usa principalmente esas 3 variables, pero fundamentalmente el largo del pico (`bill_length_mm`), pues obtiene un puntaje mayor. La isla también parece ser importante para determinar la especie.
 
 Si usas otros modelos, te van a aparecer muchas otras más métricas. Si quieres ver qué significan, puedes visitar su [documentación oficial](https://ydf.readthedocs.io/en/latest/metrics.html).
 
@@ -197,9 +197,9 @@ Ya, pero lo que trata de mostrar el el camino que siguió para tomar la decisió
             |        └─(neg)─ val:"Gentoo" prob:[0.0105263, 0.989474, 0]
             └─(neg)─ val:"Adelie" prob:[0.930233, 0.0542636, 0.0155039]
 
-¿Recuerdas que era el largo de la aleta la variable más importante?
+¿Recuerdas que era el largo del pico la variable más importante?
 
-Bueno, fíjate que acá está al inicio del árbol, pues es la que permite una mayor discriminación de especies. Por ejemplo, si el largo de la aleta en menor de 43.14 mm con un 93% de probabilidades la especie es Adelie. Debes seguir el camino.
+Bueno, fíjate que acá está al inicio del árbol, pues es la que permite una mayor discriminación de especies. Por ejemplo, si el largo del pico es menor de 43.14 mm con un 93% de probabilidades la especie es Adelie. Debes seguir el camino.
 
 ## Usemos el modelo
 
@@ -226,6 +226,8 @@ Estos son mis resultados:
 Hay más opciones como guardar el modelo para poder usarlo después o poder usar otros modelos de clasificación como `Random Forest` o `Gradient Booted Trees`.
 
 Prueba alguno de ellos y ve que te resulta.
+
+Investiga cómo usarlo con tus propiso datos. Ten en mente que deberás entrenar el algoritmo primero antes de usar el modelo. Dale una vuelta para que veas cómo es.
 
 ## Conclusiones
 

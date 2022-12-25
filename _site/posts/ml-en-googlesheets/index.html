@@ -8,7 +8,7 @@
 
 <meta name="author" content="Paulo Villarroel">
 <meta name="dcterms.date" content="2022-12-24">
-<meta name="description" content="Las hojas de cálculo las usamos en casi todo y para todo. En este artículo te explico cómo integrarlos, utilizando algoritmos de Google para predicción.">
+<meta name="description" content="Las hojas de cálculo las usamos en casi todo y para todo. En este artículo te explico cómo usar IA utilizando algoritmos de Google para predicción.">
 
 <title>PauloVillarroel.com - Usa la inteligencia artificial en tu hoja de cálculo</title>
 <style>
@@ -128,7 +128,7 @@ gtag('config', 'G-RNWVZS7ZL8', { 'anonymize_ip': true});
       <h1 class="title">Usa la inteligencia artificial en tu hoja de cálculo</h1>
                   <div>
         <div class="description">
-          Las hojas de cálculo las usamos en casi todo y para todo. En este artículo te explico cómo integrarlos, utilizando algoritmos de Google para predicción.
+          Las hojas de cálculo las usamos en casi todo y para todo. En este artículo te explico cómo usar IA utilizando algoritmos de Google para predicción.
         </div>
       </div>
                           <div class="quarto-categories">
@@ -322,7 +322,7 @@ A ver, no es tan configurable como uno podría hacerlo programando el modelo, pe
     1. "bill_length_mm" 144.918849 ################
     2.         "island" 98.055598 ##########
     3.    "body_mass_g"  5.873762 </code></pre>
-<p>Para predecir la especie, el modelo usa principalmente esas 3 variables, pero fundamentalmente el largo de la aleta (<code>bill_length_mm</code>), pues obtiene un puntaje mayor. La isla también parece ser importante para determinar la especie.</p>
+<p>Para predecir la especie, el modelo usa principalmente esas 3 variables, pero fundamentalmente el largo del pico (<code>bill_length_mm</code>), pues obtiene un puntaje mayor. La isla también parece ser importante para determinar la especie.</p>
 <p>Si usas otros modelos, te van a aparecer muchas otras más métricas. Si quieres ver qué significan, puedes visitar su <a href="https://ydf.readthedocs.io/en/latest/metrics.html">documentación oficial</a>.</p>
 <p>La última pestaña corresponde a un gráfico del modelo (plot).</p>
 <p><img src="understand3.jpg" class="img-fluid" width="800"></p>
@@ -338,8 +338,8 @@ A ver, no es tan configurable como uno podría hacerlo programando el modelo, pe
         |        |                 └─(neg)─ val:"Chinstrap" prob:[0, 0, 1]
         |        └─(neg)─ val:"Gentoo" prob:[0.0105263, 0.989474, 0]
         └─(neg)─ val:"Adelie" prob:[0.930233, 0.0542636, 0.0155039]</code></pre>
-<p>¿Recuerdas que era el largo de la aleta la variable más importante?</p>
-<p>Bueno, fíjate que acá está al inicio del árbol, pues es la que permite una mayor discriminación de especies. Por ejemplo, si el largo de la aleta en menor de 43.14 mm con un 93% de probabilidades la especie es Adelie. Debes seguir el camino.</p>
+<p>¿Recuerdas que era el largo del pico la variable más importante?</p>
+<p>Bueno, fíjate que acá está al inicio del árbol, pues es la que permite una mayor discriminación de especies. Por ejemplo, si el largo del pico es menor de 43.14 mm con un 93% de probabilidades la especie es Adelie. Debes seguir el camino.</p>
 </section>
 <section id="usemos-el-modelo" class="level2">
 <h2 class="anchored" data-anchor-id="usemos-el-modelo">Usemos el modelo</h2>
@@ -363,6 +363,7 @@ A ver, no es tan configurable como uno podría hacerlo programando el modelo, pe
 </div>
 <p>Hay más opciones como guardar el modelo para poder usarlo después o poder usar otros modelos de clasificación como <code>Random Forest</code> o <code>Gradient Booted Trees</code>.</p>
 <p>Prueba alguno de ellos y ve que te resulta.</p>
+<p>Investiga cómo usarlo con tus propiso datos. Ten en mente que deberás entrenar el algoritmo primero antes de usar el modelo. Dale una vuelta para que veas cómo es.</p>
 </section>
 <section id="conclusiones" class="level2">
 <h2 class="anchored" data-anchor-id="conclusiones">Conclusiones</h2>
