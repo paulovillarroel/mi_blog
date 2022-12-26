@@ -48,6 +48,7 @@ Ok... Ya con estos conceptos generales en mente, avancemos en el tema. Iremos pa
 Para efectos de demostración, usaré los mismos datos de ejemplo que proporciona Google. Ah! Lo mencioné, pero no lo expliqué. Usarmos [TensorFlow de Google](https://www.tensorflow.org/).
 
 ## 
+
 ¿Qué es TensorFlow?
 
 TensorFlow es una biblioteca de software de código abierto para el aprendizaje automático y el cálculo numérico. Fue desarrollada por Google y se utiliza ampliamente en la industria y en la investigación para construir y entrenar modelos de aprendizaje automático.
@@ -86,7 +87,7 @@ Ok. Con el plugin ya instalado y los datos ya disponibles, veamos algo...
 
 Fíjate que las primeras 30 filas no contiene datos de la especie del pingüino. Esos espacios en blanco (o datos faltantes) son los que por medio de un modelo de ML trataremos de predecir cuál debería ir en cada caso.
 
-## Hagamos la predicción 
+## Hagamos la predicción
 
 ![](extension1.jpg){fig-align="center" width="800"}
 
@@ -140,7 +141,7 @@ Bueno, eso es algo que no debe pasar o que de alguna forma, debemos reducir. La 
 
 Este es un tutorial nada más, pero todo este tema es algo que jamás debemos pasar por alto. Mucho menos en salud o en la toma de decisiones de política pública. Dicho eso, sigamos...
 
-El plugin de TensorFlow tiene algunas opciones para explicar el modelo y sus resultados. \
+El plugin de TensorFlow tiene algunas opciones para explicar el modelo y sus resultados.\
 A ver, no es tan configurable como uno podría hacerlo programando el modelo, pero me parece interesante que incluya este tipo de cosas.
 
 Veamos...
@@ -223,11 +224,11 @@ Estos son mis resultados:
 
 ![](dataset3.jpg){fig-align="center" width="800"}
 
-Hay más opciones como guardar el modelo para poder usarlo después o poder usar otros modelos de clasificación como `Random Forest` o `Gradient Booted Trees`.
+Hay más opciones como guardar el modelo para poder usarlo después o poder usar otros modelos de clasificación como `Random Forest` o `Gradient Boosted Trees`.
 
 Prueba alguno de ellos y ve que te resulta.
 
-Investiga cómo usarlo con tus propiso datos. Ten en mente que deberás entrenar el algoritmo primero antes de usar el modelo. Dale una vuelta para que veas cómo es.
+Investiga cómo usarlo con tus propios datos. Ten en mente que deberás entrenar el algoritmo primero antes de usar el modelo. Dale una vuelta para que veas cómo se hace. Igual, hago otro tutorial al respecto más adelante.
 
 ## Conclusiones
 
