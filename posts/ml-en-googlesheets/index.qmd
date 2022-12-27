@@ -238,4 +238,4 @@ Este tutorial busca acercar la IA a las personas que lo ven muy lejano o que no 
 
 Ah!!! No te dije algo importante 😁
 
-La primera parte de este artículo fue escrita casi totalmente por **chatGPT**, una intelegiencia artificial que fue entrenada para mantener conversaciones naturales.
+La primera parte de este artículo fue escrita casi totalmente por **chatGPT**, una inteligencia artificial que fue entrenada para mantener conversaciones naturales.
