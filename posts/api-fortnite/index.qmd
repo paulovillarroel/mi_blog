@@ -1,5 +1,5 @@
 ---
-title: "Descargué casi 3000 imágenes de Fornite!"
+title: "Descargué casi 3000 imágenes de Fortnite!"
 description: "Te ensañaré paso a paso como usar una API, usar funciones iterativas y automatizar diversas tareas para pasar de días a solo minutos."
 author: "Paulo Villarroel"
 date: "2022-12-30"
