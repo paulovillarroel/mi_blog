@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.paulovillarroel.com/index.html</loc>
-    <lastmod>2022-12-27T14:05:41.389Z</lastmod>
+    <lastmod>2022-12-30T11:41:47.614Z</lastmod>
   </url>
   <url>
     <loc>https://www.paulovillarroel.com/posts/compras-publicas/index.html</loc>
@@ -26,7 +26,7 @@
   </url>
   <url>
     <loc>https://www.paulovillarroel.com/posts/ruta-aprendizaje-python/index.html</loc>
-    <lastmod>2022-10-23T03:04:55.047Z</lastmod>
+    <lastmod>2022-12-30T02:02:54.602Z</lastmod>
   </url>
   <url>
     <loc>https://www.paulovillarroel.com/posts/personalizado-el-blog/index.html</loc>
@@ -46,6 +46,14 @@
   </url>
   <url>
     <loc>https://www.paulovillarroel.com/posts/ml-en-googlesheets/index.html</loc>
-    <lastmod>2022-12-27T14:05:46.648Z</lastmod>
+    <lastmod>2022-12-30T02:03:06.160Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.paulovillarroel.com/posts/api-fortnite/index.html</loc>
+    <lastmod>2022-12-30T11:41:46.867Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.paulovillarroel.com/about.html</loc>
+    <lastmod>2022-12-30T02:02:27.133Z</lastmod>
   </url>
 </urlset>
