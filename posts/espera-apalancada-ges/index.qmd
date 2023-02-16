@@ -183,6 +183,12 @@ Yo puse 3 clasificaciones clínicas: normal, alta y muy alta. Quizás tu podría
 
 Para los campos de los datos de los pacientes, tienes que usar los listados del SIGGES de garantías vigentes, garantías vencidas y garantías exceptuadas.
 
+Para el caso de los pacientes exceptuados, solo debes considerar los con causas transitorias. Esto es, exceptuados por inasistencia y por postergación. Estos son lo que deberían estar pendientes y son los que indica la norma que deben quedar en monitoreo y continuar sus atenciones. Ten en cuenta que el SIGGES tiene una opción para descargar las excepciones transitorias, pero mira bien el listado, pues la plataforma tiene un error (entre varios más) en donde no reconoce bien que a los pacientes exceptuados ya se les digitó la prestación o el documento que cumple la garantía y lo sigue mostrando como pendiente cuando no es tal.
+
+De todas formas, el construir este listado ordenado te va a ayudar a reconocer esos casos para actualizar la plataforma SIGGES o dejar un listado anexo más limpio.
+
+Del mismo modo, el listado te puede ayudar a actualizar otros pacientes que ya estén resueltos, pero que en el SIGGES no tengan todo digitado.
+
 ✅ Entonces, [**puedes descargar la plantilla Excel**](https://docs.google.com/spreadsheets/d/1eQKMh0__LHWsJxSCX9vHtyi_SonZ1YFe/edit?usp=share_link&ouid=115665075119014315940&rtpof=true&sd=true) que hice para que la mires y lo apliques con tus pacientes.
 
 ![](plantilla.png){fig-align="center" width="800"}
