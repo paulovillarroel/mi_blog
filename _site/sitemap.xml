@@ -1,59 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://www.paulovillarroel.com/about.html</loc>
+    <lastmod>2023-02-16T00:59:01.228Z</lastmod>
+  </url>
+  <url>
     <loc>https://www.paulovillarroel.com/index.html</loc>
-    <lastmod>2022-12-30T14:00:32.744Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.paulovillarroel.com/posts/compras-publicas/index.html</loc>
-    <lastmod>2022-10-23T03:13:41.600Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.paulovillarroel.com/posts/factores-en-r/index.html</loc>
-    <lastmod>2022-10-23T02:52:54.322Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.paulovillarroel.com/posts/estancias-hospitalarias/index.html</loc>
-    <lastmod>2022-10-23T02:58:33.016Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.paulovillarroel.com/posts/prediccion-titanic/index.html</loc>
-    <lastmod>2022-10-23T03:13:50.233Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.paulovillarroel.com/posts/creando-mi-primer-blog-con-quarto/index.html</loc>
-    <lastmod>2022-10-23T02:55:43.506Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.paulovillarroel.com/posts/ruta-aprendizaje-python/index.html</loc>
-    <lastmod>2022-12-30T02:02:54.602Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.paulovillarroel.com/posts/personalizado-el-blog/index.html</loc>
-    <lastmod>2022-10-23T03:13:32.898Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.paulovillarroel.com/posts/descargar-datos-github/index.html</loc>
-    <lastmod>2022-10-28T02:47:26.539Z</lastmod>
+    <lastmod>2023-02-16T00:59:56.263Z</lastmod>
   </url>
   <url>
     <loc>https://www.paulovillarroel.com/posts/api-cero-a-experto-p1/index.html</loc>
-    <lastmod>2022-11-24T02:41:11.130Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.paulovillarroel.com/posts/contando-letras/index.html</loc>
-    <lastmod>2022-11-24T11:04:12.810Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.paulovillarroel.com/posts/ml-en-googlesheets/index.html</loc>
-    <lastmod>2022-12-30T02:03:06.160Z</lastmod>
+    <lastmod>2023-02-16T00:59:03.831Z</lastmod>
   </url>
   <url>
     <loc>https://www.paulovillarroel.com/posts/api-fortnite/index.html</loc>
-    <lastmod>2022-12-30T14:00:35.766Z</lastmod>
+    <lastmod>2023-02-16T00:59:05.346Z</lastmod>
   </url>
   <url>
-    <loc>https://www.paulovillarroel.com/about.html</loc>
-    <lastmod>2022-12-30T02:02:27.133Z</lastmod>
+    <loc>https://www.paulovillarroel.com/posts/compras-publicas/index.html</loc>
+    <lastmod>2023-02-16T00:59:06.781Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.paulovillarroel.com/posts/contando-letras/index.html</loc>
+    <lastmod>2023-02-16T00:59:08.416Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.paulovillarroel.com/posts/contribuye-al-codigo-abierto/index.html</loc>
+    <lastmod>2023-02-16T00:59:09.552Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.paulovillarroel.com/posts/creando-mi-primer-blog-con-quarto/index.html</loc>
+    <lastmod>2023-02-16T00:59:10.846Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.paulovillarroel.com/posts/descargar-datos-github/index.html</loc>
+    <lastmod>2023-02-16T00:59:12.265Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.paulovillarroel.com/posts/espera-apalancada-ges/index.html</loc>
+    <lastmod>2023-02-16T01:00:00.212Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.paulovillarroel.com/posts/factores-en-r/index.html</loc>
+    <lastmod>2023-02-16T00:59:15.227Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.paulovillarroel.com/posts/ml-en-googlesheets/index.html</loc>
+    <lastmod>2023-02-16T00:59:16.633Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.paulovillarroel.com/posts/personalizado-el-blog/index.html</loc>
+    <lastmod>2023-02-16T00:59:17.866Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.paulovillarroel.com/posts/prediccion-titanic/index.html</loc>
+    <lastmod>2023-02-16T00:59:20.775Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.paulovillarroel.com/posts/ruta-aprendizaje-python/index.html</loc>
+    <lastmod>2023-02-16T00:59:22.078Z</lastmod>
   </url>
 </urlset>

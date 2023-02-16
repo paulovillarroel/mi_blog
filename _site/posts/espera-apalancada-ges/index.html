@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Paulo Villarroel">
+<meta name="dcterms.date" content="2023-02-15">
+<meta name="description" content="Te muestro una propuesta de modelo de gestión de garantías GES, para simplificar la gestión y el monitoreo, basado en tiempos de espera y prioridad clínica.">
+
+<title>PauloVillarroel.com - Mejorando la gestión de pacientes GES</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-RNWVZS7ZL8"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-RNWVZS7ZL8', { 'anonymize_ip': true});
+</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">PauloVillarroel.com</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">
+ <span class="menu-text">Sobre mí</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/paulovillarroel"><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/Chazkon"><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/paulovillarroeltapia/"><i class="bi bi-linkedin" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Mejorando la gestión de pacientes GES</h1>
+                  <div>
+        <div class="description">
+          Te muestro una propuesta de modelo de gestión de garantías GES, para simplificar la gestión y el monitoreo, basado en tiempos de espera y prioridad clínica.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">ges</div>
+                <div class="quarto-category">tutorial</div>
+                <div class="quarto-category">excel</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Paulo Villarroel </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">February 15, 2023</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#el-contexto" id="toc-el-contexto" class="nav-link active" data-scroll-target="#el-contexto">El contexto</a></li>
+  <li><a href="#el-problema" id="toc-el-problema" class="nav-link" data-scroll-target="#el-problema">El problema</a></li>
+  <li><a href="#la-solución" id="toc-la-solución" class="nav-link" data-scroll-target="#la-solución">La solución</a></li>
+  <li><a href="#el-algoritmo" id="toc-el-algoritmo" class="nav-link" data-scroll-target="#el-algoritmo">El algoritmo</a></li>
+  <li><a href="#algo-más" id="toc-algo-más" class="nav-link" data-scroll-target="#algo-más">Algo más…</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/paulovillarroel/mi_blog/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<p>Hola! 👋</p>
+<p>Hace tiempo que no escribía un artículo en el blog. Gracias por estar por estos lados nuevamente.</p>
+<section id="el-contexto" class="level1">
+<h1>El contexto</h1>
+<p>En esta oportunidad te quiero hablar sobre el GES (Garantías Explicitas en Salud), que es una parte fundamental de la reforma de salud que se hizo en Chile allá por los años 2004 y 2005. Esta es una Ley que establece, entre otras cosas, 4 ejes claves (o garantías): garantía de acceso, garantía financiera, garantía de calidad y garantía de oportunidad. En este articulo me voy a referir, principalmente, a la última.</p>
+<p>La garantía de oportunidad establece plazos máximos para que los pacientes reciban determinadas prestaciones de salud como atenciones médicas, realizarse estudios de imagenología, ser operados o recibir algún medicamente, por ejemplo. Estos plazos están delimitados por tipos de patologías y la etapa asistencial en que se encuentre un paciente. Esto hace que los plazos máximos dependan de cada patología y de su etapa (sospecha, estudios, tratamiento, seguimiento o rehabilitación).</p>
+<p>Actualmente hay 87 grupos de patologías incluidas en el GES. El listado completo de patologías lo puedes <a href="https://auge.minsal.cl/problemasdesalud/index">revisar en la web oficial ministerial</a>.</p>
+<p>Del mismo modo, estos plazos y las <a href="https://auge.minsal.cl/articulos/lep">prestaciones asociades</a>, determinan un derecho exigible por los pacientes, pudiendo reclamar por ellos cuando no son entregados de forma oportuna y en la manera indicada. Además, estas patologías tienen una valoración mas alta que otras prestaciones similares, pero que no corresponden al GES. Esto hace que los ingresos financieros de las instituciones de salud derivados de las atenciones de pacientes GES tengan un importante peso en los presupuestos anuales. Es decir, hay un incentivo a la atención de estos pacientes, tanto financiero como legal.</p>
+<p>Ya. Ok… Mucha palabrería jaja 😅</p>
+<p>Pero era importante situarte en el contexto y explicarte eso antes. En especial si no sabes nada del GES.</p>
+<p>Existe una plataforma llamada <a href="https://www.sigges.cl/">SIGGES</a> (mantenida por <a href="https://www.fonasa.cl/sites/fonasa/inicio">FONASA</a>), que es una aplicación web en donde se realizan los registros de los pacientes ingresados al GES. Además, esta plataforma sirve para registrar las atenciones y prestaciones entregadas a los pacientes de la cual se desprenden las transferencias financieras de las que hablaba antes y mantiene un sistema de conteo de los plazos y tiempos de espera para cada paciente, en base a su patología y etapa. Cada institución pública tiene un grupo de pacientes asignados para resolver, ya sea porque fue atendido en la misma institución o fue derivado desde otro centro o atención primaria.</p>
+<p>El tema es que esta plataforma si bien podría considerarse buena para efectos de registros (estoy siendo generoso, la verdad. Es mala, compleja y requiere 100% de actividad manual para mantenerla al día), para monitoreo es peor. Ofrece algunas funcionalidades para descargar información de los pacientes en formatos Excel, pero de forma segmentada.</p>
+<p>Te explico…</p>
+<p>Los pacientes GES pueden estar en 2 grandes categorías: abiertos y cerrados.</p>
+<p>Los casos abiertos implican que aun hay cosas que tiene pendientes los pacientes. Los cerrados es que ya cumplieron todas las etapas o bien, se cerró por alguna causal (como fallecimiento, cambios de seguro de salud, rechazo de las atenciones o indicación médica, por ejemplo).</p>
+<p>Los casos cerrados los voy a dejar de lado por ahora. Me voy a preocupar de los casos abiertos. Es decir, de aquellos que tiene pendiente alguna prestación o definición diagnostica o de tratamiento.</p>
+<p>Los casos abiertos pueden estar en alguna de estas 3 categorías: vigentes, retrasados o exceptuados.</p>
+<p>Los casos vigentes son pacientes que se encuentran dentro del plazo legal garantizado (para una determinada patología y etapa asistencial).</p>
+<p>Los casos retrasados son pacientes que excedieron el plazo legal.</p>
+<p>Y los exceptuados son pacientes a los cuales se les catalogó como tal en algún momento. Estas excepciones corresponden a situaciones inherentes a los pacientes y que impiden o retrasan la entrega de las prestaciones establecidas en el GES. Por ejemplo, una patología podría tener un plazo de 30 días para que un paciente sea citado a evaluación medica de especialidad. Pero el paciente refiere que esta de viaje y que no puede asistir en la fecha ofrecida por la institución, sino hasta varias semanas mas tarde. Esta es una situación ajena a la organización e inherente al paciente, por cuanto se podría exceptuar y postergar la plazo GES. Estas excepciones están normadas y descritas en la <a href="https://auge.minsal.cl/articulos/reglamentos">documentación GES</a>.</p>
+<p>Ok.</p>
+<p>Hasta ahora, todo muy interesante, pero nada muy problemático.</p>
+<p>Hasta ahora…</p>
+</section>
+<section id="el-problema" class="level1">
+<h1>El problema</h1>
+<p>El problema comienza porque, por defecto, no hay un solo listado de pacientes GES. Están segmentados por patologías (las 87), lo cual parece razonable. Pero también están segmentados, a su vez, entre casos abiertos y cerrados, entre vigentes, retrasados y exceptuados.</p>
+<p>Todos estos listados hacen que no podamos tener un solo listado único.</p>
+<p>Y a estas alturas te estarás preguntando… ¿Y por qué tanta relevancia tener un listado único?</p>
+<p>El disponer de un solo listado permite tener a todos los pacientes en solo 1 repositorio de datos, lo que facilita la búsqueda. Además, y quizás lo mas relevante, es que se pueden ordenar.</p>
+<p>Y este orden es importantísimo! Pues permite tener una visión general del estado de los pacientes y ayudar a priorizar casos en virtud de su orden de prelación.</p>
+<p><strong>¿Pero cómo construir ese orden?</strong></p>
+<p>Ordenar a los pacientes no es una tarea banal. Por el contrario, es algo muy complejo. En este artículo no pretendo ser la referencia máxima ni ser el modelo definitivo. Existen, por lo demás, diversas metodologías para ordena a pacientes y priorizarlos, como los modelos DELPHI u otros sistemas basados en la inclusión de factores de riesgo, factores sociales o de riesgo de mortalidad. Incluso modelos en donde se pueden usar algoritmos de inteligencia artificial para clasificación no supervisada.</p>
+<p>En esta ocasión quiero ser más pragmático, menos filosófico y más concreto. Y usar lo que hay, sin ponerme muy creativo ni impulsar grandes cambios culturales ni tecnológicos. No.&nbsp;Solo deseo ser simple y extremádamente práctico.</p>
+<p>Por ello, usaré algunos datos descargables del SIGGES y un Excel. Solo eso, de modo que sea muy simple el que lo uses en tu institución sin grandes complicaciones y desde el día cero.</p>
+<p>Lo que busco con ese orden es responder la pregunta hipotética: <strong>Si tuviera un cupo para mañana, ¿A quién cito?</strong></p>
+</section>
+<section id="la-solución" class="level1">
+<h1>La solución</h1>
+<p>Para responder esa pregunta, es necesario tener a los pacientes ordenados, desde el con mayor prioridad hasta al con menos prioridad. De modo, que si tengo un cupo, cito al primero de ese listado. Si tengo 2 cupos, cito a los 2 primeros y así sucesivamente. También es cierto que quizás el pcte en el lugar 1 no pueda asistir o no tenga las condiciones (o estudios) para hacerlo, entonces paso al segundo. Si este tampoco tiene las condiciones, paso al tercero. El tema es diseñar ese orden de prelación ex-ante y mantenerlo en vista al momento de citarlos o de programar para procedimientos o cirugías.</p>
+<p>Del mismo modo, este listado ordenado ayuda a brindar transparencia al proceso y dar explicabilidad de porque citar a un paciente primero que otro. Estos elementos (transparencia y explicabilidad) son fundamentales en el manejo ético y responsable de datos.</p>
+<p>Otro punto relevante, es evitar sesgos.</p>
+<p>Acá los sesgos están más enfocados a privilegiar a determinados grupos de pacientes, como suele hacerse en la gestión habitual de garantías GES. Es habitual que haya mayor interés en resolver y atender a pacientes retrasados que vigentes. Esto ocurre porque existen una serie de indicadores de evaluación de desempeño institucional que miden preferentemente la disminución de garantías retrasadas. Por otro lado, los pacientes exceptuados dejar de ser visibles a los sistemas de monitoreo, lo que disminuyen sus posibilidades de atención y resolución.</p>
+<p>El generar un listado único, con todos los pacientes vigentes, retrasados y exceptuados ayuda a dar visibilidad a todos los pacientes pendientes y el orden de éstos, a brindar posibilidades de atención en base a sus tiempos de espera y plazos máximos. Es, teóricamente, un modelo más justo.</p>
+<p>Pues bien… ya sabemos que necesitamos ese listado ordenado, no solo para ayudar a la decisión de a quienes priorizar, sino que ser mas transparentes y evitar sesgos de selección.</p>
+<p><strong>¿Y cómo ordenarlos?</strong></p>
+<p>Buena pregunta!!!</p>
+<p>¿Como generar ese orden?</p>
+<p>Como te mencioné antes, no quiero ponerme filosófico acá, seré intensamente pragmático. Los pacientes GES que cuentan con garantía de oportunidad tienen definidos por Ley los plazos máximos de atencion o de entrega de determinadas prestaciones. Eso es algo que no podemos obviar. Es Ley.</p>
+<p>Sin embargo, no es lo único debemos considerar.</p>
+<p>Este orden debería ayudar a resolver las siguientes situaciones:</p>
+<ul>
+<li><p>Resolver los pacientes excedidos en sus plazos.</p></li>
+<li><p>Evitar que los pacientes pasen del plazo garantizado.</p></li>
+<li><p>No es lo mismo estar excedido en 1 día que en 100 días.</p></li>
+<li><p>No es lo mismo estar a 5 días de que se cumpla el plazo máximo, que estar a 90.</p></li>
+<li><p>La mezcla de pacientes debe incluir a los 3 tipos de categorías.</p></li>
+<li><p>Evitar solo resolver retrasados.</p></li>
+</ul>
+<p>Para lo anterior, una forma de abordarlo es definir un tiempo de espera específico para cada paciente ajustado por un <strong>factor de apalancamiento</strong>.</p>
+<p>Este factor de apalancamiento lo que hace es dar mayor peso a determinados grupos de pacientes. Por ejemplo, dar mayor prioridad a personas más excedidas en su plazo que los que tienen menos tiempo de exceso. Del mismo modo, un día de exceso de pacientes con mucho retraso es proporcionalmente mayor que 1 día de alguien con poco retraso. Este factor también se aplica a pacientes vigentes, de modo de generar mayor relevancia a pacientes próximos a vencer que casos recién derivados.</p>
+<p>Este modelo de apalancamiento no es idea original mía, sino que fue descrita <a href="https://repositorio.uchile.cl/handle/2250/114206">en una tesis</a> de magister de la Universidad de Chile, en donde aplicaron este concepto en la gestión de pabellones en un hospital público pediátrico. No tengo claro si realmente lograron implementarlo y dejarlo en producción o solo fue un piloto. Pero este concepto me gustó. Le hice algunos ajustes para aplicarlo a GES, pero es una idea similar.</p>
+<p>El modelo implica establecer una espera apalancada E(t).</p>
+<p>En el caso de que el tiempo de espera sea menor a un tiempo máximo definido (T max.), el tiempo de espera es propio tiempo de espera contado en días. En el caso de que el tiempo de espera sea mayor al tiempo máximo, se debe aplicar el factor de apalancamiento (α).</p>
+<p>Si lo vemos como fórmula, tenemos:</p>
+<p><img src="formula.jpg" class="img-fluid" width="500"></p>
+<p>Para el caso de las patologías GES, ya tenemos un plazo máximo, que es el legal. Pero eso es insuficiente. Es necesario diseñar una tabla con plazos intermedios y de mayor rango para abordar las situaciones antes mencionadas.</p>
+<p>Para los efectos de este artículo y a modo de prueba, tomé la patología de colecistectomía preventiva. Esto es por varios motivos. Esta patología tiende a ser una de las con mayor número de pacientes derivados a los hospitales (sin contar las de oftalmología y ayudas técnicas) y para el caso de pabellón, es de las más comunes. Además, solo tiene 1 garantía que es la de intervención quirúrgica. Eso facilita el ejemplo.</p>
+<p>El plazo legal GES es de 90 días (desde la derivación hasta la intervención quirúrgica).</p>
+<p>He construido la siguiente tabla con tiempos máximos en distintos cortes:</p>
+<p><img src="tabla.png" class="img-fluid" width="500"></p>
+<p>T max corresponden a determinados cortes en el tiempo transcurrido desde la derivación. Por tanto, los cortes de 20, 50 y 80 días son de pacientes que están dentro del plazo legal (recuerda que es de 90) y los demás aplican para pacientes que excedieron el plazo máximo. Todos estos cortes ayudan a diferenciarlos en el listado único y generar un factor de apalancamiento para cada segmento. Ya te explico lo de la prioridad.</p>
+<p>El factor α es calculado. Se realiza dividiendo el T max por el valor mínimo de T max en la tabla.</p>
+<p>Así, para la prioridad 2, el factor de apalancamiento se obtiene de 160/20 = 8. Para la prioridad 5, se obtiene de 50/20 = 1.3</p>
+<p>Aplicando esa formula a cada campo, se puede construir la tabla sin problemas.</p>
+<p>Este factor de apalancamiento lo que hace es dar más peso a los días que pasan un determinado corte. Por ejemplo, un día de un paciente con 15 días de tiempo transcurrido equivale a 12.5 días de un paciente con más de 250 días.</p>
+<p>Esta tabla esta pensada para la patología GES de colecistectomía. Para otras patologías es necesario ajustarla a los plazos legales y generar los cortes (T max), según sea necesario. Esta construcción es en base a la experiencia en la gestión y a necesidades de cada organización. Es recomendable que sea ajustada para cada caso. Y de preferencia, hacer una tabla para cada garantía, pues los plazos pueden varias entre ellos. De todas formas, no recomiendo aplicarlo a todas las patologías y a todas las garantías en un principio, sino que focalizarlas en donde tenga mayor beneficio. Ahora, si cuentas con la capacidad de hacerlo y dispones de alguna plataforma que te facilite estas labores, podrías hacerlo.</p>
+<p>En todo caso, te dejaré disponible el Excel para lo puedas revisar con calma, mirar las fórmulas y usarlo de ejemplo.</p>
+<p>Ahora veamos cómo generar el algoritmo y aplicarlo a los pacientes.</p>
+</section>
+<section id="el-algoritmo" class="level1">
+<h1>El algoritmo</h1>
+<p>En el Excel, además, de los datos propios de los pacientes, te encontrarás con varios campos calculados.</p>
+<p>Te los explico brevemente.</p>
+<ul>
+<li><p><code>inicio_ajustado</code>: este campo corresponde a la fecha de inicio del plazo GES. Para los pacientes exceptuados, esta fecha se ajusta a la fecha en que fue exceptuado.</p></li>
+<li><p><code>t_transcurrido</code>: este es el tiempo (días) transcurrido entre la fecha de inicio y la fecha actual (en la cual estes analizando los datos).</p></li>
+<li><p><code>t_exceso</code>: son los días de exceso por sobre el plazo legal definido. En el caso de ejemplo, es 90. Debes ajustarlo a la patología que estes usando.</p></li>
+<li><p><code>prioridad_tiempo</code>: este campo se completa en base a la tabla de T max antes mencionada.</p></li>
+<li><p><code>prioridad_clinica</code>: este es un campo opcional, en donde se puede clasificar a los pacientes, según la prioridad clínica que tenga en un determinado momento. Si no se especifica nada, se asume y calculan los plazos y el tiempo apalancado en base a los T max. Si escribes “P” (sin las comillas) se aplica una prioridad alta. Si escribes “PP” (sin comillas) se aplica una prioridad muy alta. El uso de estas prioridades afecta el lugar en donde se encuentra el paciente y aumenta el factor de apalancamiento en 1 o 2 pasos, según corresponda. El motivo de que la tabla de T max tenga prioridades 0 y -1 es por este motivo, ya que, si un paciente se encuentra en prioridad 1 por su tiempo de espera, al clasificarlo con prioridad clínica alta pasa a prioridad 0 (se resta 1) y con prioridad clínica muy alta pasa a -1 (se resta 2).</p></li>
+<li><p><code>prioridad_final</code>: corresponde a la prioridad final del paciente, considerando el tiempo de espera y la clasificación clínica, si tuviera.</p></li>
+<li><p><code>t_max</code>: es el plazo máximo para cada corte. Se señala la categoría en que queda el paciente en base a su prioridad final.</p></li>
+<li><p><code>factor</code>: corresponde al factor de apalancamiento (α).</p></li>
+<li><p><code>E(t)</code>: corresponde al tiempo de espera apalancado. Este concepto ya lo expliqué previamente.</p></li>
+<li><p><code>Lugar</code>: este es un campo calculado que muestra el lugar que ocupa un determinado paciente en el listado unificado. Este es el orden de prelación que se aplica a los pacientes, en base al E(t).</p></li>
+</ul>
+<p>Un detalle sobre la clasificación de prioridad clínica. Esto es un dato que lo puedes poner con el fin de aumentar la prioridad final de un determinado paciente y, por tanto, dejarlo mas arriba en el listado de prelación. Esta clasificación es eminentemente clínica y va a depender de tu nivel de conocimientos sobre el estado de cada paciente. Por ejemplo, como estamos viendo la colecistectomía, un paciente podría estar recién ingresando al listado, pues la derivaron hace poco desde atención primaria. Esto hace que quede en los últimos puestos del listado. Pero descubres que esta en regular estado, muy sintomática, con alteración de sus pruebas hepáticas y con varias consultas al servicio de urgencia. Entonces, podrías aumentar su prioridad final agregando una prioridad clínica muy alta. Esto hace que quede mas arriba en el listado. Y no solo eso, sino que cada día que pase, tendrá más relevancia, pues el factor de apalancamiento también aumenta.</p>
+<p>Yo puse 3 clasificaciones clínicas: normal, alta y muy alta. Quizás tu podrías poner más. Para eso, debes ajustar la formula del Excel, lógicamente. Pero me parece que, con esas 3 clasificaciones, se cubre la gran mayoría de los casos.</p>
+<p>Para los campos de los datos de los pacientes, tienes que usar los listados del SIGGES de garantías vigentes, garantías vencidas y garantías exceptuadas.</p>
+<p>✅ Entonces, <a href="https://docs.google.com/spreadsheets/d/1eQKMh0__LHWsJxSCX9vHtyi_SonZ1YFe/edit?usp=share_link&amp;ouid=115665075119014315940&amp;rtpof=true&amp;sd=true"><strong>puedes descargar la plantilla Excel</strong></a> que hice para que la mires y lo apliques con tus pacientes.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="plantilla.png" class="img-fluid figure-img" width="800"></p>
+</figure>
+</div>
+<p>El hecho de hacerlo en Excel es para facilitar el uso y la cantidad de campos calculados es para mostrar paso a paso como se construye el algoritmo de ordenamiento. Se podría hace en muchos menos campos o se puede programar una app que te haga el ajuste de forma automática, pero decidí dejarlo así para mejor accesibilidad.</p>
+<p>Ya ahora depende de ti el usarlo y mejorarlo.</p>
+</section>
+<section id="algo-más" class="level1">
+<h1>Algo más…</h1>
+<p>Si bien te he hablado de usarlo para generar un orden de los pacientes para una mejor gestión. Este listado te puede servir para auditoría interna.</p>
+<p>Como tienes un listado ordenado, lo lógico es ir resolvendo los casos en ese orden. Pero no siempre es posible hacerlo. Ya te mencioné algunos ejemplos. Pero ojo, si no se sigue el orden es por algún motivo de peso. La respuesta de “es que era el que tenía a mano” o “es que me llamó recién y le di la hora” o “es que viene todos los días a preguntar” no tienen cabida en un modelo ético de gestión. Si no se sigue el orden, un motivo debe haber y uno de peso. Este listado te permite indagar en posibles fraudes, sesgos, faltas a la probidad o, simplemente, despelote.</p>
+<p>Si tienes comentarios, encuentras algún bug o se te ocurren nuevas formas de aplicarlo, los puedes dejar más abajo.</p>
+<p>Saludos!!</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<div>
+<hr>
+
+<iframe src="https://embeds.beehiiv.com/274e86f2-9411-4829-afd2-e4879f66212f" data-test-id="beehiiv-embed" width="100%" height="320" frameborder="0" scrolling="no" style="border-radius: 4px; border: 2px solid #e5e7eb; margin: 0; background-color: transparent;"></iframe>
+
+<hr>
+</div>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp(/https:\/\/www\.paulovillarroel\.com\//);
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+      }
+    }
+});
+</script>
+<script src="https://giscus.app/client.js" data-repo="paulovillarroel/mi_blog" data-repo-id="R_kgDOH_9CVg" data-category="General" data-category-id="DIC_kwDOH_9CVs4CRgbc" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">Paulo Villarroel, 2022</div>
+  </div>
+</footer>
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
